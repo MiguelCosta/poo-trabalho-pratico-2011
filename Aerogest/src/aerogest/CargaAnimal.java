@@ -57,9 +57,9 @@ public class CargaAnimal extends Carga implements Serializable{
 
 	@Override
 	public String toString(){
-		StringBuilder s = new StringBuilder("CargaAnimal:\n");
+		StringBuilder s = new StringBuilder("CARGA ANIMAL:\n");
                 s.append(super.toString());
-		s.append("volume: " + volume + "\n");
+		s.append("Volume: " + volume + "\n");
 		return s.toString();
 	}
 }

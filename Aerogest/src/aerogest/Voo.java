@@ -21,5 +21,6 @@ public class Voo {
     ArrayList<Carga> carga; // rever o tipo de dados para isto
     Aeronave aeronave;
     Tripulacao tripulacao;
+    String estado;
     
 }

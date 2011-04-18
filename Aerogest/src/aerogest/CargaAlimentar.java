@@ -58,9 +58,9 @@ public class CargaAlimentar extends Carga implements Serializable{
 
 	@Override
 	public String toString(){
-		StringBuilder s = new StringBuilder("CargaAlimentar:\n");
+		StringBuilder s = new StringBuilder("CARGA ALIMENTAR:\n");
                 s.append(super.toString());
-		s.append("dataValidade: " + dataValidade.getTime().getYear() + "/" +
+		s.append("DataValidade: " + dataValidade.getTime().getYear() + "/" +
                         dataValidade.getTime().getMonth() + "/" +
                         dataValidade.getTime().getDay() + "\n");
 		return s.toString();

@@ -30,7 +30,7 @@ public class CargaNormal extends Carga implements Serializable{
 
 	@Override
 	public String toString(){
-		StringBuilder s = new StringBuilder("CargaNormal:\n");
+		StringBuilder s = new StringBuilder("CARGA NORMAL:\n");
                 s.append(super.toString());
 		return s.toString();
 	}
