@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author goku
  */
-public class VooComercial extends Voo implements Serializable{
+public class VooComercial extends Voo implements Serializable {
     private ArrayList<Passageiro> passageirosSubstitutos;
 
     public VooComercial(String codigoVoo, String destino, GregorianCalendar horaPartida,

@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author goku
  */
-public class Tripulante implements Serializable{
+public class Tripulante implements Serializable {
     /** Variaveis de instancia */
     private String funcao;
     private String nome;
@@ -20,21 +20,21 @@ public class Tripulante implements Serializable{
 
 
     /** Construtores */
-    public Tripulante(){
+    public Tripulante() {
     	funcao = "";
 	nome = "";
 	nacionalidade = "";
         livre = true;
     }
 
-    public Tripulante(String funcao, String nome, String nacionalidade){
+    public Tripulante(String funcao, String nome, String nacionalidade) {
 	this.funcao = funcao;
 	this.nome = nome;
 	this.nacionalidade = nacionalidade;
         livre = true;
     }
 
-    public Tripulante(Tripulante tripulante){
+    public Tripulante(Tripulante tripulante) {
         funcao = tripulante.getFuncao();
 	nome = tripulante.getNome();
 	nacionalidade = tripulante.getNacionalidade();
@@ -43,20 +43,20 @@ public class Tripulante implements Serializable{
 
 
     /** gets */
-    public String getFuncao(){ return funcao; }
-    public String getNome(){ return nome; }
-    public String getNacionalidade(){ return nacionalidade; }
-    public boolean getLivre(){ return livre; }
+    public String getFuncao() { return funcao; }
+    public String getNome() { return nome; }
+    public String getNacionalidade() { return nacionalidade; }
+    public boolean getLivre() { return livre; }
 
     /** sets */
-    public void setFuncao(String funcao){ this.funcao = funcao;}
-    public void setNome(String nome){ this.nome = nome;}
-    public void setNacionalidade(String nacionalidade){ this.nacionalidade = nacionalidade;}
-    public void setLivre(boolean livre){ this.livre = livre;}
+    public void setFuncao(String funcao) { this.funcao = funcao;}
+    public void setNome(String nome) { this.nome = nome;}
+    public void setNacionalidade(String nacionalidade) { this.nacionalidade = nacionalidade;}
+    public void setLivre(boolean livre) { this.livre = livre;}
 
     /** Equals | Clone | toString */
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
     	if (this == o) { return true; }
 	if (o == null || o.getClass() != this.getClass()) { return false; }
 	Tripulante tripulante = (Tripulante) o;
@@ -71,12 +71,12 @@ public class Tripulante implements Serializable{
     }
 
     @Override
-    public Tripulante clone(){
+    public Tripulante clone() {
     	return new Tripulante(this);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
 	StringBuilder s = new StringBuilder("TRIPULANTE:\n");
 	s.append("Funcao: " + funcao + "\n");
 	s.append("Nome: " + nome + "\n");

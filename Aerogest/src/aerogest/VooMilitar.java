@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author goku
  */
-public class VooMilitar extends Voo implements Serializable{
+public class VooMilitar extends Voo implements Serializable {
     public final String Marinha = "Marinha";
     public final String Exercito = "Exército";
     public final String ForcaAerea = "Força Aérea";
@@ -25,7 +25,7 @@ public class VooMilitar extends Voo implements Serializable{
 
     public VooMilitar(String codigoVoo, String destino, GregorianCalendar horaPartida, 
             String entidade, ArrayList<Passageiro> passageiros, ArrayList<Carga> carga,
-            int duracao, String ramo, String codigoComunicacao){
+            int duracao, String ramo, String codigoComunicacao) {
         super(codigoVoo, destino, horaPartida, entidade, passageiros, carga);
         horaChegada = horaPartida; horaChegada.add(GregorianCalendar.MINUTE, duracao);
         this.duracao = duracao; 
@@ -33,7 +33,7 @@ public class VooMilitar extends Voo implements Serializable{
         this.codigoComunicacao = codigoComunicacao;
     }
 
-    public VooMilitar(VooMilitar voo){
+    public VooMilitar(VooMilitar voo) {
         super(voo);
         horaChegada = voo.getHoraChegada();
         duracao = voo.getDuracao();
@@ -52,7 +52,7 @@ public class VooMilitar extends Voo implements Serializable{
     public void setCodigoComunicacao(String codigoComunicacao) { this.codigoComunicacao = codigoComunicacao; }
 
     @Override
-    public void setVooAtrasado(GregorianCalendar novaHora){
+    public void setVooAtrasado(GregorianCalendar novaHora) {
             super.setEstado(super.VooEmPreparacao2Atraso);
             super.setObservacoes("Nova Hora : " + novaHora.getTime().getHours() + ":" +
                     novaHora.getTime().getMinutes() + "\n");

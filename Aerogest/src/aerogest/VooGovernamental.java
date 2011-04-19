@@ -13,14 +13,14 @@ import java.util.GregorianCalendar;
  *
  * @author goku
  */
-public class VooGovernamental extends Voo implements Serializable{
+public class VooGovernamental extends Voo implements Serializable {
     private ArrayList<MembroGoverno> membrosGoverno;
     private ArrayList<Passageiro> jornalistas;
     private ArrayList<Passageiro> convidados;
 
     public VooGovernamental(String codigoVoo, String destino, GregorianCalendar horaPartida,
             String entidade, ArrayList<Carga> carga, ArrayList<MembroGoverno> membrosGoverno,
-            ArrayList<Passageiro> jornalistas, ArrayList<Passageiro> convidados){
+            ArrayList<Passageiro> jornalistas, ArrayList<Passageiro> convidados) {
         super(codigoVoo, destino, horaPartida, entidade, new ArrayList<Passageiro>(), carga);
         for(Passageiro p : membrosGoverno)
             super.adicionaPassageiro(p.clone());
@@ -33,7 +33,7 @@ public class VooGovernamental extends Voo implements Serializable{
         this.convidados = convidados;
     }
 
-    public VooGovernamental(VooGovernamental vg){
+    public VooGovernamental(VooGovernamental vg) {
         super(vg);
 
     }

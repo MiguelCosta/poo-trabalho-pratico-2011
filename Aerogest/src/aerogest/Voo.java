@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author goku
  */
-public class Voo implements Serializable{
+public class Voo implements Serializable {
     public final String VooEspecificado = "Voo Especidicado";
     public final String VooEmPreparacao1 = "Voo Em Preparação 1";
     public final String VooEmPreparacao2 = "Voo Em Preparação 2";
@@ -39,7 +39,8 @@ public class Voo implements Serializable{
 
 
 	/** Construtores */
-	public Voo(String codigoVoo, String destino, GregorianCalendar horaPartida, String entidade, ArrayList<Passageiro> passageiros, ArrayList<Carga> carga){
+	public Voo(String codigoVoo, String destino, GregorianCalendar horaPartida, 
+                String entidade, ArrayList<Passageiro> passageiros, ArrayList<Carga> carga) {
 		this.codigoVoo = codigoVoo;
 		this.destino = destino;
 		this.horaPartida = horaPartida;
@@ -48,7 +49,7 @@ public class Voo implements Serializable{
 		this.carga = carga;
 		estado = VooEspecificado;
 	}
-	public Voo(Voo voo){
+	public Voo(Voo voo) {
 		codigoVoo = voo.getCodigoVoo();
 		destino = voo.getDestino();
 		horaPartida = voo.getHoraPartida();
@@ -60,33 +61,33 @@ public class Voo implements Serializable{
 
 
 	/** gets */
-	public String getCodigoVoo(){ return codigoVoo; }
-	public String getDestino(){ return destino; }
-	public GregorianCalendar getHoraPartida(){ return horaPartida; }
-	public String getEntidade(){ return entidade; }
-	public ArrayList<Passageiro> getPassageiros(){ return passageiros; }
-	public ArrayList<Carga> getCarga(){ return carga; }
-	public Aeronave getAeronave(){ return aeronave; }
-	public Porta getPorta(){ return porta; }
-	public Tripulacao getTripulacao(){ return tripulacao; }
-	public String getEstado(){ return estado; }
-        public String getObservacoes(){ return observacoes; }
+	public String getCodigoVoo() { return codigoVoo; }
+	public String getDestino() { return destino; }
+	public GregorianCalendar getHoraPartida() { return horaPartida; }
+	public String getEntidade() { return entidade; }
+	public ArrayList<Passageiro> getPassageiros() { return passageiros; }
+	public ArrayList<Carga> getCarga() { return carga; }
+	public Aeronave getAeronave() { return aeronave; }
+	public Porta getPorta() { return porta; }
+	public Tripulacao getTripulacao() { return tripulacao; }
+	public String getEstado() { return estado; }
+        public String getObservacoes() { return observacoes; }
 
 
 	/** sets */
-	public void setCodigoVoo(String codigoVoo){ this.codigoVoo = codigoVoo;}
-	public void setDestino(String destino){ this.destino = destino;}
-	public void setHoraPartida(GregorianCalendar horaPartida){ this.horaPartida = horaPartida;}
-	public void setEntidade(String entidade){ this.entidade = entidade;}
-	public void setPassageiros(ArrayList<Passageiro> passageiros){ this.passageiros = passageiros;}
-	public void setCarga(ArrayList<Carga> carga){ this.carga = carga;}
-	public void setAeronave(Aeronave aeronave){ this.aeronave = aeronave;}
-	public void setPorta(Porta porta){ this.porta = porta;}
-	public void setTripulacao(Tripulacao tripulacao){ this.tripulacao = tripulacao;}
-	public void setEstado(String estado){ this.estado = estado;}
+	public void setCodigoVoo(String codigoVoo) { this.codigoVoo = codigoVoo;}
+	public void setDestino(String destino) { this.destino = destino;}
+	public void setHoraPartida(GregorianCalendar horaPartida) { this.horaPartida = horaPartida;}
+	public void setEntidade(String entidade) { this.entidade = entidade;}
+	public void setPassageiros(ArrayList<Passageiro> passageiros) { this.passageiros = passageiros;}
+	public void setCarga(ArrayList<Carga> carga) { this.carga = carga;}
+	public void setAeronave(Aeronave aeronave) { this.aeronave = aeronave;}
+	public void setPorta(Porta porta) { this.porta = porta;}
+	public void setTripulacao(Tripulacao tripulacao) { this.tripulacao = tripulacao;}
+	public void setEstado(String estado) { this.estado = estado;}
         public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
 
-        public void setVooEmPreparacao1(Aeronave a, Tripulacao t, Porta p){
+        public void setVooEmPreparacao1(Aeronave a, Tripulacao t, Porta p) {
             aeronave = a;
             tripulacao = t;
             porta = p;
@@ -96,31 +97,31 @@ public class Voo implements Serializable{
             listaEmbarquePassageiros = new ArrayList<String>();
         }
 
-        private void setVooEmPreparacao2(){
+        private void setVooEmPreparacao2() {
             estado = VooEmPreparacao2;
         }
 
-        public void setVooPronto(){
+        public void setVooPronto() {
             estado = VooPronto;
         }
 
-        public void setVooCancelado(String obs){
+        public void setVooCancelado(String obs) {
             estado = VooCancelado;
             observacoes = obs;
         }
 
-        public void setVooAtrasado(GregorianCalendar novaHora){
+        public void setVooAtrasado(GregorianCalendar novaHora) {
             estado = VooEmPreparacao2Atraso;
             observacoes = "Nova Hora : " + novaHora.getTime().getHours() + ":" +
                     novaHora.getTime().getMinutes() + "\n";
             horaPartida = novaHora;
         }
 
-        public void setVooAr(){
+        public void setVooAr() {
             estado = VooNoAr;
         }
 
-        public boolean isPassagerVoo(Passageiro p){
+        public boolean isPassagerVoo(Passageiro p) {
             boolean encontrou = false;
             for (int i = 0 ; i < passageiros.size() && !encontrou ; i++)
                 if (passageiros.get(i).equals(p))
@@ -129,7 +130,7 @@ public class Voo implements Serializable{
             return encontrou;
         }
 
-        public boolean isCargaVoo(Carga c){
+        public boolean isCargaVoo(Carga c) {
             boolean encontrou = false;
             for (int i = 0 ; i < carga.size() && !encontrou ; i++)
                 if (carga.get(i).equals(c))
@@ -138,7 +139,7 @@ public class Voo implements Serializable{
             return encontrou;
         }
 
-        public void embarquePassageiro(Passageiro p){
+        public void embarquePassageiro(Passageiro p) {
             if (isPassagerVoo(p)){
                 listaEmbarquePassageiros.add(p.getCodPassageiro());
                 if (listaEmbarquePassageiros.size() == passageiros.size())
@@ -146,7 +147,7 @@ public class Voo implements Serializable{
             }
         }
 
-        public void embarqueCarga(Carga c){
+        public void embarqueCarga(Carga c) {
             if (isCargaVoo(c)){
                 listaEmbarqueCarga.add(c.getCodigo());
                 if (listaEmbarqueCarga.size() == carga.size())
@@ -154,16 +155,16 @@ public class Voo implements Serializable{
             }
         }
 
-        public void anulaPassageiro(Passageiro p){
+        public void anulaPassageiro(Passageiro p) {
             passageiros.remove(p);
         }
 
-        public void adicionaPassageiro(Passageiro p){
+        public void adicionaPassageiro(Passageiro p) {
             passageiros.add(p);
         }
 
 	@Override
-	public Voo clone(){
+	public Voo clone() {
 		return new Voo(this);
 	}
 }
