@@ -10,13 +10,14 @@ package Classes;
  * @author goku
  */
 public class MembroGoverno extends Passageiro {
-    public final String Ministerio = "Ministério";
-    public final String Presidencia = "Presidência";
+    public static final String Ministerio = "Ministério";
+    public static final String Presidencia = "Presidência";
 
     private String origem;
 
-    public MembroGoverno(String origem) {
-        super();
+    public MembroGoverno(String codPassageiro, String nome, String nacionalidade,
+            long contacto, String origem) {
+        super(codPassageiro, nome, nacionalidade, contacto);
         this.origem = origem;
     }
 

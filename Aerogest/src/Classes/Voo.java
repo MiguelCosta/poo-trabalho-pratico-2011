@@ -14,13 +14,13 @@ import java.util.GregorianCalendar;
  * @author goku
  */
 public class Voo implements Serializable {
-    public final String VooEspecificado = "Voo Especidicado";
-    public final String VooEmPreparacao1 = "Voo Em Preparação 1";
-    public final String VooEmPreparacao2 = "Voo Em Preparação 2";
-    public final String VooEmPreparacao2Atraso = "Voo Em Preparação 2 com Atraso";
-    public final String VooPronto = "Voo Pronto";
-    public final String VooCancelado = "Voo Cancelado";
-    public final String VooNoAr = "Voo no ar";
+    public static final String VooEspecificado = "Voo Especidicado";
+    public static final String VooEmPreparacao1 = "Voo Em Preparação 1";
+    public static final String VooEmPreparacao2 = "Voo Em Preparação 2";
+    public static final String VooEmPreparacao2Atraso = "Voo Em Preparação 2 com Atraso";
+    public static final String VooPronto = "Voo Pronto";
+    public static final String VooCancelado = "Voo Cancelado";
+    public static final String VooNoAr = "Voo no ar";
 
         /** Variaveis de instancia */
 	private String codigoVoo;
