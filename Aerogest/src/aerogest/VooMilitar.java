@@ -19,7 +19,7 @@ public class VooMilitar extends Voo implements Serializable{
     public final String ForcaAerea = "Força Aérea";
 
     private GregorianCalendar horaChegada;
-    private int duracao; //minutos
+    private int duracao; //minutos : max 1 440 (1 dia)
     private String ramo; // Ramo das forças armadas
     private String codigoComunicacao;
 
@@ -28,7 +28,7 @@ public class VooMilitar extends Voo implements Serializable{
             int duracao, String ramo, String codigoComunicacao){
         super(codigoVoo, destino, horaPartida, entidade, passageiros, carga);
         horaChegada = horaPartida; horaChegada.add(GregorianCalendar.MINUTE, duracao);
-        this.duracao = duracao; // minutos : max 1 440 (1 dia)
+        this.duracao = duracao; 
         this.ramo = ramo;
         this.codigoComunicacao = codigoComunicacao;
     }
