@@ -30,8 +30,9 @@ public class AerogestSistema {
     private GregorianCalendar dataActual;
 
     /** Adicionar um voo ao mapa de voos */
-    public void adicionaVoo(Voo v){
-
+    public void adicionaVoo(Voo v)
+    {
+        
     }
 
     /** Adicionar um comandante ao array de comandantes */
