@@ -5,7 +5,6 @@
 
 package aerogest;
 
-import aerogest.Voo;
 import java.util.GregorianCalendar;
 
 /**
@@ -13,9 +12,9 @@ import java.util.GregorianCalendar;
  * @author goku
  */
 public class VooMilitar extends Voo{
-    final String Marinha = "Marinha";
-    final String Exercito = "Exército";
-    final String ForcaAerea = "Força Aérea";
+    // final String Marinha = "Marinha";
+    // final String Exercito = "Exército";
+    // final String ForcaAerea = "Força Aérea";
 
     GregorianCalendar horaChegada;
     int duracao; //minutos
