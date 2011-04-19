@@ -186,10 +186,6 @@ public class GerarDados {
 
     }
 
-    private void geraAerogestSistema(){
-
-    }
-
     private void geraMapaVoos(){
 
     }
@@ -202,8 +198,20 @@ public class GerarDados {
         
     }
 
+    private void gereFuncoesValidas(){
+
+    }
+
+    private void gereHoraSistema(){
+
+    }
+
+    private void geraAerogestSistema(){
+
+    }
+
     public void main(){
         init();
-        SaveLoadDB.saveDB();
+        SaveLoadDB.saveDB(aerogestSistema,SaveLoadDB.DefualtObjectFileName);
     }
 }

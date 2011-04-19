@@ -21,9 +21,9 @@ import java.util.TreeMap;
  */
 public class AerogestSistema {
     private TreeMap<GregorianCalendar,TreeMap<String,Voo>> mapaVoos;
-    private ArrayList<Comandante> comandantes;
-    private ArrayList<CoPiloto> coPilotos;
-    private ArrayList<Tripulante> tribulantesAdicionais;
+    private ArrayList<Comandante> comandantes; // TreeMap ?
+    private ArrayList<CoPiloto> coPilotos; // TreeMap ?
+    private ArrayList<Tripulante> tribulantesAdicionais; // TreeMap ?
     private TreeMap<String,Aeronave> aeronaves;
     private TreeMap<String,Porta> portas;
     private ArrayList<String> funcoesValidas;
