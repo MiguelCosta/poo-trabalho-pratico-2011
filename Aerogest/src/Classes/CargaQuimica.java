@@ -67,8 +67,8 @@ public class CargaQuimica extends Carga implements Serializable{
 	public String toString(){
 		StringBuilder s = new StringBuilder("CARGA QUIMICA:\n");
                 s.append(super.toString());
-		s.append("Estado: " + estado + "\n");
-                s.append("GrauToxicidade: " + grauToxicidade + "\n");
+		s.append("Estado: ").append(estado).append("\n");
+                s.append("GrauToxicidade: ").append(grauToxicidade).append("\n");
 		return s.toString();
 	}
 }

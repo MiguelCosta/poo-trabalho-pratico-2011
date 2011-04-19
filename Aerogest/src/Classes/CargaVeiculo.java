@@ -59,7 +59,7 @@ public class CargaVeiculo extends Carga implements Serializable{
 	public String toString(){
 		StringBuilder s = new StringBuilder("CARGA VEICULO:\n");
                 s.append(super.toString());
-		s.append("Tipo: " + tipo + "\n");
+		s.append("Tipo: ").append(tipo).append("\n");
 		return s.toString();
 	}
 }

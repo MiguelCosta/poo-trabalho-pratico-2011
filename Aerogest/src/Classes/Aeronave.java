@@ -89,12 +89,12 @@ public class Aeronave {
 	@Override
 	public String toString(){
 		StringBuilder s = new StringBuilder("AERONAVE:\n");
-		s.append("Matricula: " + matricula + "\n");
-		s.append("Designacao: " + designacao + "\n");
-		s.append("CapacidadePassageiros: " + capacidadePassageiros + "\n");
-		s.append("CapacidadeCarga: " + capacidadeCarga + "\n");
-		s.append("VelocidadeMaxima: " + velocidadeMaxima + "\n");
-                s.append("Ocupação: " + (livre ? "livre" : "ocupado") + "\n");
+		s.append("Matricula: ").append(matricula).append("\n");
+		s.append("Designacao: ").append(designacao).append("\n");
+		s.append("CapacidadePassageiros: ").append(capacidadePassageiros).append("\n");
+		s.append("CapacidadeCarga: ").append(capacidadeCarga).append("\n");
+		s.append("VelocidadeMaxima: ").append(velocidadeMaxima).append("\n");
+                s.append("Ocupação: ").append(livre ? "livre" : "ocupado").append("\n");
 		return s.toString();
 	}
 }

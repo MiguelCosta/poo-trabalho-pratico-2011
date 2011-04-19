@@ -78,10 +78,10 @@ public class Carga implements Serializable{
 	@Override
 	public String toString(){
 		StringBuilder s = new StringBuilder("CARGA:\n");
-		s.append("Codigo: " + codigo + "\n");
-		s.append("Peso: " + peso + "\n");
-		s.append("Descricao: " + descricao + "\n");
-		s.append("TempoCarregamento: " + tempoCarregamento + "\n");
+		s.append("Codigo: ").append(codigo).append("\n");
+		s.append("Peso: ").append(peso).append("\n");
+		s.append("Descricao: ").append(descricao).append("\n");
+		s.append("TempoCarregamento: ").append(tempoCarregamento).append("\n");
 		return s.toString();
 	}
 }
