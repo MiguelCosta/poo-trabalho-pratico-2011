@@ -5,6 +5,12 @@
 
 package aerogest;
 
+import Classes.Voo;
+import Classes.CoPiloto;
+import Classes.Comandante;
+import Classes.Aeronave;
+import Classes.Porta;
+import Classes.Tripulante;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;

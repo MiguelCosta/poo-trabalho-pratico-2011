@@ -1,0 +1,17 @@
+* Classes já estão quase todas feitas, é preciso agora comecar a fazer o trabalho
+em si.
+
+* Fazer o Aerogest Sistema e ComandoVoos (Precisa se perguntar ao prof entao se)
+nos é que temos o controlo total daquilo ou pomos aquilo a fazer cenas aleatorias
+
+* Preciso documentar e identar tudo direitinho
+
+* Preciso fazer toString dos Voos (Todos eles)
+
+* [Duvida] É preciso fazer o equals nos voos ? (Faz sentido ?)
+
+* Fazer a classe de teste para as cenas
+
+* Preciso criar os ObjectFiles para fazer import no comeco
+
+* Preciso fazer a classe que importa as cenas
