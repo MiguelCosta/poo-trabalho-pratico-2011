@@ -70,6 +70,7 @@ public class Voo implements Serializable{
 	public Porta getPorta(){ return porta; }
 	public Tripulacao getTripulacao(){ return tripulacao; }
 	public String getEstado(){ return estado; }
+        public String getObservacoes(){ return observacoes; }
 
 
 	/** sets */
@@ -83,6 +84,7 @@ public class Voo implements Serializable{
 	public void setPorta(Porta porta){ this.porta = porta;}
 	public void setTripulacao(Tripulacao tripulacao){ this.tripulacao = tripulacao;}
 	public void setEstado(String estado){ this.estado = estado;}
+        public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
 
         public void setVooEmPreparacao1(Aeronave a, Tripulacao t, Porta p){
             aeronave = a;
