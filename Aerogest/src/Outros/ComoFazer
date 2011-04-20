@@ -28,4 +28,11 @@
   no objecto e vemos o seu estado , ou usamos ArrayList em todos e no ComandoVoos usamos
   outro arraylist com os ocupados e caga-se para o estado nas diversas classes ?
   Por mim é indiferente, (mas acho mais correcto usar maps em todos e a cada momento
-  ver o seu estado).
+  ver o seu estado). Outra hipotese era na classe AerogesteSistema termos 2 arrays
+  um com os ocupados e outra com os livres e depois remover e adicionar no outro.
+
+    E ja agora, acham que vale a pena termos uma classe comandante e uma classe copiloto ?
+  é que podemos juntar estes 2 no resto da tripulacao, nas funcoesValidas juntar tb.
+  A classe Tripulacao ja nao fazia sentido e entao apagava-se, e na classe Aerogest Sistema
+  colocavamos uma list/map com os varios tripulantes, e quando fosse preciso ia la ver-se se
+  havia algum comandante e copiloto.
