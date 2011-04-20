@@ -36,3 +36,6 @@
   A classe Tripulacao ja nao fazia sentido e entao apagava-se, e na classe Aerogest Sistema
   colocavamos uma list/map com os varios tripulantes, e quando fosse preciso ia la ver-se se
   havia algum comandante e copiloto.
+
+(NOTA: nao apagar estas cenas, pois é interessante colocar isto no relatorio como
+decisoes tomadas)
