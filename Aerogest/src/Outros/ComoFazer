@@ -1,0 +1,31 @@
+* Na classe AerogesteSistema eu coloquei as seguintes cariaveis de instancia :
+    private TreeMap<GregorianCalendar,TreeMap<String,Voo>> mapaVoos;
+    private ArrayList<Comandante> comandantes; // TreeMap ?
+    private ArrayList<CoPiloto> coPilotos; // TreeMap ?
+    private ArrayList<Tripulante> tribulantesAdicionais; // TreeMap ?
+    private TreeMap<String,Aeronave> aeronaves;
+    private TreeMap<String,Porta> portas;
+    private ArrayList<String> funcoesValidas;
+    private GregorianCalendar dataActual;
+
+    A cena é, o nosso sistema tem de ter aviões, portas, tripulantes ( de notar,
+  que os comandantes e co-pilotos sao os mais importantes, pois sem sem cada 1 deles
+  numa tripulacao, nao pode haver voo, por isso criei uma classe Comandante e CoPiloto,
+  que apenas e uma extensao de tripulante, so que a funcao destes e clara!, Por isso é
+  que coloquei um array de comandantes, de co-pilotos e de tripulantes ), e o mais
+  importante, voos.
+
+    As funcoesValidas sao as funcoes que os tripulantes podem assumir (assistente,
+  Aeronauta, MECÂNICO DE VÔO, NAVEGADOR, RADIOPERADOR DE VÔO, COMISSÁRIO, entre outros
+  (Fora o comandante e co-piloto, que acho que nao interessa estarem aqui));
+
+    Agora a duvida: A classe CommandoVoos é a classe que controla os voos, isto é,
+  a que cancela, a que determina que o voo ira ser atrasado, ... Mas para isso, para
+  passar um voo ao ESTADO DE PREPARACAO 2, ele precisa de saber se tem aeronaves
+  disponiveis, 1 comandante, 1 co piloto e uma porta de embarque (Por isso é que
+  coloquei os arrays/treemap na classe AerogesteSistema, e o estado nestas diversas
+  classes). A cena é usamos TreeMap para todos e a cada momento no ComandoVoos pegamos
+  no objecto e vemos o seu estado , ou usamos ArrayList em todos e no ComandoVoos usamos
+  outro arraylist com os ocupados e caga-se para o estado nas diversas classes ?
+  Por mim é indiferente, (mas acho mais correcto usar maps em todos e a cada momento
+  ver o seu estado).
