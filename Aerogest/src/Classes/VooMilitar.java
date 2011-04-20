@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade VooMilitar
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class VooMilitar extends Voo implements Serializable {
     public final String Marinha = "Marinha";

@@ -5,8 +5,9 @@
 package Classes;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade Aeronave
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class Aeronave {
 

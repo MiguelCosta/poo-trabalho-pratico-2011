@@ -93,45 +93,45 @@ public class GerarDados {
     }
 
     private void geraPassageiros(){
-        passageiros.add(new Passageiro("p001", "António Almeida", "Portugal", 910000001));
-        passageiros.add(new Passageiro("p002", "Bernado Borgues", "Portugal", 910000002));
-        passageiros.add(new Passageiro("p003", "Carlos Cunha", "Portugal", 910000003));
-        passageiros.add(new Passageiro("p004", "Duarte Durão", "Portugal", 910000004));
-        passageiros.add(new Passageiro("p005", "Elias Esteves", "Portugal", 910000005));
-        passageiros.add(new Passageiro("p006", "Fábio Faria", "Portugal", 910000006));
-        passageiros.add(new Passageiro("p007", "Guilherme Guimarães", "Portugal", 910000007));
-        passageiros.add(new Passageiro("p008", "Hugo Horta", "Portugal", 910000008));
-        passageiros.add(new Passageiro("p009", "Isabel Infante", "Portugal", 910000009));
-        passageiros.add(new Passageiro("p010", "Joana Jardim", "Portugal", 910000010));
-        passageiros.add(new Passageiro("p011", "Kelly Ketchup", "Chile", 910000011));
-        passageiros.add(new Passageiro("p012", "Luciana Lameira", "Portugal", 910000012));
-        passageiros.add(new Passageiro("p013", "Mário Martins", "Portugal", 910000013));
-        passageiros.add(new Passageiro("p014", "Nuno Nobre", "Portugal", 910000014));
-        passageiros.add(new Passageiro("p015", "Óscar Oliveira", "Portugal", 910000015));
-        passageiros.add(new Passageiro("p016", "Paula Pacheco", "Portugal", 910000016));
-        passageiros.add(new Passageiro("p017", "Quim Queirós", "Portugal", 910000017));
-        passageiros.add(new Passageiro("p018", "Rita Ramalho", "Portugal", 910000018));
-        passageiros.add(new Passageiro("p019", "Sara Santos", "Portugal", 910000019));
-        passageiros.add(new Passageiro("p020", "Tiago Taveira", "Portugal", 910000020));
-        passageiros.add(new Passageiro("p021", "Ulisses Uchoa", "Grécia", 910000021));
-        passageiros.add(new Passageiro("p022", "Vania Valentim", "Portugal", 910000022));
-        passageiros.add(new Passageiro("p023", "Wilson Wolf", "Inglaterra", 910000023));
-        passageiros.add(new Passageiro("p024", "Xavier Ximenes", "Portugal", 910000024));
-        passageiros.add(new Passageiro("p025", "Yuri Yasmin", "Rússia", 910000025));
-        passageiros.add(new Passageiro("p026", "Zé Zambujal", "Portugal", 910000026));
+        passageiros.add(new Passageiro("p001", "António Almeida", "Portugal", "910000001"));
+        passageiros.add(new Passageiro("p002", "Bernado Borgues", "Portugal", "910000002"));
+        passageiros.add(new Passageiro("p003", "Carlos Cunha", "Portugal", "910000003"));
+        passageiros.add(new Passageiro("p004", "Duarte Durão", "Portugal", "910000004"));
+        passageiros.add(new Passageiro("p005", "Elias Esteves", "Portugal", "910000005"));
+        passageiros.add(new Passageiro("p006", "Fábio Faria", "Portugal", "910000006"));
+        passageiros.add(new Passageiro("p007", "Guilherme Guimarães", "Portugal", "910000007"));
+        passageiros.add(new Passageiro("p008", "Hugo Horta", "Portugal", "910000008"));
+        passageiros.add(new Passageiro("p009", "Isabel Infante", "Portugal", "910000009"));
+        passageiros.add(new Passageiro("p010", "Joana Jardim", "Portugal", "910000010"));
+        passageiros.add(new Passageiro("p011", "Kelly Ketchup", "Chile", "910000011"));
+        passageiros.add(new Passageiro("p012", "Luciana Lameira", "Portugal", "910000012"));
+        passageiros.add(new Passageiro("p013", "Mário Martins", "Portugal", "910000013"));
+        passageiros.add(new Passageiro("p014", "Nuno Nobre", "Portugal", "910000014"));
+        passageiros.add(new Passageiro("p015", "Óscar Oliveira", "Portugal", "910000015"));
+        passageiros.add(new Passageiro("p016", "Paula Pacheco", "Portugal", "910000016"));
+        passageiros.add(new Passageiro("p017", "Quim Queirós", "Portugal", "910000017"));
+        passageiros.add(new Passageiro("p018", "Rita Ramalho", "Portugal", "910000018"));
+        passageiros.add(new Passageiro("p019", "Sara Santos", "Portugal", "910000019"));
+        passageiros.add(new Passageiro("p020", "Tiago Taveira", "Portugal", "910000020"));
+        passageiros.add(new Passageiro("p021", "Ulisses Uchoa", "Grécia", "910000021"));
+        passageiros.add(new Passageiro("p022", "Vania Valentim", "Portugal", "910000022"));
+        passageiros.add(new Passageiro("p023", "Wilson Wolf", "Inglaterra", "910000023"));
+        passageiros.add(new Passageiro("p024", "Xavier Ximenes", "Portugal", "910000024"));
+        passageiros.add(new Passageiro("p025", "Yuri Yasmin", "Rússia", "910000025"));
+        passageiros.add(new Passageiro("p026", "Zé Zambujal", "Portugal", "910000026"));
     }
 
     private void geraMembrosGoverno(){
         membrosGoverno.add(new MembroGoverno("mg001", "José Sócrates", "Portual",
-                910000027, MembroGoverno.Presidencia));
+                "910000027", MembroGoverno.Presidencia));
         membrosGoverno.add(new MembroGoverno("mg002", "Carlos Cascais", "Portual",
-                910000028, MembroGoverno.Presidencia));
+                "910000028", MembroGoverno.Presidencia));
         membrosGoverno.add(new MembroGoverno("mg003", "Pedro Almeida", "Portual",
-                910000029, MembroGoverno.Ministerio));
+                "910000029", MembroGoverno.Ministerio));
         membrosGoverno.add(new MembroGoverno("mg004", "Carina Campos", "Portual",
-                910000030, MembroGoverno.Presidencia));
+                "910000030", MembroGoverno.Presidencia));
         membrosGoverno.add(new MembroGoverno("mg005", "Catarina Salsa", "Espanha",
-                910000031, MembroGoverno.Ministerio));
+                "910000031", MembroGoverno.Ministerio));
     }
 
     private void geraCargaAlimentar(){

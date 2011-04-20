@@ -2,23 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Classes;
 
 import java.io.Serializable;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade CoPiloto
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class CoPiloto extends Tripulante implements Serializable{
+public class CoPiloto extends Tripulante implements Serializable {
 
-    public CoPiloto(){
+    /**
+     * Construtor CoPiloto
+     */
+    public CoPiloto() {
         super();
         super.setFuncao("CoPiloto");
     }
 
-    public CoPiloto(String nome, String nacionalidade){
-        super("CoPiloto",nome,nacionalidade);
+    /**
+     * Construtor CoPiloto
+     * @param nome
+     * @param nacionalidade 
+     */
+    public CoPiloto(String nome, String nacionalidade) {
+        super("CoPiloto", nome, nacionalidade);
     }
 }

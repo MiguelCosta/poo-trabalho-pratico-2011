@@ -7,8 +7,9 @@ package Classes;
 import java.io.Serializable;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade Carga
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class Carga implements Serializable {
 

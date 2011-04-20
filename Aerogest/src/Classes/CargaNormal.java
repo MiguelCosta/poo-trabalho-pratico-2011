@@ -2,36 +2,61 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Classes;
 
 import java.io.Serializable;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade CargaNormal
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class CargaNormal extends Carga implements Serializable{
+public class CargaNormal extends Carga implements Serializable {
+
     /** Construtores */
-    public CargaNormal(){
+    /**
+     * Cria Carga Normal
+     */
+    public CargaNormal() {
         super();
     }
-    public CargaNormal(String codigo, double peso, String descricao, double tempoCarregamento){
-        super(codigo,peso,descricao,tempoCarregamento);
+
+    /**
+     * Cria CargaNormal
+     * @param codigo
+     * @param peso
+     * @param descricao
+     * @param tempoCarregamento 
+     */
+    public CargaNormal(String codigo, double peso, String descricao, double tempoCarregamento) {
+        super(codigo, peso, descricao, tempoCarregamento);
     }
-    public CargaNormal(CargaNormal cargaNormal){
+
+    /**
+     * Cria Carga Normal
+     * @param cargaNormal 
+     */
+    public CargaNormal(CargaNormal cargaNormal) {
         super(cargaNormal);
     }
 
-	@Override
-	public CargaNormal clone(){
-		return new CargaNormal(this);
-	}
+    /**
+     * clone
+     * @return CargaNormal 
+     */
+    @Override
+    public CargaNormal clone() {
+        return new CargaNormal(this);
+    }
 
-	@Override
-	public String toString(){
-		StringBuilder s = new StringBuilder("CARGA NORMAL:\n");
-                s.append(super.toString());
-		return s.toString();
-	}
+    /**
+     * toString
+     * @return String
+     */
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("CARGA NORMAL:\n");
+        s.append(super.toString());
+        return s.toString();
+    }
 }

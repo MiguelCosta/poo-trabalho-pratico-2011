@@ -6,8 +6,9 @@
 package Classes;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade Porta
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class Porta {
         /** Variaveis de instancia */
@@ -16,14 +17,26 @@ public class Porta {
 
 
 	/** Construtores */
+        /**
+         * Construtor Porta
+         */
 	public Porta(){
 		codPorta = "";
 		livre = false;
 	}
+        /**
+         * Construtor Porta
+         * @param codPorta
+         * @param livre 
+         */
 	public Porta(String codPorta, boolean livre){
 		this.codPorta = codPorta;
 		this.livre = livre;
 	}
+        /**
+         * Construtor Porta
+         * @param porta 
+         */
 	public Porta(Porta porta){
 		codPorta = porta.getCodPorta();
 		livre = porta.getLivre();
@@ -31,16 +44,37 @@ public class Porta {
 
 
 	/** gets */
+        /**
+         * Codigo da Porta
+         * @return String
+         */
 	public String getCodPorta(){ return codPorta; }
+        /**
+         * Estado da Porta
+         * @return 
+         */
 	public boolean getLivre(){ return livre; }
 
 
 	/** sets */
+        /**
+         * Alterar o codigo da Porta
+         * @param codPorta 
+         */
 	public void setCodPorta(String codPorta){ this.codPorta = codPorta;}
+        /**
+         * Alterar o estado da Porta
+         * @param livre 
+         */
 	public void setLivre(boolean livre){ this.livre = livre;}
 
 
 	/** Equals | Clone | toString */
+        /**
+         * equals
+         * @param object
+         * @return boolean
+         */
 	@Override
 	public boolean equals(Object o){
 		if (this == o) { return true; }
@@ -53,11 +87,19 @@ public class Porta {
 		}
 	}
 
+        /**
+         * clone
+         * @return Porta 
+         */
 	@Override
 	public Porta clone(){
 		return new Porta(this);
 	}
 
+        /**
+         * toString
+         * @return String
+         */
 	@Override
 	public String toString(){
 		StringBuilder s = new StringBuilder("PORTA:\n");
