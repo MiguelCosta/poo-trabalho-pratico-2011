@@ -12,11 +12,14 @@ import Classes.Porta;
 import Classes.Tripulante;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade AerogestSistema
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class AerogestSistema {
 
@@ -36,7 +39,7 @@ public class AerogestSistema {
     public void adicionaVoo(Voo v) {
         TreeMap<String, Voo> x = new TreeMap<String, Voo>();
         x.put(v.getCodigoVoo(), v);
-        
+
         mapaVoos.put(new GregorianCalendar(), x);
     }
 
@@ -56,7 +59,16 @@ public class AerogestSistema {
         comandantes.remove(c);
     }
 
-    
+    /**
+     * Adicionar um array com comandantes ao array de comandantes
+     * @param c 
+     */
+    public void adicionaComandateArray(List<Comandante> c) {
+        for (Comandante x : c) {
+            comandantes.add(x);
+        }
+    }
+
     /**
      * Adicionar um co Piloto ao array de CoPilotos
      * @param coPiloto 
@@ -64,7 +76,7 @@ public class AerogestSistema {
     public void adicionaCoPiloto(CoPiloto c) {
         coPilotos.add(c);
     }
-    
+
     /**
      * Remover um CoPiloto do array de CoPilotos
      * @param coPiloto
@@ -72,7 +84,17 @@ public class AerogestSistema {
     public void removeCoPiloto(CoPiloto c) {
         coPilotos.remove(c);
     }
-    
+
+    /**
+     * Adicionar um array com copilotos ao array de CoPilotos
+     * @param coPiloto 
+     */
+    public void adicionaCoPilotoArray(List<CoPiloto> c) {
+        for (CoPiloto x : c) {
+            coPilotos.add(x);
+        }
+    }
+
     /**
      * Adicionar um tripulante ao array de tripulantes
      * @param tripulante
@@ -80,7 +102,7 @@ public class AerogestSistema {
     public void adicionaTripulante(Tripulante t) {
         tribulantesAdicionais.add(t);
     }
-    
+
     /**
      * Remover um tripulante do array de tripulantes
      * @param tripulante
@@ -88,7 +110,17 @@ public class AerogestSistema {
     public void removeTripulante(Tripulante t) {
         tribulantesAdicionais.remove(t);
     }
-    
+
+    /**
+     * Adicionar um array com tripulantes ao array de tripulantes
+     * @param t 
+     */
+    public void adicionaTripulanteArray(List<Tripulante> t) {
+        for (Tripulante x : t) {
+            tribulantesAdicionais.add(x);
+        }
+    }
+
     /**
      * Adicionar uma aeronave ao mapa de aeronaves
      * @param aeronave
@@ -96,7 +128,7 @@ public class AerogestSistema {
     public void adicionaAeronave(Aeronave a) {
         aeronaves.put(a.getMatricula(), a);
     }
-    
+
     /**
      * Remover uma aeronave do mapa de aeronaves
      * @param aeronave
@@ -104,7 +136,15 @@ public class AerogestSistema {
     public void removeAeronave(Aeronave a) {
         aeronaves.remove(a.getMatricula());
     }
-    
+
+    /**
+     * Adicionar um mapa com aeronaves ao Mapa de aeronaves
+     * @param aeronaves
+     */
+    public void adicionaAeronaveMap(Map a) {
+        aeronaves.putAll(a);
+    }
+
     /**
      * Adicionar uma Porta ao mapa de portas
      * @param porta
@@ -112,7 +152,7 @@ public class AerogestSistema {
     public void adicionaPorta(Porta p) {
         portas.put(p.getCodPorta(), p);
     }
-    
+
     /**
      * Remover uma porta do mapa de portas
      * @param porta
@@ -120,7 +160,15 @@ public class AerogestSistema {
     public void removePorta(Porta p) {
         portas.remove(p.getCodPorta());
     }
-    
+
+    /**
+     * Adicionar um mapa com portas ao mada de portas
+     * @param porta 
+     */
+    public void adicionaPortaMap(Map p) {
+        portas.putAll(p);
+    }
+
     /**
      * Adicionar uma função ao array de funções
      * @param funcao 
@@ -128,7 +176,7 @@ public class AerogestSistema {
     public void adicionaFuncaoValida(String funcao) {
         funcoesValidas.add(funcao);
     }
-    
+
     /**
      * Remover uma função do array de funções
      * @param funcao 
@@ -137,33 +185,78 @@ public class AerogestSistema {
         funcoesValidas.remove(funcao);
     }
     
-    
-    
-    public void getVoosPorDia(GregorianCalendar dia) {
-        
+    /**
+     * Adicionar uma lista com funções à lista de funções
+     * @param funcoes
+     */
+    public void adicionaFuncaoValidaList(List<String> f){
+        for(String s : f){
+            funcoesValidas.add(s);
+        }
+    }
+
+    /**
+     * Mapa de voos do dia
+     * @param dia
+     * @return Map
+     */
+    public Map getVoosPorDia(GregorianCalendar dia) {
+        return mapaVoos.get(dia);
+    }
+
+    /**
+     * Lista dos comandantes
+     * @return list
+     */
+    public List getComandantes() {
+        return comandantes;
+    }
+
+    /**
+     * Lista com os CoPilots
+     * @return list
+     */
+    public List getCoPilotos() {
+        return coPilotos;
+    }
+
+    /**
+     * Lista com os tripulantes adicionais
+     * @return list
+     */
+    public List getTripulantesAdicionais() {
+        return tribulantesAdicionais;
+    }
+
+    /**
+     * Mapa das aeronaves
+     * @return map
+     */
+    public Map getAeronaves() {
+        return aeronaves;
+    }
+
+    /**
+     * Mapa das portas
+     * @return map
+     */
+    public Map getPortas() {
+        return portas;
+    }
+
+    /**
+     * Hora actual do sistema
+     * @return GregorianCalendar
+     */
+    public GregorianCalendar getHoraActual() {
+        return dataActual;
     }
     
-    public void getComandantes() {
-        
-    }
-    
-    public void getCoPilotos() {
-        
-    }
-    
-    public void getTripulantesAdicionais() {
-        
-    }
-    
-    public void getAeronaves() {
-        
-    }
-    
-    public void getPortas() {
-        
-    }
-    
-    public void getHoraActual() {
-        
+    /**
+     * Alterar a data actual do AerogestSistema
+     * @param data
+     */
+    public void setHoraActual(GregorianCalendar d){
+        dataActual = d;
     }
 }

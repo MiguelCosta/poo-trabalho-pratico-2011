@@ -6,8 +6,9 @@
 package aerogest;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para criar e gerir a entidade ComandoVoos
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class ComandoVoos {
 

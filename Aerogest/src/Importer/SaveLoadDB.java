@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package Importer;
 
@@ -14,8 +11,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para gerir os ficheiros
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class SaveLoadDB {
 

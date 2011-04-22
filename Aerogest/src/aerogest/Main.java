@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- *
- * @author Miguel
+ * Possui todos os métodos necessários para iniciar o sistema
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class Main {
 

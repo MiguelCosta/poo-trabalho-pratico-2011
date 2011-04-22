@@ -11,5 +11,8 @@ ou no inicio do dia ? (00:00)
 * Jornalistas e Convidados em VooGovernamental também tem de ter a origem ?
 (Presidencia ou Ministerio)
 
-* Na class AerogestSistema o que é que os gets tem de devolver?? as mesmas estruturas de dados?
+* Na classe AerogestSistema o que é que os gets tem de devolver?? as mesmas estruturas de dados?
 por exemplo o getAeronaves tem dedevover um TreeMap ?
+
+* Na classe AerogestSistema o método que eu fiz adicionaAeronaveMap(Map a) será que funciona?
+Map getVoosPorDia(GregorianCalendar dia) ?

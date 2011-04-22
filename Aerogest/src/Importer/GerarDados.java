@@ -27,8 +27,9 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 
 /**
- *
- * @author goku
+ * Possui todos os métodos necessários para gerar os dados
+ * 
+ * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
 public class GerarDados {
 
@@ -47,6 +48,7 @@ public class GerarDados {
     private ArrayList<VooComercial> voosComererciais;
     private ArrayList<VooGovernamental> voosGovernamentais;
     private ArrayList<VooMilitar> voosMilitares;
+    
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos_;
     private ArrayList<Comandante> comandantes_;
     private ArrayList<CoPiloto> coPilotos_;
@@ -89,6 +91,13 @@ public class GerarDados {
         geraVoosComerciais();
         geraVoosGovernamentais();
         geraVoosMilitares();
+        geraMapaAeronaves();
+        geraMapaPortas();
+        geraMapaVoos();
+        geraMembrosGoverno();
+        gereFuncoesValidas();
+        gereHoraSistema();
+        geraAerogestSistema();
     }
 
     private void geraPassageiros() {
@@ -268,11 +277,11 @@ public class GerarDados {
     }
 
     private void geraTripulantes() {
-        tripulantes.add(new Tripulante("cozinheiro", "Maria", "Portuguesa"));
-        tripulantes.add(new Tripulante("medico", "Duarte", "Portuguesa"));
-        tripulantes.add(new Tripulante("servente", "Vitor", "Portuguesa"));
-        tripulantes.add(new Tripulante("servente", "Mario", "Portuguesa"));
-        tripulantes.add(new Tripulante("servente", "Antonio", "Portuguesa"));
+        tripulantes.add(new Tripulante(funcoesValidas_.get(0), "Maria", "Portuguesa"));
+        tripulantes.add(new Tripulante(funcoesValidas_.get(1), "Duarte", "Portuguesa"));
+        tripulantes.add(new Tripulante(funcoesValidas_.get(2), "Vitor", "Portuguesa"));
+        tripulantes.add(new Tripulante(funcoesValidas_.get(3), "Mario", "Portuguesa"));
+        tripulantes.add(new Tripulante(funcoesValidas_.get(4), "Antonio", "Portuguesa"));
     }
 
     private void geraPortas() {
@@ -380,7 +389,12 @@ public class GerarDados {
     }
 
     private void gereFuncoesValidas() {
-        
+        funcoesValidas_.add("assistente");
+        funcoesValidas_.add("aeronauta");
+        funcoesValidas_.add("mecanico de voo");
+        funcoesValidas_.add("navegador");
+        funcoesValidas_.add("radioperador de voo");
+        funcoesValidas_.add("Comissario");
     }
 
     private void gereHoraSistema() {
@@ -389,6 +403,17 @@ public class GerarDados {
 
     private void geraAerogestSistema() {
         aerogestSistema = new AerogestSistema();
+        aerogestSistema.adicionaComandateArray(comandantes);
+        aerogestSistema.adicionaCoPilotoArray(coPilotos);
+        aerogestSistema.adicionaAeronaveMap(aeronaves_);
+        aerogestSistema.adicionaPortaMap(portas_);
+        aerogestSistema.setHoraActual(dataActual_);
+        aerogestSistema.adicionaFuncaoValidaList(funcoesValidas_);
+        
+        // qual destes dois é??
+        aerogestSistema.adicionaTripulanteArray(tripulantes);
+        aerogestSistema.adicionaTripulanteArray(tribulantesAdicionais_);
+        
         
     }
 
