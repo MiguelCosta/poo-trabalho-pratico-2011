@@ -32,15 +32,38 @@ public class AerogestSistema {
     private ArrayList<String> funcoesValidas;
     private GregorianCalendar dataActual;
 
+    public AerogestSistema(){
+        mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        comandantes = new ArrayList<Comandante>();
+        coPilotos = new ArrayList<CoPiloto>();
+        tribulantesAdicionais = new ArrayList<Tripulante>();
+        aeronaves = new TreeMap<String, Aeronave>();
+        portas = new TreeMap<String, Porta>();
+        funcoesValidas = new ArrayList<String>();
+        dataActual = new GregorianCalendar();
+    }
+
+    public TreeMap<GregorianCalendar, TreeMap<String, Voo>> getMapaVoos()
+    {
+        return mapaVoos;
+    }
+
     /**
      * Adicionar um voo ao mapa de voos
      * @param voo 
      */
     public void adicionaVoo(Voo v) {
-        TreeMap<String, Voo> x = new TreeMap<String, Voo>();
-        x.put(v.getCodigoVoo(), v);
 
-        mapaVoos.put(new GregorianCalendar(), x);
+        if (mapaVoos.get(v.getHoraPartida()) == null){
+            TreeMap<String, Voo> x = new TreeMap<String, Voo>();
+            x.put(v.getEntidade() + v.getCodigoVoo(), v);
+
+            mapaVoos.put(v.getHoraPartida(), x);
+        }
+        else{
+            TreeMap<String,Voo> x = mapaVoos.get(v.getHoraPartida());
+            x.put(v.getEntidade() + v.getCodigoVoo(), v);
+        }
     }
 
     /**

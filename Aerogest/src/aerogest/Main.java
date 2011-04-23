@@ -7,9 +7,11 @@ package aerogest;
 
 import Classes.Passageiro;
 import Classes.Carga;
+import Classes.Voo;
 import Classes.VooMilitar;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.TreeMap;
 
 /**
  * Possui todos os métodos necessários para iniciar o sistema
@@ -22,6 +24,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
 
         String codVoo = "Voo";
         String destino = "ola";
@@ -38,6 +41,15 @@ public class Main {
 
         System.out.println("Hora Chegada : " + v.getHoraChegada().getTime().getHours() + ":" +
                 v.getHoraChegada().getTime().getMinutes());
+
+        AerogestSistema as = new AerogestSistema();
+        as.adicionaVoo(v);
+
+        for (TreeMap<String,Voo> voodia : as.getMapaVoos().values())
+            for (Voo voo : voodia.values()){
+                System.out.println("Voo: " + voo.getClass());
+                System.out.println("" + ((voo.getClass() == VooMilitar.class) ? true : false) );
+            }
     }
 
 }
