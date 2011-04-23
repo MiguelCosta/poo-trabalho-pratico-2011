@@ -13,6 +13,14 @@ ou no inicio do dia ? (00:00)
 
 * Na classe AerogestSistema o que é que os gets tem de devolver?? as mesmas estruturas de dados?
 por exemplo o getAeronaves tem dedevover um TreeMap ?
+-----> Axo que sim, de qualquer modo podemos por para retornar uma nave introduzindo como
+parametro o seu codigo (Podemos fazer as 2 funcoes)
 
 * Na classe AerogestSistema o método que eu fiz adicionaAeronaveMap(Map a) será que funciona?
 Map getVoosPorDia(GregorianCalendar dia) ?
+-----> Axo que sim, mas quando e que vais usar uma funcao que recebe um map ?
+Quanto à outra, a cena vai ser um pouco complicada, porque este dia, como é um gregorian
+calendar, tem ano, mes, dia, hora, minuto, segundo ... A unica parte que interessa é a data
+portanto este dia é um dia com a hora a 00:00:00 ou entao temos uma outra hipotes que ainda
+nao sei como funciona. Eu lembro m do rocket fazer uma vez uma funcao para colocar cenas numa
+treemap, so k ja nao me lembro como se faz isso. tenho dir pesquisar.
