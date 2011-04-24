@@ -21,6 +21,7 @@ import Classes.Voo;
 import Classes.VooComercial;
 import Classes.VooGovernamental;
 import Classes.VooMilitar;
+import Classes.VooPrivado;
 import aerogest.AerogestSistema;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -33,33 +34,34 @@ import java.util.TreeMap;
  */
 public class GerarDados {
 
-    private ArrayList<Passageiro> passageiros;
-    private ArrayList<MembroGoverno> membrosGoverno;
-    private ArrayList<CargaAlimentar> cargaAlimentar;
-    private ArrayList<CargaAnimal> cargaAnimal;
-    private ArrayList<CargaNormal> cargaNormal;
-    private ArrayList<CargaQuimica> cargaQuimica;
-    private ArrayList<CargaVeiculo> cargaVeiculo;
-    private ArrayList<Comandante> comandantes;
-    private ArrayList<CoPiloto> coPilotos;
-    private ArrayList<Tripulante> tripulantes;
-    private ArrayList<Porta> portas;
-    private ArrayList<Aeronave> aeronaves;
-    private ArrayList<VooComercial> voosComererciais;
-    private ArrayList<VooGovernamental> voosGovernamentais;
-    private ArrayList<VooMilitar> voosMilitares;
+    private static ArrayList<Passageiro> passageiros;
+    private static ArrayList<MembroGoverno> membrosGoverno;
+    private static ArrayList<CargaAlimentar> cargaAlimentar;
+    private static ArrayList<CargaAnimal> cargaAnimal;
+    private static ArrayList<CargaNormal> cargaNormal;
+    private static ArrayList<CargaQuimica> cargaQuimica;
+    private static ArrayList<CargaVeiculo> cargaVeiculo;
+    private static ArrayList<Comandante> comandantes;
+    private static ArrayList<CoPiloto> coPilotos;
+    private static ArrayList<Tripulante> tripulantes;
+    private static ArrayList<Porta> portas;
+    private static ArrayList<Aeronave> aeronaves;
+    private static ArrayList<VooComercial> voosComererciais;
+    private static ArrayList<VooGovernamental> voosGovernamentais;
+    private static ArrayList<VooMilitar> voosMilitares;
+    private static ArrayList<VooPrivado> voosPrivados;
     
-    private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos_;
-    private ArrayList<Comandante> comandantes_;
-    private ArrayList<CoPiloto> coPilotos_;
-    private ArrayList<Tripulante> tribulantesAdicionais_;
-    private TreeMap<String, Aeronave> aeronaves_;
-    private TreeMap<String, Porta> portas_;
-    private ArrayList<String> funcoesValidas_;
-    private GregorianCalendar dataActual_;
-    private AerogestSistema aerogestSistema;
+    private static TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos_;
+    private static ArrayList<Comandante> comandantes_;
+    private static ArrayList<CoPiloto> coPilotos_;
+    private static ArrayList<Tripulante> tribulantesAdicionais_;
+    private static TreeMap<String, Aeronave> aeronaves_;
+    private static TreeMap<String, Porta> portas_;
+    private static ArrayList<String> funcoesValidas_;
+    private static GregorianCalendar dataActual_;
+    private static AerogestSistema aerogestSistema;
 
-    private void init() {
+    private static void init() {
         passageiros = new ArrayList<Passageiro>();
         membrosGoverno = new ArrayList<MembroGoverno>();
         cargaAlimentar = new ArrayList<CargaAlimentar>();
@@ -75,6 +77,16 @@ public class GerarDados {
         voosComererciais = new ArrayList<VooComercial>();
         voosGovernamentais = new ArrayList<VooGovernamental>();
         voosMilitares = new ArrayList<VooMilitar>();
+        voosPrivados = new ArrayList<VooPrivado>();
+
+        mapaVoos_ = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        comandantes_ = new ArrayList<Comandante>();
+        coPilotos_ = new ArrayList<CoPiloto>();
+        tribulantesAdicionais_ = new ArrayList<Tripulante>();
+        aeronaves_ = new TreeMap<String, Aeronave>();
+        portas_ = new TreeMap<String, Porta>();
+        funcoesValidas_ = new ArrayList<String>();
+        dataActual_ = new GregorianCalendar();
 
         geraPassageiros();
         geraMembrosGoverno();
@@ -91,6 +103,7 @@ public class GerarDados {
         geraVoosComerciais();
         geraVoosGovernamentais();
         geraVoosMilitares();
+        geraVoosPrivados();
         geraMapaAeronaves();
         geraMapaPortas();
         geraMapaVoos();
@@ -100,7 +113,7 @@ public class GerarDados {
         geraAerogestSistema();
     }
 
-    private void geraPassageiros() {
+    private static void geraPassageiros() {
         passageiros.add(new Passageiro("p001", "António Almeida", "Portugal", "910000001"));
         passageiros.add(new Passageiro("p002", "Bernado Borgues", "Portugal", "910000002"));
         passageiros.add(new Passageiro("p003", "Carlos Cunha", "Portugal", "910000003"));
@@ -129,7 +142,7 @@ public class GerarDados {
         passageiros.add(new Passageiro("p026", "Zé Zambujal", "Portugal", "910000026"));
     }
 
-    private void geraMembrosGoverno() {
+    private static void geraMembrosGoverno() {
         membrosGoverno.add(new MembroGoverno("mg001", "José Sócrates", "Portual",
                 "910000027", MembroGoverno.Presidencia));
         membrosGoverno.add(new MembroGoverno("mg002", "Carlos Cascais", "Portual",
@@ -142,7 +155,7 @@ public class GerarDados {
                 "910000031", MembroGoverno.Ministerio));
     }
 
-    private void geraCargaAlimentar() {
+    private static void geraCargaAlimentar() {
         cargaAlimentar.add(new CargaAlimentar("cargaAlim01", 100.1, "Alimento 1", 14, new GregorianCalendar()));
         cargaAlimentar.add(new CargaAlimentar("cargaAlim02", 101.1, "Alimento 2", 14, new GregorianCalendar()));
         cargaAlimentar.add(new CargaAlimentar("cargaAlim03", 102.1, "Alimento 3", 14, new GregorianCalendar()));
@@ -165,7 +178,7 @@ public class GerarDados {
         cargaAlimentar.add(new CargaAlimentar("cargaAlim20", 119.1, "Alimento 20", 14, new GregorianCalendar()));
     }
 
-    private void geraCargaAnimal() {
+    private static void geraCargaAnimal() {
         cargaAnimal.add(new CargaAnimal("carAnimal01", 20, "Animal 1", 1, 10));
         cargaAnimal.add(new CargaAnimal("carAnimal02", 21, "Animal 2", 2, 11));
         cargaAnimal.add(new CargaAnimal("carAnimal03", 22, "Animal 3", 3, 12));
@@ -188,7 +201,7 @@ public class GerarDados {
         cargaAnimal.add(new CargaAnimal("carAnimal20", 39, "Animal 20", 20, 29));
     }
 
-    private void geraCargaNormal() {
+    private static void geraCargaNormal() {
         cargaNormal.add(new CargaNormal("cargaNormal", 20, "Carga 1", 12));
         cargaNormal.add(new CargaNormal("cargaNorma2", 21, "Carga 2", 13));
         cargaNormal.add(new CargaNormal("cargaNorma3", 22, "Carga 3", 14));
@@ -211,7 +224,7 @@ public class GerarDados {
         cargaNormal.add(new CargaNormal("cargaNorma20", 39, "Carga 20", 31));
     }
 
-    private void geraCargaQuimica() {
+    private static void geraCargaQuimica() {
         cargaQuimica.add(new CargaQuimica("cargaQuimica1", 12, "Quimico 1", 13, "", "muito toxico"));
         cargaQuimica.add(new CargaQuimica("cargaQuimica2", 13, "Quimico 2", 14, "", "muito toxico"));
         cargaQuimica.add(new CargaQuimica("cargaQuimica3", 14, "Quimico 3", 15, "", "muito toxico"));
@@ -234,7 +247,7 @@ public class GerarDados {
         cargaQuimica.add(new CargaQuimica("cargaQuimica20", 31, "Quimico 20", 32, "", "toxico"));
     }
 
-    private void geraCargaVeiculo() {
+    private static void geraCargaVeiculo() {
         cargaVeiculo.add(new CargaVeiculo("cargaVeiculo1", 10, "veiculo 1", 12, "ligeiro"));
         cargaVeiculo.add(new CargaVeiculo("cargaVeiculo2", 11, "veiculo 2", 13, "ligeiro"));
         cargaVeiculo.add(new CargaVeiculo("cargaVeiculo3", 12, "veiculo 3", 14, "ligeiro"));
@@ -247,7 +260,7 @@ public class GerarDados {
         cargaVeiculo.add(new CargaVeiculo("cargaVeiculo10", 19, "veiculo 10", 21, "pesado"));
     }
 
-    private void geraComandantes() {
+    private static void geraComandantes() {
         comandantes.add(new Comandante("Mike", "Inglesa"));
         comandantes.add(new Comandante("John", "Inglesa"));
         comandantes.add(new Comandante("Alexandre", "Portuguesa"));
@@ -262,7 +275,7 @@ public class GerarDados {
         comandantes_.add(new Comandante("Miguel", "Portuguesa"));
     }
 
-    private void geraCoPilotos() {
+    private static void geraCoPilotos() {
         coPilotos.add(new CoPiloto("Pedro", "Espanhol"));
         coPilotos.add(new CoPiloto("Sofia", "portuguesa"));
         coPilotos.add(new CoPiloto("Joaquim", "Espanhol"));
@@ -276,7 +289,16 @@ public class GerarDados {
         coPilotos_.add(new CoPiloto("Abel", "Norte Americano"));
     }
 
-    private void geraTripulantes() {
+    private static void gereFuncoesValidas() {
+        funcoesValidas_.add("assistente");
+        funcoesValidas_.add("aeronauta");
+        funcoesValidas_.add("mecanico de voo");
+        funcoesValidas_.add("navegador");
+        funcoesValidas_.add("radioperador de voo");
+        funcoesValidas_.add("Comissario");
+    }
+
+    private static void geraTripulantes() {
         tripulantes.add(new Tripulante(funcoesValidas_.get(0), "Maria", "Portuguesa"));
         tripulantes.add(new Tripulante(funcoesValidas_.get(1), "Duarte", "Portuguesa"));
         tripulantes.add(new Tripulante(funcoesValidas_.get(2), "Vitor", "Portuguesa"));
@@ -284,20 +306,20 @@ public class GerarDados {
         tripulantes.add(new Tripulante(funcoesValidas_.get(4), "Antonio", "Portuguesa"));
     }
 
-    private void geraPortas() {
-        portas.add(new Porta("porta1", true));
-        portas.add(new Porta("porta2", true));
-        portas.add(new Porta("porta3", true));
-        portas.add(new Porta("porta4", true));
-        portas.add(new Porta("porta5", true));
-        portas.add(new Porta("porta6", true));
-        portas.add(new Porta("porta7", true));
-        portas.add(new Porta("porta8", true));
-        portas.add(new Porta("porta9", true));
-        portas.add(new Porta("porta10", true));
+    private static void geraPortas() {
+        portas.add(new Porta("porta1", false));
+        portas.add(new Porta("porta2", false));
+        portas.add(new Porta("porta3", false));
+        portas.add(new Porta("porta4", false));
+        portas.add(new Porta("porta5", false));
+        portas.add(new Porta("porta6", false));
+        portas.add(new Porta("porta7", false));
+        portas.add(new Porta("porta8", false));
+        portas.add(new Porta("porta9", false));
+        portas.add(new Porta("porta10", false));
     }
 
-    private void geraAeronaves() {
+    private static void geraAeronaves() {
         aeronaves.add(new Aeronave("00-00-00", "Aviao", 150, 200, 700));
         aeronaves.add(new Aeronave("01-01-01", "Aviao pequeno", 20, 15, 900));
         aeronaves.add(new Aeronave("02-02-02", "Jacto", 100, 50, 1300));
@@ -308,7 +330,7 @@ public class GerarDados {
         aeronaves.add(new Aeronave("15-19-17", "Aviao", 140, 40, 700));
     }
 
-    private void geraVoosComerciais() {
+    private static void geraVoosComerciais() {
         ArrayList<Passageiro> passag = new ArrayList<Passageiro>();
         passag.add(passageiros.get(0));
         passag.add(passageiros.get(1));
@@ -325,7 +347,7 @@ public class GerarDados {
 
     }
 
-    private void geraVoosGovernamentais() {
+    private static void geraVoosGovernamentais() {
         ArrayList<Carga> carga = new ArrayList<Carga>();
         carga.add(cargaQuimica.get(0));
 
@@ -342,7 +364,7 @@ public class GerarDados {
         voosGovernamentais.add(new VooGovernamental("vGovern", "Londres", new GregorianCalendar(), "TAP", carga, mGov, jorn, convi));
     }
 
-    private void geraVoosMilitares() {
+    private static void geraVoosMilitares() {
         ArrayList<Passageiro> passag = new ArrayList<Passageiro>();
         passag.add(passageiros.get(9));
         passag.add(passageiros.get(10));
@@ -353,55 +375,58 @@ public class GerarDados {
         voosMilitares.add(new VooMilitar("vMilitar1", "Libia", new GregorianCalendar(), "Forças Armadas", passag, carga, 150, "Exercito", "codComu1"));
     }
 
-    private void geraMapaVoos() {
+    private static void geraVoosPrivados(){
+        ArrayList<Passageiro> passag = new ArrayList<Passageiro>();
+        passag.add(passageiros.get(1));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(9));
+        passag.add(passageiros.get(10));
+
+        ArrayList<Carga> carga = new ArrayList<Carga>();
+        carga.add(cargaNormal.get(0));
+        carga.add(cargaNormal.get(1));
+        carga.add(cargaVeiculo.get(1));
+        voosPrivados.add(new VooPrivado("vProvado1", "Lisboa", new GregorianCalendar(), "TAP", passag, carga));
+    }
+
+    private static void geraMapaVoos() {
         TreeMap<String, Voo> v = new TreeMap<String, Voo>();
 
-        for (Voo x : voosComererciais) {
-            v.put(x.getCodigoVoo(), x);
-        }
+        for (Voo x : voosComererciais)
+            v.put(x.getEntidade()+x.getCodigoVoo(), x);
 
+        for (Voo x : voosGovernamentais)
+            v.put(x.getEntidade()+x.getCodigoVoo(), x);
 
-        for (Voo x : voosGovernamentais) {
-            v.put(x.getCodigoVoo(), x);
-        }
+        for (Voo x : voosMilitares) 
+            v.put(x.getEntidade()+x.getCodigoVoo(), x);
 
-
-        for (Voo x : voosMilitares) {
-            v.put(x.getCodigoVoo(), x);
-        }
+        for (Voo x : voosPrivados)
+            v.put(x.getEntidade()+x.getCodigoVoo(), x);
 
 
         mapaVoos_.put(new GregorianCalendar(), v);
     }
 
-    private void geraMapaAeronaves() {
+    private static void geraMapaAeronaves() {
         for (Aeronave a : aeronaves) {
             aeronaves_.put(a.getMatricula(), a);
         }
 
     }
 
-    private void geraMapaPortas() {
+    private static void geraMapaPortas() {
         for (Porta p : portas) {
             portas_.put(p.getCodPorta(), p);
         }
 
     }
 
-    private void gereFuncoesValidas() {
-        funcoesValidas_.add("assistente");
-        funcoesValidas_.add("aeronauta");
-        funcoesValidas_.add("mecanico de voo");
-        funcoesValidas_.add("navegador");
-        funcoesValidas_.add("radioperador de voo");
-        funcoesValidas_.add("Comissario");
-    }
-
-    private void gereHoraSistema() {
+    private static void gereHoraSistema() {
         dataActual_ = new GregorianCalendar();
     }
 
-    private void geraAerogestSistema() {
+    private static void geraAerogestSistema() {
         aerogestSistema = new AerogestSistema();
         aerogestSistema.adicionaComandateArray(comandantes);
         aerogestSistema.adicionaCoPilotoArray(coPilotos);
@@ -410,14 +435,12 @@ public class GerarDados {
         aerogestSistema.setHoraActual(dataActual_);
         aerogestSistema.adicionaFuncaoValidaList(funcoesValidas_);
         
-        // qual destes dois é??
+        // qual destes dois é?? E igual, os elementos de 1 vao tar no outro
         aerogestSistema.adicionaTripulanteArray(tripulantes);
-        aerogestSistema.adicionaTripulanteArray(tribulantesAdicionais_);
-        
-        
+        //aerogestSistema.adicionaTripulanteArray(tribulantesAdicionais_);
     }
 
-    public void main() {
+    public static void main() {
         init();
         SaveLoadDB.saveDB(aerogestSistema, SaveLoadDB.DefualtObjectFileName);
     }

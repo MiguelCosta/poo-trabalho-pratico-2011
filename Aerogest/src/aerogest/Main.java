@@ -9,6 +9,7 @@ import Classes.Passageiro;
 import Classes.Carga;
 import Classes.Voo;
 import Classes.VooMilitar;
+import Importer.GerarDados;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
@@ -50,6 +51,9 @@ public class Main {
                 System.out.println("Voo: " + voo.getClass());
                 System.out.println("" + ((voo.getClass() == VooMilitar.class) ? true : false) );
             }
+
+
+        GerarDados.main();
     }
 
 }
