@@ -4,12 +4,14 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  * Possui todos os métodos necessários para criar e gerir a entidade Porta
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Porta {
+public class Porta implements Serializable{
 
     /** Variaveis de instancia */
     private String codPorta;

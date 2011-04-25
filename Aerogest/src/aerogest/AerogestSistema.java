@@ -10,6 +10,7 @@ import Classes.Comandante;
 import Classes.Aeronave;
 import Classes.Porta;
 import Classes.Tripulante;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.TreeMap;
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class AerogestSistema {
+public class AerogestSistema implements  Serializable{
 
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
     private ArrayList<Comandante> comandantes; // TreeMap ?

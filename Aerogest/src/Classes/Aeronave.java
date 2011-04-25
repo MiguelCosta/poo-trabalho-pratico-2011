@@ -4,12 +4,14 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  * Possui todos os métodos necessários para criar e gerir a entidade Aeronave
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Aeronave {
+public class Aeronave implements Serializable{
 
     /** Variaveis de instancia */
     private String matricula;

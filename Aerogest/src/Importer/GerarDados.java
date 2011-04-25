@@ -99,6 +99,7 @@ public class GerarDados {
         geraCoPilotos();
         geraComandantes();
         geraPortas();
+        gereFuncoesValidas();
         geraTripulantes();
         geraVoosComerciais();
         geraVoosGovernamentais();
@@ -108,7 +109,6 @@ public class GerarDados {
         geraMapaPortas();
         geraMapaVoos();
         geraMembrosGoverno();
-        gereFuncoesValidas();
         gereHoraSistema();
         geraAerogestSistema();
     }
