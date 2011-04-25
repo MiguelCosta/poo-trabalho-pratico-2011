@@ -7,24 +7,28 @@ ordens de fim de embarque, take off, etc)
 ou no inicio do dia ? (00:00)
 
 * É preciso usar Swing no trabalho / Podemos usar Swing ?
+Pachon ----> o prof pede um interface em texto, mas podemos usar Swing.
 
 * Jornalistas e Convidados em VooGovernamental também tem de ter a origem ?
 (Presidencia ou Ministerio)
 
 * Na classe AerogestSistema o que é que os gets tem de devolver?? as mesmas estruturas de dados?
 por exemplo o getAeronaves tem dedevover um TreeMap ?
------> Axo que sim, de qualquer modo podemos por para retornar uma nave introduzindo como
+Goku -----> Axo que sim, de qualquer modo podemos por para retornar uma nave introduzindo como
 parametro o seu codigo (Podemos fazer as 2 funcoes)
+Pachon ----> Pois, faz sentido. Vou então criar esse método.
 
 * Na classe AerogestSistema o método que eu fiz adicionaAeronaveMap(Map a) será que funciona?
 Map getVoosPorDia(GregorianCalendar dia) ?
------> Axo que sim, mas quando e que vais usar uma funcao que recebe um map ?
+Goku -----> Axo que sim, mas quando e que vais usar uma funcao que recebe um map ?
 Quanto à outra, a cena vai ser um pouco complicada, porque este dia, como é um gregorian
 calendar, tem ano, mes, dia, hora, minuto, segundo ... A unica parte que interessa é a data
 portanto este dia é um dia com a hora a 00:00:00 ou entao temos uma outra hipotes que ainda
 nao sei como funciona. Eu lembro m do rocket fazer uma vez uma funcao para colocar cenas numa
 treemap, so k ja nao me lembro como se faz isso. tenho dir pesquisar.
+Pachon -----> Realmente não me tinha lembrado desse problema da data, mas vou ver a melhor forma de resolver isso ;)
+Vou usar o método para receber um Map na classe de gerar os dados. Lá colocamos tudo num TreeMap e depois é preciso passar isso para o AerogestSistema.
 
 *Quando o prof diz no enunciado que a carga quimica tem de ter um estado e um grau de
 toxidade. O estado é o que ? e o grau de toxidade, e muito toxico/pouco toxico/nada toxiko?
-
+Pachon ----> Ao dizer estado não será líquido, gasoso, solido, etc..?
