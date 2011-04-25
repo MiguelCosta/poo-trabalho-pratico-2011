@@ -256,10 +256,18 @@ public class AerogestSistema implements  Serializable{
      * Mapa das aeronaves
      * @return map
      */
-    public Map getAeronaves() {
+    public Map getAeronave_All() {
         return aeronaves;
     }
 
+    /**
+     * Aeronave de com uma determinada matricula
+     * @param matricula
+     * @return aeronave
+     */
+    public Aeronave getAeronave_One(String matricula){
+        return aeronaves.get(matricula);
+    }
     /**
      * Mapa das portas
      * @return map
