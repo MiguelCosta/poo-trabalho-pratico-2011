@@ -13,8 +13,10 @@ import Classes.Tripulante;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -25,28 +27,28 @@ import java.util.TreeMap;
 public class AerogestSistema implements  Serializable{
 
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
-    private ArrayList<Comandante> comandantes; // TreeMap ?
-    private ArrayList<CoPiloto> coPilotos; // TreeMap ?
-    private ArrayList<Tripulante> tribulantesAdicionais; // TreeMap ?
-    private TreeMap<String, Aeronave> aeronaves;
-    private TreeMap<String, Porta> portas;
-    private ArrayList<String> funcoesValidas;
+    private Set<Comandante> comandantes; // TreeMap ?
+    private Set<CoPiloto> coPilotos; // TreeMap ?
+    private Set<Tripulante> tribulantesAdicionais; // TreeMap ?
+    private Map<String, Aeronave> aeronaves;
+    private Map<String, Porta> portas;
+    private Set<String> funcoesValidas;
     private GregorianCalendar dataActual;
 
     public AerogestSistema(){
         mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
-        comandantes = new ArrayList<Comandante>();
-        coPilotos = new ArrayList<CoPiloto>();
-        tribulantesAdicionais = new ArrayList<Tripulante>();
+        comandantes = new HashSet<Comandante>();
+        coPilotos = new HashSet<CoPiloto>();
+        tribulantesAdicionais = new HashSet<Tripulante>();
         aeronaves = new TreeMap<String, Aeronave>();
         portas = new TreeMap<String, Porta>();
-        funcoesValidas = new ArrayList<String>();
+        funcoesValidas = new HashSet<String>();
         dataActual = new GregorianCalendar();
     }
 
-    public TreeMap<GregorianCalendar, TreeMap<String, Voo>> getMapaVoos()
+    public Map<GregorianCalendar, Map<String, Voo>> getMapaVoos()
     {
-        return mapaVoos;
+        return (Map<GregorianCalendar, Map<String, Voo>>) mapaVoos.clone();
     }
 
     /**
@@ -224,7 +226,7 @@ public class AerogestSistema implements  Serializable{
      * @param dia
      * @return Map
      */
-    public Map getVoosPorDia(GregorianCalendar dia) {
+    public Map<String,Voo> getVoosPorDia(GregorianCalendar dia) {
         return mapaVoos.get(dia);
     }
 
@@ -232,7 +234,7 @@ public class AerogestSistema implements  Serializable{
      * Lista dos comandantes
      * @return list
      */
-    public List getComandantes() {
+    public Set getComandantes() {
         return comandantes;
     }
 
@@ -240,7 +242,7 @@ public class AerogestSistema implements  Serializable{
      * Lista com os CoPilots
      * @return list
      */
-    public List getCoPilotos() {
+    public Set getCoPilotos() {
         return coPilotos;
     }
 
@@ -248,7 +250,7 @@ public class AerogestSistema implements  Serializable{
      * Lista com os tripulantes adicionais
      * @return list
      */
-    public List getTripulantesAdicionais() {
+    public Set getTripulantesAdicionais() {
         return tribulantesAdicionais;
     }
 
@@ -256,7 +258,7 @@ public class AerogestSistema implements  Serializable{
      * Mapa das aeronaves
      * @return map
      */
-    public Map getAeronave_All() {
+    public Map<String,Aeronave> getAeronave_All() {
         return aeronaves;
     }
 
@@ -272,7 +274,7 @@ public class AerogestSistema implements  Serializable{
      * Mapa das portas
      * @return map
      */
-    public Map getPortas() {
+    public Map<String,Porta> getPortas() {
         return portas;
     }
 

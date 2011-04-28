@@ -12,6 +12,7 @@ import Classes.VooMilitar;
 import Importer.GerarDados;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -46,7 +47,7 @@ public class Main {
         AerogestSistema as = new AerogestSistema();
         as.adicionaVoo(v);
 
-        for (TreeMap<String,Voo> voodia : as.getMapaVoos().values())
+        for (Map<String,Voo> voodia : as.getMapaVoos().values())
             for (Voo voo : voodia.values()){
                 System.out.println("Voo: " + voo.getClass());
                 System.out.println("" + ((voo.getClass() == VooMilitar.class) ? true : false) );
