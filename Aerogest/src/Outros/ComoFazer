@@ -37,5 +37,8 @@
   colocavamos uma list/map com os varios tripulantes, e quando fosse preciso ia la ver-se se
   havia algum comandante e copiloto.
 
+NOTA MUITO IMPORTANTE: NAO PODEMOS FAZER FUNCOES DA COLECCAO MAP COM O METODO
+PULALL PORQUE VAI CONTRA OS PRINCIPIOS DO ENCAPSULAMENTO!
+
 (NOTA: nao apagar estas cenas, pois é interessante colocar isto no relatorio como
 decisoes tomadas)
