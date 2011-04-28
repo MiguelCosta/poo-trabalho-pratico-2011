@@ -19,7 +19,7 @@ public class Aeronave implements Serializable{
     private int capacidadePassageiros;
     private double capacidadeCarga; //toneladas
     private double velocidadeMaxima;
-    boolean livre;
+    private boolean livre;
 
     /**
      * Cria uma aeronave
