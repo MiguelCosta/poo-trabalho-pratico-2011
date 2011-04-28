@@ -49,7 +49,7 @@ public class Main {
 
         for (Map<String,Voo> voodia : as.getMapaVoos().values())
             for (Voo voo : voodia.values()){
-                System.out.println("Voo: " + voo.getClass());
+                System.out.println("Voo: " + voo.getClass().getName());
                 System.out.println("" + ((voo.getClass() == VooMilitar.class) ? true : false) );
             }
 
