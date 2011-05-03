@@ -26,22 +26,23 @@ public class JMain extends javax.swing.JFrame {
         jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
                 new String[][]{
                     {"Miguel", "Costa"},
-                    {"Fábio", "Costa"}
+                    {"Fábio", "Costa"},
+                    {"Sofia", "Vieira"}
                 },
                 new String[]{
                     "Primeiro Nome", "Ultimo Nome"
                 }));
 
         System.out.println("Nome das Colunas:");
-        for (int i = 0; i <= jTablePlacard.getComponentCount(); i++) {
+        for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
             System.out.println(jTablePlacard.getColumnName(i));
         }
         // isto nao esta bem
         // http://download.oracle.com/javase/tutorial/uiswing/components/table.html
         System.out.println("\nValores nas celulas:");
-        for (int i = 0; i <= jTablePlacard.getColumnCount(); i++) {
+        for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
             for (int j = 0; j < jTablePlacard.getRowCount(); j++) {
-                System.out.println(jTablePlacard.getValueAt(i, j).toString());
+                System.out.println("Celula("+i+","+j+"): "+jTablePlacard.getValueAt(i, j).toString());
             }
 
         }
