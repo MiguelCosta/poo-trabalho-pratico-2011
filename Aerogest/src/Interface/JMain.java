@@ -27,7 +27,8 @@ public class JMain extends javax.swing.JFrame {
                 new String[][]{
                     {"Miguel", "Costa"},
                     {"Fábio", "Costa"},
-                    {"Sofia", "Vieira"}
+                    {"Sofia", "Vieira"},
+                    {"Pinto", "Costa"}
                 },
                 new String[]{
                     "Primeiro Nome", "Ultimo Nome"
@@ -37,11 +38,13 @@ public class JMain extends javax.swing.JFrame {
         for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
             System.out.println(jTablePlacard.getColumnName(i));
         }
-        // isto nao esta bem
+        // apenas para testar como funcionam as tabelas
         // http://download.oracle.com/javase/tutorial/uiswing/components/table.html
         System.out.println("\nValores nas celulas:");
-        for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
-            for (int j = 0; j < jTablePlacard.getRowCount(); j++) {
+        int numLinhas = jTablePlacard.getRowCount();
+        int numColunas = jTablePlacard.getColumnCount();
+        for (int i = 0; i < numLinhas; i++) {
+            for (int j = 0; j < numColunas; j++) {
                 System.out.println("Celula("+i+","+j+"): "+jTablePlacard.getValueAt(i, j).toString());
             }
 
