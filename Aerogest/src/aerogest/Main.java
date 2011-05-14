@@ -7,11 +7,15 @@ package aerogest;
 
 import Classes.Passageiro;
 import Classes.Carga;
+import Classes.Comandante;
+import Classes.Porta;
 import Classes.Voo;
 import Classes.VooMilitar;
 import Importer.GerarDados;
+import Importer.SaveLoadDB;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,7 +31,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-
+/*
         String codVoo = "Voo";
         String destino = "ola";
         GregorianCalendar horaPartida = new GregorianCalendar();
@@ -53,8 +57,16 @@ public class Main {
                 System.out.println("" + ((voo.getClass() == VooMilitar.class) ? true : false) );
             }
 
-
+*/
         GerarDados.main();
+        
+        AerogestSistema a = SaveLoadDB.loadDB("aeroguest.obj");
+        
+        System.out.println(a.getHoraActual().toString());
+
+        String s = a.imprimePortas();
+        
+        System.out.print(s);
     }
 
 }

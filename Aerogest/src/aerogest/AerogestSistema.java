@@ -293,4 +293,18 @@ public class AerogestSistema implements  Serializable{
     public void setHoraActual(GregorianCalendar d){
         dataActual = d;
     }
+    
+    /**
+     * Imprimir todas as portas de AerogestSistema
+     * @return 
+     */
+    public String imprimePortas(){
+        StringBuilder s = new StringBuilder("**Todas as Portas**\n");
+        
+        for(Porta p : portas.values()){
+            s.append(p.toString());
+            s.append("\n");
+        }
+        return s.toString();
+    }
 }
