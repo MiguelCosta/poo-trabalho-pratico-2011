@@ -13,11 +13,14 @@ import Classes.Voo;
 import Classes.VooMilitar;
 import Importer.GerarDados;
 import Importer.SaveLoadDB;
+import Interface.JMain;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Possui todos os métodos necessários para iniciar o sistema
@@ -26,6 +29,7 @@ import java.util.TreeMap;
  */
 public class Main {
 
+    public static AerogestSistema a;
     /**
      * @param args the command line arguments
      */
@@ -60,13 +64,17 @@ public class Main {
 */
         GerarDados.main();
         
-        AerogestSistema a = SaveLoadDB.loadDB("aeroguest.obj");
+        a = SaveLoadDB.loadDB("aeroguest.obj");
         
         System.out.println(a.getHoraActual().toString());
 
         String s = a.imprimePortas();
         
         System.out.print(s);
+        
+        JFrame j = new JMain();
+        j.show(true);
+        
     }
 
 }

@@ -46,9 +46,26 @@ public class AerogestSistema implements  Serializable{
         dataActual = new GregorianCalendar();
     }
 
+    /**
+     * Devolve uma copia do mapa de voos
+     * @return 
+     */
     public Map<GregorianCalendar, Map<String, Voo>> getMapaVoos()
     {
-        return (Map<GregorianCalendar, Map<String, Voo>>) mapaVoos.clone();
+        // apontador para os valores no mapaVoos
+        Map<String, Voo> a_voos = new TreeMap<String, Voo>();
+        a_voos = (Map<String, Voo>) mapaVoos.values();
+        
+        // copia os voos
+        Map<String, Voo> voos_copia = new TreeMap<String, Voo>();
+        for(Voo v : a_voos.values()){
+            voos_copia.put(v.getEntidade()+v.getCodigoVoo(), v.clone()); // aqui é suposto ter clone ?? 
+        }
+        
+        Map<GregorianCalendar, Map<String, Voo>> r = new TreeMap<GregorianCalendar, Map<String, Voo>>();
+        r.put(dataActual, voos_copia);
+        
+        return r;
     }
 
     /**
