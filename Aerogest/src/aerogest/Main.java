@@ -69,6 +69,8 @@ public class Main {
         
         
         JFrame j = new JMain(a);
+        // não deixa alterar o tamanho da janela
+        j.setResizable(false);
         j.show(true);
         
     }

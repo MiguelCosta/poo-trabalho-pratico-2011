@@ -275,7 +275,15 @@ public class AerogestSistema implements Serializable {
      * @param coPiloto
      */
     public void removeCoPiloto(CoPiloto c) {
-        coPilotos.remove(c);
+        Iterator itr = coPilotos.iterator();
+        boolean encontrado = false;
+
+        while (itr.hasNext() && !encontrado) {
+            if (itr.next().equals(c)) {
+                encontrado = true;
+                if(encontrado) itr.remove();
+            }
+        }
     }
 
     /**
