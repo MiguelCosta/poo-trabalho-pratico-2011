@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -171,42 +172,42 @@ public class AerogestSistema implements Serializable {
         }
         return s.toString();
     }
-    
+
     /**
      * Imprime todos os voos do sistema         NÃO ESTÁ A FUNCIONAR
      * @return 
      */
-    public String imprimeVoos(){
+    public String imprimeVoos() {
         StringBuilder s = new StringBuilder("***MAPA DE VOOS***miguel\n");
-        
-        for(GregorianCalendar d : mapaVoos.keySet()){
+
+        for (GregorianCalendar d : mapaVoos.keySet()) {
             s.append("DIA: ").append(d.get(Calendar.DAY_OF_MONTH)).append("\n");
             s.append("MES: ").append(d.get(Calendar.MONTH)).append("\n");
             s.append("ANO: ").append(d.get(Calendar.YEAR)).append("\n");
-            
-            for(TreeMap<String,Voo> mv : mapaVoos.values()){
-                for(Voo v : mv.values()){
+
+            for (TreeMap<String, Voo> mv : mapaVoos.values()) {
+                for (Voo v : mv.values()) {
                     s.append("Codigo de Voo: ").append(v.getCodigoVoo()).append("\n");
                     s.append("Entidade: ").append(v.getEntidade()).append("\n");
                 }
             }
         }
-        
+
         return s.toString();
     }
-    
+
     /**
      * Imprime todos os comandantes do Sistema
      * @return 
      */
-    public String imprimeComandantes(){
+    public String imprimeComandantes() {
         StringBuilder s = new StringBuilder("**COMANDANTES**\n");
-        
-        for(Comandante c : comandantes){
+
+        for (Comandante c : comandantes) {
             s.append(c.toString());
         }
-        
-        
+
+
         return s.toString();
     }
 
@@ -240,8 +241,15 @@ public class AerogestSistema implements Serializable {
      * @param c omandante
      */
     public void removeComandante(Comandante c) {
-        
-        comandantes.remove(c);
+        Iterator itr = comandantes.iterator();
+        boolean encontrado = false;
+
+        while (itr.hasNext() && !encontrado) {
+            if (itr.next().equals(c)) {
+                encontrado = true;
+                if(encontrado) itr.remove();
+            }
+        }
     }
 
     /**

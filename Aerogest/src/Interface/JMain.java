@@ -15,6 +15,8 @@ import Classes.Tripulante;
 import aerogest.AerogestSistema;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -327,17 +329,18 @@ public class JMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRemoveComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveComandanteActionPerformed
-
         int linha = jTableComandantes.getSelectedRow();
+        System.out.println("Linha: "+linha);
         
         if (linha >= 0) {
             String nome = (String) jTableComandantes.getValueAt(linha, 0);
             String nacionalidade = (String) jTableComandantes.getValueAt(linha, 1);
+            String estado = (String) jTableComandantes.getValueAt(linha, 2);
+            
             Comandante c = new Comandante(nome, nacionalidade);
+            if(estado.equalsIgnoreCase("ocupado")) c.setLivre(false);
+            
             aerogestSistema.removeComandante(c);
-            //System.out.println(c.toString());
-            comandantes.removeRow(linha);
-            System.out.println(aerogestSistema.imprimeComandantes());
             actualizarTabelaComandantes();
         }
 
