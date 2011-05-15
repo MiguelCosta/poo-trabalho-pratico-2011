@@ -199,7 +199,7 @@ public class AerogestSistema implements Serializable {
      * Imprime todos os comandantes do Sistema
      * @return 
      */
-    public String imprimeComandates(){
+    public String imprimeComandantes(){
         StringBuilder s = new StringBuilder("**COMANDANTES**\n");
         
         for(Comandante c : comandantes){
@@ -240,6 +240,7 @@ public class AerogestSistema implements Serializable {
      * @param c omandante
      */
     public void removeComandante(Comandante c) {
+        
         comandantes.remove(c);
     }
 

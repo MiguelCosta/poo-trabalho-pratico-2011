@@ -29,4 +29,8 @@ public class Comandante extends Tripulante implements Serializable {
     public Comandante(String nome, String nacionalidade) {
         super("Comandante", nome, nacionalidade);
     }
+    
+    public String toString(){
+        return super.toString();
+    }
 }

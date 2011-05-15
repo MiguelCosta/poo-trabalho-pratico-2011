@@ -11,6 +11,7 @@
 package Interface;
 
 import Classes.Comandante;
+import Classes.Tripulante;
 import aerogest.AerogestSistema;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,7 +49,7 @@ public class JMain extends javax.swing.JFrame {
         //String s = aerogestSistema.imprimePortas();
         //System.out.print(s);
 
-        String s = aerogestSistema.imprimeComandates();
+        String s = aerogestSistema.imprimeComandantes();
         System.out.print(s);
 
         jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,6 +92,7 @@ public class JMain extends javax.swing.JFrame {
     }
 
     private void actualizarTabelaComandantes() {
+        comandantes = new DefaultTableModel();
         comandantes.addColumn("Nome");
         comandantes.addColumn("Nacionalidade");
         comandantes.addColumn("Estado");
@@ -132,7 +134,7 @@ public class JMain extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableComandantes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonRemoveComandante = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -195,7 +197,12 @@ public class JMain extends javax.swing.JFrame {
 
         jButton1.setText("Adicionar");
 
-        jButton2.setText("Remover");
+        jButtonRemoveComandante.setText("Remover");
+        jButtonRemoveComandante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveComandanteActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Editar");
 
@@ -204,27 +211,28 @@ public class JMain extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jButton1)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButtonRemoveComandante))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonRemoveComandante)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -234,7 +242,7 @@ public class JMain extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,6 +326,23 @@ public class JMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonRemoveComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveComandanteActionPerformed
+
+        int linha = jTableComandantes.getSelectedRow();
+        
+        if (linha >= 0) {
+            String nome = (String) jTableComandantes.getValueAt(linha, 0);
+            String nacionalidade = (String) jTableComandantes.getValueAt(linha, 1);
+            Comandante c = new Comandante(nome, nacionalidade);
+            aerogestSistema.removeComandante(c);
+            //System.out.println(c.toString());
+            comandantes.removeRow(linha);
+            System.out.println(aerogestSistema.imprimeComandantes());
+            actualizarTabelaComandantes();
+        }
+
+    }//GEN-LAST:event_jButtonRemoveComandanteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,8 +359,8 @@ public class JMain extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonRemoveComandante;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
