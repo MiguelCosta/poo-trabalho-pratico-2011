@@ -10,6 +10,12 @@
  */
 package Interface;
 
+import Classes.Comandante;
+import aerogest.AerogestSistema;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,60 +23,95 @@ package Interface;
  */
 public class JMain extends javax.swing.JFrame {
 
-    String[][] mapaVoos = null;
+    private DefaultTableModel mapa_voos;
+    private DefaultTableModel comandantes;
+    private static AerogestSistema aerogestSistema;
+
     /** Creates new form JMain */
-    public JMain() {
+    public JMain(AerogestSistema a) {
         initComponents();
-        actualizarTabela();
+
+        aerogestSistema = new AerogestSistema(a);
+        mapa_voos = new DefaultTableModel();
+        comandantes = new DefaultTableModel();
+
+        //actualizarTabelaMapaVoos();
+        actualizarTabelaComandantes();
+
     }
 
-    private void actualizarTabela() {
-        /*
-       int l,c;
-       for(l=0; l<10; l++){
-           for(c=0; c<2; c++){
-               mapaVoos[0][0] = "Miguel";
-           }
-       }*/
-        
+    private void actualizarTabelaMapaVoos() {
+
+        //System.out.println("*******Tabela:\n"+aerogestSistema.getHoraActual().toString());
+        //System.out.println(aerogestSistema.getHoraActual().toString());
+
+        //String s = aerogestSistema.imprimePortas();
+        //System.out.print(s);
+
+        String s = aerogestSistema.imprimeComandates();
+        System.out.print(s);
+
         jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
-                new String[][]{
-                //{"v1","braga","14:15:16","pronto"}
-          
+                new String[][]{ //{"v1","braga","14:15:16","pronto"}
                 },
                 new String[]{
-                    "VOO", "DESTINO","HORA PARTIDA","ESTADO"
-                }
-                )); 
-        
-        
-        /*
-        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
-                new String[][]{
-                    {"Miguel", "Pinto","Costa"},
-                    {"Fábio", "Costa",""},
-                    {"Sofia", "Vieira",""},
-                    {"Pinto", "Costa",""}
-                },
-                new String[]{
-                    "Primeiro Nome", "Meio", "Ultimo Nome"
+                    "VOO", "DESTINO", "HORA PARTIDA", "ESTADO"
                 }));
-*/
+
+
+        /*
+        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
+        new String[][]{
+        {"Miguel", "Pinto","Costa"},
+        {"Fábio", "Costa",""},
+        {"Sofia", "Vieira",""},
+        {"Pinto", "Costa",""}
+        },
+        new String[]{
+        "Primeiro Nome", "Meio", "Ultimo Nome"
+        }));
+         */
+        /**
         System.out.println("Nome das Colunas:");
         for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
-            System.out.println(jTablePlacard.getColumnName(i));
-        }
+        System.out.println(jTablePlacard.getColumnName(i));
+        }*/
         // apenas para testar como funcionam as tabelas
         // http://download.oracle.com/javase/tutorial/uiswing/components/table.html
+        /*
         System.out.println("\nValores nas celulas:");
         int numLinhas = jTablePlacard.getRowCount();
         int numColunas = jTablePlacard.getColumnCount();
         for (int i = 0; i < numLinhas; i++) {
-            for (int j = 0; j < numColunas; j++) {
-                System.out.println("Celula("+i+","+j+"): "+jTablePlacard.getValueAt(i, j).toString());
-            }
-
+        for (int j = 0; j < numColunas; j++) {
+        System.out.println("Celula("+i+","+j+"): "+jTablePlacard.getValueAt(i, j).toString());
         }
+        
+        }*/
+    }
+
+    private void actualizarTabelaComandantes() {
+        comandantes.addColumn("Nome");
+        comandantes.addColumn("Nacionalidade");
+        comandantes.addColumn("Estado");
+
+        Set<Comandante> cms = new HashSet<Comandante>();
+        cms = aerogestSistema.getComandantes();
+
+        for (Comandante c : cms) {
+            boolean estado = c.getLivre();
+
+            if (estado) {
+                String[] livre = {c.getNome(), c.getNacionalidade(), "livre"};
+                comandantes.addRow(livre);
+            } else {
+                String[] ocupado = {c.getNome(), c.getNacionalidade(), "ocupado"};
+                comandantes.addRow(ocupado);
+            }
+        }
+
+        jTableComandantes.setModel(comandantes);
+
     }
 
     /** This method is called from within the constructor to
@@ -87,8 +128,12 @@ public class JMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePlacard = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableTripulacoes = new javax.swing.JTable();
+        jTableComandantes = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -123,46 +168,80 @@ public class JMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedTripulacoes.addTab("Mapa de Voos", jPanel2);
 
-        jTableTripulacoes.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Comandantes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jTableComandantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTableTripulacoes);
+        jScrollPane2.setViewportView(jTableComandantes);
+
+        jButton1.setText("Adicionar");
+
+        jButton2.setText("Remover");
+
+        jButton3.setText("Editar");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(4, 4, 4)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(264, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Tripulações", jPanel1);
@@ -171,11 +250,11 @@ public class JMain extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
+            .addGap(0, 646, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
 
         jTabbedTripulacoes.addTab("Cargas", jPanel3);
@@ -184,11 +263,11 @@ public class JMain extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
+            .addGap(0, 646, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
 
         jTabbedTripulacoes.addTab("Aeronaves", jPanel4);
@@ -226,13 +305,13 @@ public class JMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -245,12 +324,18 @@ public class JMain extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            JMain principal = new JMain(aerogestSistema);
+
             public void run() {
-                new JMain().setVisible(true);
+
+                principal.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -262,11 +347,12 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedTripulacoes;
+    private javax.swing.JTable jTableComandantes;
     private javax.swing.JTable jTablePlacard;
-    private javax.swing.JTable jTableTripulacoes;
     // End of variables declaration//GEN-END:variables
 }

@@ -66,13 +66,9 @@ public class Main {
         
         a = SaveLoadDB.loadDB("aeroguest.obj");
         
-        System.out.println(a.getHoraActual().toString());
-
-        String s = a.imprimePortas();
         
-        System.out.print(s);
         
-        JFrame j = new JMain();
+        JFrame j = new JMain(a);
         j.show(true);
         
     }

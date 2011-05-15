@@ -11,7 +11,7 @@ import Classes.Aeronave;
 import Classes.Porta;
 import Classes.Tripulante;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.TreeMap;
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class AerogestSistema implements  Serializable{
+public class AerogestSistema implements Serializable {
 
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
     private Set<Comandante> comandantes; // TreeMap ?
@@ -35,7 +35,7 @@ public class AerogestSistema implements  Serializable{
     private Set<String> funcoesValidas;
     private GregorianCalendar dataActual;
 
-    public AerogestSistema(){
+    public AerogestSistema() {
         mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         comandantes = new HashSet<Comandante>();
         coPilotos = new HashSet<CoPiloto>();
@@ -46,26 +46,168 @@ public class AerogestSistema implements  Serializable{
         dataActual = new GregorianCalendar();
     }
 
+    public AerogestSistema(AerogestSistema a) {
+        mapaVoos = a.getMapaVoos();
+        comandantes = a.getComandantes();
+        coPilotos = a.getCoPilotos();
+        tribulantesAdicionais = a.getTripulantesAdicionais();
+        aeronaves = a.getAeronave_All();
+        portas = a.getPortas();
+        funcoesValidas = a.getFuncoesValidas();
+        dataActual = a.getHoraActual();
+    }
+
     /**
-     * Devolve uma copia do mapa de voos
+     * Devolve o mapa de voos
      * @return 
      */
-    public Map<GregorianCalendar, Map<String, Voo>> getMapaVoos()
-    {
-        // apontador para os valores no mapaVoos
-        Map<String, Voo> a_voos = new TreeMap<String, Voo>();
-        a_voos = (Map<String, Voo>) mapaVoos.values();
+    public TreeMap<GregorianCalendar, TreeMap<String, Voo>> getMapaVoos() {
+        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+
+        for (GregorianCalendar d : mapaVoos.keySet()) {
+            r.put(d, mapaVoos.get(d));
+        }
+
+        return r;
+    }
+
+    /**
+     * Mapa de voos do dia
+     * @param dia
+     * @return Map
+     */
+    public Map<String, Voo> getVoosPorDia(GregorianCalendar dia) {
+        return mapaVoos.get(dia);
+    }
+
+    /**
+     * Lista dos comandantes
+     * @return list
+     */
+    public Set getComandantes() {
+        return comandantes;
+    }
+
+    /**
+     * Lista com os CoPilots
+     * @return list
+     */
+    public Set getCoPilotos() {
+        return coPilotos;
+    }
+
+    /**
+     * Lista com os tripulantes adicionais
+     * @return list
+     */
+    public Set getTripulantesAdicionais() {
+        return tribulantesAdicionais;
+    }
+
+    /**
+     * Mapa das aeronaves
+     * @return map
+     */
+    public Map<String, Aeronave> getAeronave_All() {
+        return aeronaves;
+    }
+
+    /**
+     * Aeronave de com uma determinada matricula
+     * @param matricula
+     * @return aeronave
+     */
+    public Aeronave getAeronave_One(String matricula) {
+        return aeronaves.get(matricula);
+    }
+
+    /**
+     * Mapa das portas
+     * @return map
+     */
+    public Map<String, Porta> getPortas() {
+        return portas;
+    }
+
+    /**
+     * Hora actual do sistema
+     * @return GregorianCalendar
+     */
+    public GregorianCalendar getHoraActual() {
+        return dataActual;
+    }
+
+    /**
+     * Funcoes Validas do Sistemas
+     * @return Set<String> 
+     */
+    public Set<String> getFuncoesValidas() {
+        Set<String> r = new HashSet<String>();
+
+        for (String f : funcoesValidas) {
+            r.add(f);
+        }
+        return r;
+    }
+
+    /**
+     * Alterar a data actual do AerogestSistema
+     * @param data
+     */
+    public void setHoraActual(GregorianCalendar d) {
+        dataActual = d;
+    }
+
+    /**
+     * Imprimir todas as portas de AerogestSistema
+     * @return 
+     */
+    public String imprimePortas() {
+        StringBuilder s = new StringBuilder("**Todas as Portas**\n");
+
+        for (Porta p : portas.values()) {
+            s.append(p.toString());
+            s.append("\n");
+        }
+        return s.toString();
+    }
+    
+    /**
+     * Imprime todos os voos do sistema         NÃO ESTÁ A FUNCIONAR
+     * @return 
+     */
+    public String imprimeVoos(){
+        StringBuilder s = new StringBuilder("***MAPA DE VOOS***miguel\n");
         
-        // copia os voos
-        Map<String, Voo> voos_copia = new TreeMap<String, Voo>();
-        for(Voo v : a_voos.values()){
-            voos_copia.put(v.getEntidade()+v.getCodigoVoo(), v.clone()); // aqui é suposto ter clone ?? 
+        for(GregorianCalendar d : mapaVoos.keySet()){
+            s.append("DIA: ").append(d.get(Calendar.DAY_OF_MONTH)).append("\n");
+            s.append("MES: ").append(d.get(Calendar.MONTH)).append("\n");
+            s.append("ANO: ").append(d.get(Calendar.YEAR)).append("\n");
+            
+            for(TreeMap<String,Voo> mv : mapaVoos.values()){
+                for(Voo v : mv.values()){
+                    s.append("Codigo de Voo: ").append(v.getCodigoVoo()).append("\n");
+                    s.append("Entidade: ").append(v.getEntidade()).append("\n");
+                }
+            }
         }
         
-        Map<GregorianCalendar, Map<String, Voo>> r = new TreeMap<GregorianCalendar, Map<String, Voo>>();
-        r.put(dataActual, voos_copia);
+        return s.toString();
+    }
+    
+    /**
+     * Imprime todos os comandantes do Sistema
+     * @return 
+     */
+    public String imprimeComandates(){
+        StringBuilder s = new StringBuilder("**COMANDANTES**\n");
         
-        return r;
+        for(Comandante c : comandantes){
+            s.append(c.toString());
+        }
+        
+        
+        return s.toString();
     }
 
     /**
@@ -74,14 +216,13 @@ public class AerogestSistema implements  Serializable{
      */
     public void adicionaVoo(Voo v) {
 
-        if (mapaVoos.get(v.getHoraPartida()) == null){
+        if (mapaVoos.get(v.getHoraPartida()) == null) {
             TreeMap<String, Voo> x = new TreeMap<String, Voo>();
             x.put(v.getEntidade() + v.getCodigoVoo(), v);
 
             mapaVoos.put(v.getHoraPartida(), x);
-        }
-        else{
-            TreeMap<String,Voo> x = mapaVoos.get(v.getHoraPartida());
+        } else {
+            TreeMap<String, Voo> x = mapaVoos.get(v.getHoraPartida());
             x.put(v.getEntidade() + v.getCodigoVoo(), v);
         }
     }
@@ -227,101 +368,14 @@ public class AerogestSistema implements  Serializable{
     public void removeFuncaoValida(String funcao) {
         funcoesValidas.remove(funcao);
     }
-    
+
     /**
      * Adicionar uma lista com funções à lista de funções
      * @param funcoes
      */
-    public void adicionaFuncaoValidaList(List<String> f){
-        for(String s : f){
+    public void adicionaFuncaoValidaList(List<String> f) {
+        for (String s : f) {
             funcoesValidas.add(s);
         }
-    }
-
-    /**
-     * Mapa de voos do dia
-     * @param dia
-     * @return Map
-     */
-    public Map<String,Voo> getVoosPorDia(GregorianCalendar dia) {
-        return mapaVoos.get(dia);
-    }
-
-    /**
-     * Lista dos comandantes
-     * @return list
-     */
-    public Set getComandantes() {
-        return comandantes;
-    }
-
-    /**
-     * Lista com os CoPilots
-     * @return list
-     */
-    public Set getCoPilotos() {
-        return coPilotos;
-    }
-
-    /**
-     * Lista com os tripulantes adicionais
-     * @return list
-     */
-    public Set getTripulantesAdicionais() {
-        return tribulantesAdicionais;
-    }
-
-    /**
-     * Mapa das aeronaves
-     * @return map
-     */
-    public Map<String,Aeronave> getAeronave_All() {
-        return aeronaves;
-    }
-
-    /**
-     * Aeronave de com uma determinada matricula
-     * @param matricula
-     * @return aeronave
-     */
-    public Aeronave getAeronave_One(String matricula){
-        return aeronaves.get(matricula);
-    }
-    /**
-     * Mapa das portas
-     * @return map
-     */
-    public Map<String,Porta> getPortas() {
-        return portas;
-    }
-
-    /**
-     * Hora actual do sistema
-     * @return GregorianCalendar
-     */
-    public GregorianCalendar getHoraActual() {
-        return dataActual;
-    }
-    
-    /**
-     * Alterar a data actual do AerogestSistema
-     * @param data
-     */
-    public void setHoraActual(GregorianCalendar d){
-        dataActual = d;
-    }
-    
-    /**
-     * Imprimir todas as portas de AerogestSistema
-     * @return 
-     */
-    public String imprimePortas(){
-        StringBuilder s = new StringBuilder("**Todas as Portas**\n");
-        
-        for(Porta p : portas.values()){
-            s.append(p.toString());
-            s.append("\n");
-        }
-        return s.toString();
     }
 }
