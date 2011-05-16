@@ -50,6 +50,7 @@ public class JMain extends javax.swing.JFrame {
 
     }
 
+    /*Isto nao está a funcionar! */
     private void actualizarTabelaMapaVoos() {
 
         //System.out.println("*******Tabela:\n"+aerogestSistema.getHoraActual().toString());
