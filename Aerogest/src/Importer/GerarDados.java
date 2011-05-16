@@ -261,32 +261,32 @@ public class GerarDados {
     }
 
     private static void geraComandantes() {
-        comandantes.add(new Comandante("Mike", "Inglesa"));
-        comandantes.add(new Comandante("John", "Inglesa"));
-        comandantes.add(new Comandante("Alexandre", "Portuguesa"));
-        comandantes.add(new Comandante("Fábio", "Portuguesa"));
-        comandantes.add(new Comandante("Miguel", "Portuguesa"));
+        comandantes.add(new Comandante("t01","Mike", "Inglesa"));
+        comandantes.add(new Comandante("t02","John", "Inglesa"));
+        comandantes.add(new Comandante("t03","Alexandre", "Portuguesa"));
+        comandantes.add(new Comandante("t04","Fábio", "Portuguesa"));
+        comandantes.add(new Comandante("t05","Miguel", "Portuguesa"));
 
 
-        comandantes_.add(new Comandante("Mike", "Inglesa"));
-        comandantes_.add(new Comandante("John", "Inglesa"));
-        comandantes_.add(new Comandante("Alexandre", "Portuguesa"));
-        comandantes_.add(new Comandante("Fábio", "Portuguesa"));
-        comandantes_.add(new Comandante("Miguel", "Portuguesa"));
+        comandantes_.add(new Comandante("t06","Mike", "Inglesa"));
+        comandantes_.add(new Comandante("t07","John", "Inglesa"));
+        comandantes_.add(new Comandante("t08","Alexandre", "Portuguesa"));
+        comandantes_.add(new Comandante("t09","Fábio", "Portuguesa"));
+        comandantes_.add(new Comandante("t10","Miguel", "Portuguesa"));
     }
 
     private static void geraCoPilotos() {
-        coPilotos.add(new CoPiloto("Pedro", "Espanhol"));
-        coPilotos.add(new CoPiloto("Sofia", "portuguesa"));
-        coPilotos.add(new CoPiloto("Joaquim", "Espanhol"));
-        coPilotos.add(new CoPiloto("Sara", "Francesa"));
-        coPilotos.add(new CoPiloto("Abel", "Norte Americano"));
+        coPilotos.add(new CoPiloto("t11","Pedro", "Espanhol"));
+        coPilotos.add(new CoPiloto("t12","Sofia", "portuguesa"));
+        coPilotos.add(new CoPiloto("t13","Joaquim", "Espanhol"));
+        coPilotos.add(new CoPiloto("t14","Sara", "Francesa"));
+        coPilotos.add(new CoPiloto("t15","Abel", "Norte Americano"));
 
-        coPilotos_.add(new CoPiloto("Pedro", "Espanhol"));
-        coPilotos_.add(new CoPiloto("Sofia", "portuguesa"));
-        coPilotos_.add(new CoPiloto("Joaquim", "Espanhol"));
-        coPilotos_.add(new CoPiloto("Sara", "Francesa"));
-        coPilotos_.add(new CoPiloto("Abel", "Norte Americano"));
+        coPilotos_.add(new CoPiloto("t16","Pedro", "Espanhol"));
+        coPilotos_.add(new CoPiloto("t17","Sofia", "portuguesa"));
+        coPilotos_.add(new CoPiloto("t18","Joaquim", "Espanhol"));
+        coPilotos_.add(new CoPiloto("t19","Sara", "Francesa"));
+        coPilotos_.add(new CoPiloto("t20","Abel", "Norte Americano"));
     }
 
     private static void gereFuncoesValidas() {
@@ -299,11 +299,11 @@ public class GerarDados {
     }
 
     private static void geraTripulantes() {
-        tripulantes.add(new Tripulante(funcoesValidas_.get(0), "Maria", "Portuguesa"));
-        tripulantes.add(new Tripulante(funcoesValidas_.get(1), "Duarte", "Portuguesa"));
-        tripulantes.add(new Tripulante(funcoesValidas_.get(2), "Vitor", "Portuguesa"));
-        tripulantes.add(new Tripulante(funcoesValidas_.get(3), "Mario", "Portuguesa"));
-        tripulantes.add(new Tripulante(funcoesValidas_.get(4), "Antonio", "Portuguesa"));
+        tripulantes.add(new Tripulante("t21",funcoesValidas_.get(0), "Maria", "Portuguesa"));
+        tripulantes.add(new Tripulante("t22",funcoesValidas_.get(1), "Duarte", "Portuguesa"));
+        tripulantes.add(new Tripulante("t23",funcoesValidas_.get(2), "Vitor", "Portuguesa"));
+        tripulantes.add(new Tripulante("t24",funcoesValidas_.get(3), "Mario", "Portuguesa"));
+        tripulantes.add(new Tripulante("t25",funcoesValidas_.get(4), "Antonio", "Portuguesa"));
     }
 
     private static void geraPortas() {

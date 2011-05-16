@@ -14,10 +14,12 @@ import java.io.Serializable;
 public class Tripulante implements Serializable {
 
     /** Variaveis de instancia */
+    private String codigo;
     private String funcao;
     private String nome;
     private String nacionalidade;
     private boolean livre;
+    
 
     /** Construtores */
     /**
@@ -28,6 +30,7 @@ public class Tripulante implements Serializable {
         nome = "";
         nacionalidade = "";
         livre = true;
+        codigo = "";
     }
 
     /**
@@ -36,7 +39,8 @@ public class Tripulante implements Serializable {
      * @param nome
      * @param nacionalidade 
      */
-    public Tripulante(String funcao, String nome, String nacionalidade) {
+    public Tripulante(String codigo, String funcao, String nome, String nacionalidade) {
+        this.codigo = codigo;
         this.funcao = funcao;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
@@ -48,6 +52,7 @@ public class Tripulante implements Serializable {
      * @param tripulante 
      */
     public Tripulante(Tripulante tripulante) {
+        codigo = tripulante.getCodigo();
         funcao = tripulante.getFuncao();
         nome = tripulante.getNome();
         nacionalidade = tripulante.getNacionalidade();
@@ -55,6 +60,15 @@ public class Tripulante implements Serializable {
     }
 
     /** gets */
+    
+    /**
+     * Codigo do tripulante
+     * @return 
+     */
+    public String getCodigo(){
+        return codigo;
+    }
+    
     /**
      * Função do Tripulante
      * @return 
@@ -88,6 +102,11 @@ public class Tripulante implements Serializable {
     }
 
     /** sets */
+    
+    public void setCodigo(String codigo){
+        this.codigo = codigo;
+    }
+    
     /**
      * Alterar a função do Tripulante
      * @param funcao 
@@ -136,6 +155,7 @@ public class Tripulante implements Serializable {
         }
         Tripulante tripulante = (Tripulante) o;
         if (this.funcao.equals(tripulante.getFuncao())
+                && this.codigo.equals(tripulante.getCodigo())
                 && this.nome.equals(tripulante.getNome())
                 && this.nacionalidade.equals(tripulante.getNacionalidade())
                 && this.livre == tripulante.getLivre()) {
@@ -161,6 +181,9 @@ public class Tripulante implements Serializable {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("TRIPULANTE:\n");
+        s.append("Codigo: ");
+        s.append(codigo);
+        s.append("\n");
         s.append("Funcao: ");
         s.append(funcao);
         s.append("\n");

@@ -13,6 +13,7 @@ import Classes.Tripulante;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.TreeMap;
 public class AerogestSistema implements Serializable {
 
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
-    private Set<Comandante> comandantes; // TreeMap ?
+    private HashMap<String, Comandante> comandantes; // TreeMap ?
     private Set<CoPiloto> coPilotos; // TreeMap ?
     private Set<Tripulante> tribulantesAdicionais; // TreeMap ?
     private Map<String, Aeronave> aeronaves;
@@ -38,7 +39,7 @@ public class AerogestSistema implements Serializable {
 
     public AerogestSistema() {
         mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
-        comandantes = new HashSet<Comandante>();
+        comandantes = new HashMap<String, Comandante>();
         coPilotos = new HashSet<CoPiloto>();
         tribulantesAdicionais = new HashSet<Tripulante>();
         aeronaves = new TreeMap<String, Aeronave>();
@@ -49,7 +50,7 @@ public class AerogestSistema implements Serializable {
 
     public AerogestSistema(AerogestSistema a) {
         mapaVoos = a.getMapaVoos();
-        comandantes = a.getComandantes();
+        comandantes = (HashMap<String, Comandante>) a.getComandantes();
         coPilotos = a.getCoPilotos();
         tribulantesAdicionais = a.getTripulantesAdicionais();
         aeronaves = a.getAeronave_All();
@@ -85,7 +86,7 @@ public class AerogestSistema implements Serializable {
      * Lista dos comandantes
      * @return list
      */
-    public Set getComandantes() {
+    public Map<String, Comandante> getComandantes() {
         return comandantes;
     }
 
@@ -203,8 +204,8 @@ public class AerogestSistema implements Serializable {
     public String imprimeComandantes() {
         StringBuilder s = new StringBuilder("**COMANDANTES**\n");
 
-        for (Comandante c : comandantes) {
-            s.append(c.toString());
+        for (String c : comandantes.keySet()) {
+            s.append(comandantes.get(c).toString());
         }
 
 
@@ -233,7 +234,7 @@ public class AerogestSistema implements Serializable {
      * @param comandante 
      */
     public void adicionaComandante(Comandante c) {
-        comandantes.add(c);
+        comandantes.put(c.getCodigo(), c);
     }
 
     /**
@@ -241,15 +242,7 @@ public class AerogestSistema implements Serializable {
      * @param c omandante
      */
     public void removeComandante(Comandante c) {
-        Iterator itr = comandantes.iterator();
-        boolean encontrado = false;
-
-        while (itr.hasNext() && !encontrado) {
-            if (itr.next().equals(c)) {
-                encontrado = true;
-                if(encontrado) itr.remove();
-            }
-        }
+        comandantes.remove(c.getCodigo());
     }
 
     /**
@@ -258,7 +251,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaComandateArray(List<Comandante> c) {
         for (Comandante x : c) {
-            comandantes.add(x);
+            comandantes.put(x.getCodigo(), x);
         }
     }
 

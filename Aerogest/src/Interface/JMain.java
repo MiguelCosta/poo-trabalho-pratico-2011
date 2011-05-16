@@ -12,16 +12,15 @@ package Interface;
 
 import Classes.CoPiloto;
 import Classes.Comandante;
-import Classes.Tripulante;
+import Importer.SaveLoadDB;
 import aerogest.AerogestSistema;
+import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,12 +43,14 @@ public class JMain extends javax.swing.JFrame {
         comandantes = new DefaultTableModel();
         copilotos = new DefaultTableModel();
 
-        //actualizarTabelaMapaVoos();
-        actualizarTabelaComandantes();
-        actualizarTabelaCoPilotos();
-
+        actualizarTabelas();
     }
 
+    private void actualizarTabelas(){
+        actualizarTabelaComandantes();
+        actualizarTabelaCoPilotos();
+    }
+    
     /*Isto nao está a funcionar! */
     private void actualizarTabelaMapaVoos() {
 
@@ -106,21 +107,22 @@ public class JMain extends javax.swing.JFrame {
      */
     private void actualizarTabelaComandantes() {
         comandantes = new DefaultTableModel();
+        comandantes.addColumn("Codigo");
         comandantes.addColumn("Nome");
         comandantes.addColumn("Nacionalidade");
         comandantes.addColumn("Estado");
 
-        Set<Comandante> cms = new HashSet<Comandante>();
+        Map<String, Comandante> cms = new HashMap<String, Comandante>();
         cms = aerogestSistema.getComandantes();
 
-        for (Comandante c : cms) {
+        for (Comandante c : cms.values()) {
             boolean estado = c.getLivre();
 
             if (estado) {
-                String[] livre = {c.getNome(), c.getNacionalidade(), "livre"};
+                String[] livre = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "livre"};
                 comandantes.addRow(livre);
             } else {
-                String[] ocupado = {c.getNome(), c.getNacionalidade(), "ocupado"};
+                String[] ocupado = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "ocupado"};
                 comandantes.addRow(ocupado);
             }
         }
@@ -133,6 +135,7 @@ public class JMain extends javax.swing.JFrame {
      */
     private void actualizarTabelaCoPilotos() {
         copilotos = new DefaultTableModel();
+        copilotos.addColumn("Codigo");
         copilotos.addColumn("Nome");
         copilotos.addColumn("Nacionalidade");
         copilotos.addColumn("Estado");
@@ -144,10 +147,10 @@ public class JMain extends javax.swing.JFrame {
             boolean estado = c.getLivre();
 
             if (estado) {
-                String[] livre = {c.getNome(), c.getNacionalidade(), "livre"};
+                String[] livre = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "livre"};
                 copilotos.addRow(livre);
             } else {
-                String[] ocupado = {c.getNome(), c.getNacionalidade(), "ocupado"};
+                String[] ocupado = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "ocupado"};
                 copilotos.addRow(ocupado);
             }
         }
@@ -184,11 +187,13 @@ public class JMain extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuFicheiro = new javax.swing.JMenu();
+        jMenuItemAbrirComo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemGuardar = new javax.swing.JMenuItem();
+        jMenuItemGuardarComo = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -382,27 +387,42 @@ public class JMain extends javax.swing.JFrame {
 
         jTabbedTripulacoes.addTab("Aeronaves", jPanel4);
 
-        jMenu1.setText("Ficheiro");
+        jMenuFicheiro.setText("Ficheiro");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Guardar");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Guardar como...");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAbrirComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemAbrirComo.setText("Abrir");
+        jMenuItemAbrirComo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemAbrirComoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenuFicheiro.add(jMenuItemAbrirComo);
+        jMenuFicheiro.add(jSeparator1);
+
+        jMenuItemGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemGuardar.setText("Guardar");
+        jMenuItemGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGuardarActionPerformed(evt);
+            }
+        });
+        jMenuFicheiro.add(jMenuItemGuardar);
+
+        jMenuItemGuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemGuardarComo.setText("Guardar como...");
+        jMenuItemGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGuardarComoActionPerformed(evt);
+            }
+        });
+        jMenuFicheiro.add(jMenuItemGuardarComo);
+        jMenuFicheiro.add(jSeparator2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Sair");
-        jMenu1.add(jMenuItem3);
-        jMenu1.add(jSeparator1);
+        jMenuFicheiro.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuFicheiro);
 
         jMenu2.setText("Ajuda");
 
@@ -434,28 +454,30 @@ public class JMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRemoveComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveComandanteActionPerformed
-        
+
         // linha que está seleccionada
         int linha = jTableComandantes.getSelectedRow();
-        
+
         // se alguma linha estiver seleccionada
         if (linha >= 0) {
             int escolha = JOptionPane.showConfirmDialog(rootPane, "Tem a ceteza que prentende remover o comandante seleccionado?", "Remover comandante", 1);
             if (escolha == 0) {
-                // nome do comandantes; 1ª coluna
-                String nome = (String) jTableComandantes.getValueAt(linha, 0);
-                // nacionalidade; 2ª coluna
-                String nacionalidade = (String) jTableComandantes.getValueAt(linha, 1);
-                // estado; 3ª coluna
-                String estado = (String) jTableComandantes.getValueAt(linha, 2);
-                
+                // codigo do tripulante; 1ª coluna
+                String codigo = (String) jTableComandantes.getValueAt(linha, 0);
+                // nome do comandantes; 2ª coluna
+                String nome = (String) jTableComandantes.getValueAt(linha, 1);
+                // nacionalidade; 3ª coluna
+                String nacionalidade = (String) jTableComandantes.getValueAt(linha, 2);
+                // estado; 4ª coluna
+                String estado = (String) jTableComandantes.getValueAt(linha, 3);
+
                 // Comandante que está seleccionado
-                Comandante c = new Comandante(nome, nacionalidade);
+                Comandante c = new Comandante(codigo, nome, nacionalidade);
                 // altera o estado caso seja necessário, porque ele inicialmente está sempre livre
                 if (estado.equalsIgnoreCase("ocupado")) {
                     c.setLivre(false);
                 }
-                
+
                 // remove do Sistema o comandante
                 aerogestSistema.removeComandante(c);
                 // actualiza a tabela
@@ -468,25 +490,27 @@ public class JMain extends javax.swing.JFrame {
     private void jButtonRemoveCoPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCoPilotoActionPerformed
         // linha que está seleccionada
         int linha = jTableCoPilotos.getSelectedRow();
-        
+
         // se alguma linha estiver seleccionada
         if (linha >= 0) {
             int escolha = JOptionPane.showConfirmDialog(rootPane, "Tem a ceteza que prentende remover o CoPiloto seleccionado?", "Remover CoPiloto", 1);
             if (escolha == 0) {
-                // nome do comandantes; 1ª coluna
-                String nome = (String) jTableCoPilotos.getValueAt(linha, 0);
-                // nacionalidade; 2ª coluna
-                String nacionalidade = (String) jTableCoPilotos.getValueAt(linha, 1);
-                // estado; 3ª coluna
-                String estado = (String) jTableCoPilotos.getValueAt(linha, 2);
-                
+                // codigo do copiloto; 1ª coluna
+                String codigo = (String) jTableCoPilotos.getValueAt(linha, 0);
+                // nome; 2ª coluna
+                String nome = (String) jTableCoPilotos.getValueAt(linha, 1);
+                // nacionalidade; 3ª coluna
+                String nacionalidade = (String) jTableCoPilotos.getValueAt(linha, 2);
+                // estado; 4ª coluna
+                String estado = (String) jTableCoPilotos.getValueAt(linha, 3);
+
                 // Comandante que está seleccionado
-                CoPiloto c = new CoPiloto(nome, nacionalidade);
+                CoPiloto c = new CoPiloto(codigo, nome, nacionalidade);
                 // altera o estado caso seja necessário, porque ele inicialmente está sempre livre
                 if (estado.equalsIgnoreCase("ocupado")) {
                     c.setLivre(false);
                 }
-                
+
                 // remove do Sistema o comandante
                 aerogestSistema.removeCoPiloto(c);
                 // actualiza a tabela
@@ -496,13 +520,38 @@ public class JMain extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_jButtonRemoveCoPilotoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JFileChooser f = new JFileChooser();
-        f.setApproveButtonText("Abrir");
+    private void jMenuItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarComoActionPerformed
+        JFileChooser fc = new JFileChooser();
+
+        int returnVal = fc.showSaveDialog(this);
         
-        f.showOpenDialog(this);
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+            String nome = fc.getSelectedFile().getAbsolutePath();
+            SaveLoadDB.saveDB(aerogestSistema,nome);
+        }
+
+    }//GEN-LAST:event_jMenuItemGuardarComoActionPerformed
+
+    private void jMenuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarActionPerformed
+        int op = JOptionPane.showConfirmDialog(rootPane, "Pertende guardar a informacao?");
+        if (op == 0) {
+            SaveLoadDB.saveDB(aerogestSistema, "aeroguest.obj");
+            JOptionPane.showMessageDialog(rootPane, "Guardado com sucesso", "",1);
+        }
+    }//GEN-LAST:event_jMenuItemGuardarActionPerformed
+
+    private void jMenuItemAbrirComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirComoActionPerformed
+        JFileChooser fc = new JFileChooser();
         
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        // opcao de se clicou
+        int returnVal = fc.showOpenDialog(this);
+        // se se clicou em abrir, vai carregar o ficheiro para o aerogestSistema
+        if (returnVal == JFileChooser.APPROVE_OPTION){
+            File file = fc.getSelectedFile();
+            aerogestSistema = SaveLoadDB.loadDB(file.getAbsolutePath());
+            actualizarTabelas();
+        }
+    }//GEN-LAST:event_jMenuItemAbrirComoActionPerformed
 
     /**
      * Evento que remove um comandante
@@ -529,13 +578,14 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonRemoveCoPiloto;
     private javax.swing.JButton jButtonRemoveComandante;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu jMenuFicheiro;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemAbrirComo;
+    private javax.swing.JMenuItem jMenuItemGuardar;
+    private javax.swing.JMenuItem jMenuItemGuardarComo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -546,6 +596,7 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedTripulacoes;
     private javax.swing.JTable jTableCoPilotos;
     private javax.swing.JTable jTableComandantes;

@@ -63,6 +63,7 @@ public class Main {
 
 */
         GerarDados.main();
+        a = new AerogestSistema();
         
         a = SaveLoadDB.loadDB("aeroguest.obj");
         

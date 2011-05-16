@@ -26,7 +26,7 @@ public class CoPiloto extends Tripulante implements Serializable {
      * @param nome
      * @param nacionalidade 
      */
-    public CoPiloto(String nome, String nacionalidade) {
-        super("CoPiloto", nome, nacionalidade);
+    public CoPiloto(String codigo, String nome, String nacionalidade) {
+        super(codigo, "CoPiloto", nome, nacionalidade);
     }
 }

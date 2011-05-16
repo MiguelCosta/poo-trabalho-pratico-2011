@@ -26,8 +26,8 @@ public class Comandante extends Tripulante implements Serializable {
      * @param nome
      * @param nacionalidade 
      */
-    public Comandante(String nome, String nacionalidade) {
-        super("Comandante", nome, nacionalidade);
+    public Comandante(String codigo, String nome, String nacionalidade) {
+        super(codigo, "Comandante", nome, nacionalidade);
     }
     
     @Override
