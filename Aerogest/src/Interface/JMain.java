@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -388,6 +389,11 @@ public class JMain extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Guardar como...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -426,15 +432,11 @@ public class JMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Evento que remove um comandante
-     * @param evt 
-     */
     private void jButtonRemoveComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveComandanteActionPerformed
-
+        
         // linha que está seleccionada
         int linha = jTableComandantes.getSelectedRow();
-
+        
         // se alguma linha estiver seleccionada
         if (linha >= 0) {
             int escolha = JOptionPane.showConfirmDialog(rootPane, "Tem a ceteza que prentende remover o comandante seleccionado?", "Remover comandante", 1);
@@ -445,14 +447,14 @@ public class JMain extends javax.swing.JFrame {
                 String nacionalidade = (String) jTableComandantes.getValueAt(linha, 1);
                 // estado; 3ª coluna
                 String estado = (String) jTableComandantes.getValueAt(linha, 2);
-
+                
                 // Comandante que está seleccionado
                 Comandante c = new Comandante(nome, nacionalidade);
                 // altera o estado caso seja necessário, porque ele inicialmente está sempre livre
                 if (estado.equalsIgnoreCase("ocupado")) {
                     c.setLivre(false);
                 }
-
+                
                 // remove do Sistema o comandante
                 aerogestSistema.removeComandante(c);
                 // actualiza a tabela
@@ -460,13 +462,12 @@ public class JMain extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Remoção efectuado com sucesso!", "Comandante removido", 1);
             }
         }
-
     }//GEN-LAST:event_jButtonRemoveComandanteActionPerformed
 
     private void jButtonRemoveCoPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCoPilotoActionPerformed
-// linha que está seleccionada
+        // linha que está seleccionada
         int linha = jTableCoPilotos.getSelectedRow();
-
+        
         // se alguma linha estiver seleccionada
         if (linha >= 0) {
             int escolha = JOptionPane.showConfirmDialog(rootPane, "Tem a ceteza que prentende remover o CoPiloto seleccionado?", "Remover CoPiloto", 1);
@@ -477,14 +478,14 @@ public class JMain extends javax.swing.JFrame {
                 String nacionalidade = (String) jTableCoPilotos.getValueAt(linha, 1);
                 // estado; 3ª coluna
                 String estado = (String) jTableCoPilotos.getValueAt(linha, 2);
-
+                
                 // Comandante que está seleccionado
                 CoPiloto c = new CoPiloto(nome, nacionalidade);
                 // altera o estado caso seja necessário, porque ele inicialmente está sempre livre
                 if (estado.equalsIgnoreCase("ocupado")) {
                     c.setLivre(false);
                 }
-
+                
                 // remove do Sistema o comandante
                 aerogestSistema.removeCoPiloto(c);
                 // actualiza a tabela
@@ -492,8 +493,20 @@ public class JMain extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Remoção efectuado com sucesso!", "CoPiloto removido", 1);
             }
         }
-    }//GEN-LAST:event_jButtonRemoveCoPilotoActionPerformed
+}//GEN-LAST:event_jButtonRemoveCoPilotoActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JFileChooser f = new JFileChooser();
+        f.setApproveButtonText("Abrir");
+        
+        f.showOpenDialog(this);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    /**
+     * Evento que remove um comandante
+     * @param evt 
+     */
     /**
      * @param args the command line arguments
      */
