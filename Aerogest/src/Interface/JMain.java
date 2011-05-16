@@ -46,11 +46,11 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelas();
     }
 
-    private void actualizarTabelas(){
+    private void actualizarTabelas() {
         actualizarTabelaComandantes();
         actualizarTabelaCoPilotos();
     }
-    
+
     /*Isto nao está a funcionar! */
     private void actualizarTabelaMapaVoos() {
 
@@ -175,13 +175,13 @@ public class JMain extends javax.swing.JFrame {
         jPanelTripulacaoComandantes = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableComandantes = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonAdicionarComandante = new javax.swing.JButton();
         jButtonRemoveComandante = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanelTripulacaoCoPilotos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableCoPilotos = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jButtonAdicionarCoPiloto = new javax.swing.JButton();
         jButtonRemoveCoPiloto = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -245,7 +245,12 @@ public class JMain extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableComandantes);
 
-        jButton1.setText("Adicionar");
+        jButtonAdicionarComandante.setText("Adicionar");
+        jButtonAdicionarComandante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarComandanteActionPerformed(evt);
+            }
+        });
 
         jButtonRemoveComandante.setText("Remover");
         jButtonRemoveComandante.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +269,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanelTripulacaoComandantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTripulacaoComandantesLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonAdicionarComandante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,7 +287,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanelTripulacaoComandantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRemoveComandante)
                     .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonAdicionarComandante))
                 .addContainerGap())
         );
 
@@ -298,7 +303,12 @@ public class JMain extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTableCoPilotos);
 
-        jButton2.setText("Adicionar");
+        jButtonAdicionarCoPiloto.setText("Adicionar");
+        jButtonAdicionarCoPiloto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarCoPilotoActionPerformed(evt);
+            }
+        });
 
         jButtonRemoveCoPiloto.setText("Remover");
         jButtonRemoveCoPiloto.addActionListener(new java.awt.event.ActionListener() {
@@ -317,7 +327,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanelTripulacaoCoPilotosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTripulacaoCoPilotosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)
+                        .addComponent(jButtonAdicionarCoPiloto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -335,7 +345,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanelTripulacaoCoPilotosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRemoveCoPiloto)
                     .addComponent(jButton4)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonAdicionarCoPiloto))
                 .addContainerGap())
         );
 
@@ -524,10 +534,10 @@ public class JMain extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
 
         int returnVal = fc.showSaveDialog(this);
-        
-        if(returnVal == JFileChooser.APPROVE_OPTION){
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             String nome = fc.getSelectedFile().getAbsolutePath();
-            SaveLoadDB.saveDB(aerogestSistema,nome);
+            SaveLoadDB.saveDB(aerogestSistema, nome);
         }
 
     }//GEN-LAST:event_jMenuItemGuardarComoActionPerformed
@@ -536,22 +546,57 @@ public class JMain extends javax.swing.JFrame {
         int op = JOptionPane.showConfirmDialog(rootPane, "Pertende guardar a informacao?");
         if (op == 0) {
             SaveLoadDB.saveDB(aerogestSistema, "aeroguest.obj");
-            JOptionPane.showMessageDialog(rootPane, "Guardado com sucesso", "",1);
+            JOptionPane.showMessageDialog(rootPane, "Guardado com sucesso", "", 1);
         }
     }//GEN-LAST:event_jMenuItemGuardarActionPerformed
 
     private void jMenuItemAbrirComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirComoActionPerformed
         JFileChooser fc = new JFileChooser();
-        
+
         // opcao de se clicou
         int returnVal = fc.showOpenDialog(this);
         // se se clicou em abrir, vai carregar o ficheiro para o aerogestSistema
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             aerogestSistema = SaveLoadDB.loadDB(file.getAbsolutePath());
             actualizarTabelas();
         }
     }//GEN-LAST:event_jMenuItemAbrirComoActionPerformed
+
+    private void jButtonAdicionarComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarComandanteActionPerformed
+
+        String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do comandante:");
+        String nome = "" + JOptionPane.showInputDialog("Insira o nome do comandante:");
+        String nacionalidade = "" + JOptionPane.showInputDialog("Insira a nacionalidade do comandante:");
+
+        // verifica se todos os campos foram preenchidos
+        if (!nacionalidade.equalsIgnoreCase("") && !nome.equalsIgnoreCase("") && !codigo.equalsIgnoreCase("")) {
+            Comandante c = new Comandante(codigo, nome, nacionalidade);
+            aerogestSistema.adicionaComandante(c);
+            JOptionPane.showMessageDialog(rootPane, "Comandante adicionado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Comandante não adicionado");
+        }
+
+        actualizarTabelas();
+    }//GEN-LAST:event_jButtonAdicionarComandanteActionPerformed
+
+    private void jButtonAdicionarCoPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarCoPilotoActionPerformed
+        String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do CoPiloto:");
+        String nome = "" + JOptionPane.showInputDialog("Insira o nome do CoPiloto:");
+        String nacionalidade = "" + JOptionPane.showInputDialog("Insira a nacionalidade do CoPiloto:");
+
+        // verifica se todos os campos foram preenchidos
+        if (!nacionalidade.equalsIgnoreCase("") && !nome.equalsIgnoreCase("") && !codigo.equalsIgnoreCase("")) {
+            CoPiloto c = new CoPiloto(codigo, nome, nacionalidade);
+            aerogestSistema.adicionaCoPiloto(c);
+            JOptionPane.showMessageDialog(rootPane, "CoPilotoadicionado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "CoPiloto não adicionado");
+        }
+
+        actualizarTabelas();
+    }//GEN-LAST:event_jButtonAdicionarCoPilotoActionPerformed
 
     /**
      * Evento que remove um comandante
@@ -572,10 +617,10 @@ public class JMain extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAdicionarCoPiloto;
+    private javax.swing.JButton jButtonAdicionarComandante;
     private javax.swing.JButton jButtonRemoveCoPiloto;
     private javax.swing.JButton jButtonRemoveComandante;
     private javax.swing.JMenu jMenu2;
