@@ -227,26 +227,26 @@ public class GerarDados {
     }
 
     private static void geraCargaQuimica() {
-        cargaQuimica.add(new CargaQuimica("cargaQuimica1", 12, "Quimico 1", 13, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica2", 13, "Quimico 2", 14, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica3", 14, "Quimico 3", 15, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica4", 15, "Quimico 4", 16, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica5", 16, "Quimico 5", 17, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica6", 17, "Quimico 6", 18, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica7", 18, "Quimico 7", 19, "", "nada toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica8", 19, "Quimico 8", 20, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica9", 20, "Quimico 9", 21, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica10", 21, "Quimico 10", 22, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica11", 22, "Quimico 11", 23, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica12", 23, "Quimico 12", 24, "", "pouco toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica13", 24, "Quimico 13", 25, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica14", 25, "Quimico 14", 26, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica15", 26, "Quimico 15", 27, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica16", 27, "Quimico 16", 28, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica17", 28, "Quimico 17", 29, "", "pouco toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica18", 29, "Quimico 18", 30, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica19", 30, "Quimico 19", 31, "", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica20", 31, "Quimico 20", 32, "", "toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica1", 12, "Quimico 1", 13, "solido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica2", 13, "Quimico 2", 14, "solido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica3", 14, "Quimico 3", 15, "solido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica4", 15, "Quimico 4", 16, "solido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica5", 16, "Quimico 5", 17, "solido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica6", 17, "Quimico 6", 18, "liquido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica7", 18, "Quimico 7", 19, "po", "nada toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica8", 19, "Quimico 8", 20, "liquido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica9", 20, "Quimico 9", 21, "liquido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica10", 21, "Quimico 10", 22, "liquido", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica11", 22, "Quimico 11", 23, "gasoso", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica12", 23, "Quimico 12", 24, "gasoso", "pouco toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica13", 24, "Quimico 13", 25, "gasoso", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica14", 25, "Quimico 14", 26, "po", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica15", 26, "Quimico 15", 27, "gasoso", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica16", 27, "Quimico 16", 28, "gasoso", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica17", 28, "Quimico 17", 29, "cristais", "pouco toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica18", 29, "Quimico 18", 30, "cristais", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica19", 30, "Quimico 19", 31, "cristais", "muito toxico"));
+        cargaQuimica.add(new CargaQuimica("cargaQuimica20", 31, "Quimico 20", 32, "po", "toxico"));
     }
 
     private static void geraCargaVeiculo() {

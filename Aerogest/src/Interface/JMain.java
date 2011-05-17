@@ -14,6 +14,7 @@ import Classes.Carga;
 import Classes.CargaAlimentar;
 import Classes.CargaAnimal;
 import Classes.CargaQuimica;
+import Classes.CargaVeiculo;
 import Classes.CoPiloto;
 import Classes.Comandante;
 import Classes.Tripulacao;
@@ -58,7 +59,7 @@ public class JMain extends javax.swing.JFrame {
         copilotos = new DefaultTableModel();
         tripulantesAdicionais = new DefaultTableModel();
         cargas = new DefaultTableModel();
-        
+
         actualizarTabelas();
     }
 
@@ -213,9 +214,10 @@ public class JMain extends javax.swing.JFrame {
         cargas.addColumn("Volume");
         cargas.addColumn("Estado");
         cargas.addColumn("Toxidade");
+        cargas.addColumn("Tipo Veiculo");
 
         jTableCargas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         Map<String, Carga> cs = new HashMap<String, Carga>();
         cs = aerogestSistema.getCargas();
 
@@ -224,27 +226,55 @@ public class JMain extends javax.swing.JFrame {
 
             if (s.equalsIgnoreCase("Classes.CargaAlimentar")) {
                 CargaAlimentar ca = (CargaAlimentar) c;
-                String dia = ""+ca.getdataValidade().get(Calendar.DAY_OF_MONTH);
-                String mes = ""+(ca.getdataValidade().get(Calendar.MONTH)+1);
-                String ano = ""+ca.getdataValidade().get(Calendar.YEAR);
-                String data = dia+"/"+mes+"/"+ano;
-                String[] info = {"Alimentar", ca.getCodigo(), ""+ca.getPeso(), ca.getDescricao(), ""+ca.getTempoCarregamento(), data  };
+                String dia = "" + ca.getdataValidade().get(Calendar.DAY_OF_MONTH);
+                String mes = "" + (ca.getdataValidade().get(Calendar.MONTH) + 1);
+                String ano = "" + ca.getdataValidade().get(Calendar.YEAR);
+                String data = dia + "/" + mes + "/" + ano;
+                String codigo = ca.getCodigo();
+                String peso = "" + ca.getPeso();
+                String descricao = ca.getDescricao();
+                String tmp_carr = "" + ca.getTempoCarregamento();
+                String[] info = {"Alimentar", codigo, peso, descricao, tmp_carr, data};
                 cargas.addRow(info);
             } else if (s.equalsIgnoreCase("Classes.CargaAnimal")) {
                 CargaAnimal ca = (CargaAnimal) c;
-                String[] info = {"Animal", ca.getCodigo(), ""+ca.getPeso(), ca.getDescricao(), ""+ca.getTempoCarregamento(), "" ,""+ca.getVolume()};
+                String codigo = ca.getCodigo();
+                String peso = "" + ca.getPeso();
+                String descricao = ca.getDescricao();
+                String tmp_carr = "" + ca.getTempoCarregamento();
+                String volume = "" + ca.getVolume();
+                String[] info = {"Animal", codigo, peso, descricao, tmp_carr, "", volume};
                 cargas.addRow(info);
             } else if (s.equalsIgnoreCase("Classes.CargaNormal")) {
-                String[] info = {"Normal", c.getCodigo(), ""+c.getPeso(), c.getDescricao(), ""+c.getTempoCarregamento(),"",""};
+                String codigo = c.getCodigo();
+                String peso = "" + c.getPeso();
+                String descricao = c.getDescricao();
+                String tmp_carr = "" + c.getTempoCarregamento();
+                String[] info = {"Normal", codigo, peso, descricao, tmp_carr, "", ""};
                 cargas.addRow(info);
-            } else if(s.equalsIgnoreCase("Classes.CargaQuimica")){
+            } else if (s.equalsIgnoreCase("Classes.CargaQuimica")) {
                 CargaQuimica cq = (CargaQuimica) c;
-                String[] info = {"Normal", cq.getCodigo(), ""+cq.getPeso(), cq.getDescricao(), ""+cq.getTempoCarregamento(),"","", cq.getEstado(), cq.getGrauToxicidade()};
+                String codigo = cq.getCodigo();
+                String peso = "" + cq.getPeso();
+                String descricao = cq.getDescricao();
+                String tmp_carr = "" + cq.getTempoCarregamento();
+                String estado = cq.getEstado();
+                String grau_toxi = cq.getGrauToxicidade();
+                String[] info = {"Quimica", codigo, peso, descricao, tmp_carr, "", "", estado, grau_toxi};
+                cargas.addRow(info);
+            } else if (s.equalsIgnoreCase("Classes.CargaVeiculo")) {
+                CargaVeiculo cv = (CargaVeiculo) c;
+                String codigo = cv.getCodigo();
+                String peso = "" + cv.getPeso();
+                String descricao = cv.getDescricao();
+                String tmp_carr = "" + cv.getTempoCarregamento();
+                String tipo = cv.getTipo();
+                String[] info = {"Veiculo", codigo, peso, descricao, tmp_carr, "", "", "", "", tipo};
                 cargas.addRow(info);
             }
 
         }
-        
+
         jTableCargas.setModel(cargas);
 
     }
@@ -294,7 +324,7 @@ public class JMain extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemAcerca = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -613,9 +643,14 @@ public class JMain extends javax.swing.JFrame {
 
         jMenu2.setText("Ajuda");
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jMenuItem4.setText("Acerca");
-        jMenu2.add(jMenuItem4);
+        jMenuItemAcerca.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItemAcerca.setText("Acerca");
+        jMenuItemAcerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAcercaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemAcerca);
 
         jMenuBar1.add(jMenu2);
 
@@ -769,7 +804,7 @@ public class JMain extends javax.swing.JFrame {
         if (!nacionalidade.equalsIgnoreCase("") && !nome.equalsIgnoreCase("") && !codigo.equalsIgnoreCase("")) {
             CoPiloto c = new CoPiloto(codigo, nome, nacionalidade);
             aerogestSistema.adicionaCoPiloto(c);
-            JOptionPane.showMessageDialog(rootPane, "CoPilotoadicionado com sucesso");
+            JOptionPane.showMessageDialog(rootPane, "CoPiloto adicionado com sucesso");
         } else {
             JOptionPane.showMessageDialog(rootPane, "CoPiloto não adicionado");
         }
@@ -778,12 +813,73 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAdicionarCoPilotoActionPerformed
 
     private void jButtonAdicionarTripulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarTripulanteActionPerformed
-        // TODO add your handling code here:
+        String funcao = "" + JOptionPane.showInputDialog("Insira a função do tripulante:");
+        String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do tripulante");
+        String nome = "" + JOptionPane.showInputDialog("Insira o nome do tripulante:");
+        String nacionalidade = "" + JOptionPane.showInputDialog("Insira a nacionalidade do tripulante:");
+        
+        // verifica se todos os campos foram preenchidos
+        if (!funcao.equalsIgnoreCase("") && !nacionalidade.equalsIgnoreCase("") && !nome.equalsIgnoreCase("") && !codigo.equalsIgnoreCase("")) {
+            Tripulante t = new Tripulante(codigo, funcao, nome, nacionalidade);
+            aerogestSistema.adicionaTripulante(t);
+            JOptionPane.showMessageDialog(rootPane, "Tripulante adicionado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "CoPiloto não adicionado");
+        }
+
+        actualizarTabelas();
     }//GEN-LAST:event_jButtonAdicionarTripulanteActionPerformed
 
+    /**
+     * Evento que permite remover o tripulante do sistema
+     * @param evt 
+     */
     private void jButtonRemoveTripulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveTripulanteActionPerformed
-        // TODO add your handling code here:
+        // linha que está seleccionada
+        int linha = jTableTripulantes.getSelectedRow();
+
+        // se alguma linha estiver seleccionada
+        if (linha >= 0) {
+            int escolha = JOptionPane.showConfirmDialog(rootPane, "Tem a ceteza que prentende remover o Tripulante seleccionado?", "Remover Tripulante", 1);
+            if (escolha == 0) {
+                // codigo; 1ª coluna
+                String funcao = (String) jTableTripulantes.getValueAt(linha, 0);
+                // codigo; 2ª coluna
+                String codigo = (String) jTableTripulantes.getValueAt(linha, 1);
+                // nome; 3ª coluna
+                String nome = (String) jTableTripulantes.getValueAt(linha, 2);
+                // nacionalidade; 4ª coluna
+                String nacionalidade = (String) jTableTripulantes.getValueAt(linha, 3);
+                // estado; 5ª coluna
+                String estado = (String) jTableTripulantes.getValueAt(linha, 4);
+
+                // Comandante que está seleccionado
+                Tripulante t = new Tripulante(codigo, funcao, nome, nacionalidade);
+                // altera o estado caso seja necessário, porque ele inicialmente está sempre livre
+                if (estado.equalsIgnoreCase("ocupado")) {
+                    t.setLivre(false);
+                }
+
+                // remove do Sistema o comandante
+                aerogestSistema.removeTripulante(t);
+                // actualiza a tabela
+                actualizarTabelas();
+                JOptionPane.showMessageDialog(rootPane, "Remoção efectuado com sucesso!", "Tripulante removido", 1);
+            }
+        }
     }//GEN-LAST:event_jButtonRemoveTripulanteActionPerformed
+
+    private void jMenuItemAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaActionPerformed
+        String s = "PROGRAMAÇÃO ORIENTADA AOS OBJECTOS\n\n";
+        s = s + "Software criado por:\n";
+        s = s + "       * 54746 Miguel Costa\n";
+        s = s + "       * 54782 Sofia Vieira\n";
+        s = s + "       * 54822 Fábio Costa\n";
+        s = s + "\n";
+        s = s + "WebSite:\n http://code.google.com/p/poo-trabalho-pratico-2011/\n\n";
+        
+        JOptionPane.showMessageDialog(rootPane, s, "Acerca", 1);
+    }//GEN-LAST:event_jMenuItemAcercaActionPerformed
 
     /**
      * Evento que remove um comandante
@@ -834,8 +930,8 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFicheiro;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemAbrirComo;
+    private javax.swing.JMenuItem jMenuItemAcerca;
     private javax.swing.JMenuItem jMenuItemGuardar;
     private javax.swing.JMenuItem jMenuItemGuardarComo;
     private javax.swing.JPanel jPanel1;
