@@ -73,10 +73,12 @@ public class AerogestSistema implements Serializable {
      * @return 
      */
     public TreeMap<GregorianCalendar, TreeMap<String, Voo>> getMapaVoos() {
-        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
 
+        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        System.out.println("aqui");
         for (GregorianCalendar d : mapaVoos.keySet()) {
-            r.put(d, mapaVoos.get(d));
+            System.out.println(d.toString());
+
         }
 
         return r;
@@ -244,18 +246,18 @@ public class AerogestSistema implements Serializable {
 
         return s.toString();
     }
-    
+
     /**
      * Imprime a informacao de todas as tripulacoes
      * @return 
      */
-    public String imprimeTripulacoes(){
-        StringBuilder s = new StringBuilder("TRIPULACOES\n**************************");
-        
-        for(Tripulacao t : tripulacao){
+    public String imprimeTripulacoes() {
+        StringBuilder s = new StringBuilder("TRIPULACOES\n**************************\n");
+
+        for (Tripulacao t : tripulacao) {
             s.append(t.toString());
         }
-        
+
         return s.toString();
     }
 

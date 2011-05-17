@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Voo implements Serializable {
+public abstract class Voo implements Serializable {
 
     public static final String VooEspecificado = "Voo Especidicado";
     public static final String VooEmPreparacao1 = "Voo Em Preparação 1";
@@ -385,7 +385,8 @@ public class Voo implements Serializable {
      * @return Voo 
      */
     @Override
-    public Voo clone() {
-        return new Voo(this);
-    }
+    public abstract Voo clone();
+    
+    @Override
+    public abstract String toString();
 }

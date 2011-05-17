@@ -62,6 +62,7 @@ public class JMain extends javax.swing.JFrame {
         cargas = new DefaultTableModel();
 
         actualizarTabelas();
+        a.getMapaVoos();
     }
 
     private void actualizarTabelas() {

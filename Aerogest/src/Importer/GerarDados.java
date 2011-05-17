@@ -53,7 +53,7 @@ public class GerarDados {
     private static ArrayList<VooGovernamental> voosGovernamentais;
     private static ArrayList<VooMilitar> voosMilitares;
     private static ArrayList<VooPrivado> voosPrivados;
-    private static TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos_;
+    private static TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
     private static TreeMap<String, Aeronave> aeronaves_;
     private static TreeMap<String, Porta> portas_;
     private static ArrayList<String> funcoesValidas;
@@ -80,7 +80,7 @@ public class GerarDados {
         voosMilitares = new ArrayList<VooMilitar>();
         voosPrivados = new ArrayList<VooPrivado>();
 
-        mapaVoos_ = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         aeronaves_ = new TreeMap<String, Aeronave>();
         portas_ = new TreeMap<String, Porta>();
         funcoesValidas = new ArrayList<String>();
@@ -474,7 +474,10 @@ public class GerarDados {
         }
 
 
-        mapaVoos_.put(new GregorianCalendar(), v);
+        for(Voo voo : v.values()){
+            System.out.println(voo.toString());
+        }
+        mapaVoos.put(new GregorianCalendar(), v);
     }
 
     private static void geraMapaAeronaves() {
