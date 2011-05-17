@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -69,9 +70,21 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelaTrpulantesAdicionais();
         actualizarTabelaCargas();
         
-        
+        actualizarData();
     }
 
+    private void actualizarData(){
+        GregorianCalendar d = new GregorianCalendar();
+        String s = "Data: ";
+        s = s + d.get(Calendar.DAY_OF_MONTH);
+        s = s + "/";
+        s = s + (d.get(Calendar.MONDAY)+1);
+        s = s + "/";
+        s = s + d.get(Calendar.YEAR);
+        
+        jLabelData.setText(s);
+        
+    }
     /*Isto nao está a funcionar! */
     private void actualizarTabelaMapaVoos() {
 
