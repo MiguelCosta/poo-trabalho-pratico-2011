@@ -10,8 +10,10 @@ import Classes.Comandante;
 import Classes.Aeronave;
 import Classes.Carga;
 import Classes.Porta;
+import Classes.Tripulacao;
 import Classes.Tripulante;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class AerogestSistema implements Serializable {
     private Map<String, Comandante> comandantes;
     private Map<String, CoPiloto> coPilotos;
     private Map<String, Tripulante> tribulantesAdicionais;
+    private List<Tripulacao> tripulacao;
     private Map<String, Aeronave> aeronaves;
     private Map<String, Porta> portas;
     private Map<String, Carga> cargas;
@@ -44,6 +47,7 @@ public class AerogestSistema implements Serializable {
         comandantes = new HashMap<String, Comandante>();
         coPilotos = new HashMap<String, CoPiloto>();
         tribulantesAdicionais = new HashMap<String, Tripulante>();
+        tripulacao = new ArrayList<Tripulacao>();
         aeronaves = new TreeMap<String, Aeronave>();
         portas = new TreeMap<String, Porta>();
         cargas = new HashMap<String, Carga>();
@@ -56,6 +60,7 @@ public class AerogestSistema implements Serializable {
         comandantes = a.getComandantes();
         coPilotos = a.getCoPilotos();
         tribulantesAdicionais = a.getTripulantesAdicionais();
+        tripulacao = a.getTripulacao();
         aeronaves = a.getAeronave_All();
         portas = a.getPortas();
         cargas = a.getCargas();
@@ -115,6 +120,14 @@ public class AerogestSistema implements Serializable {
     }
 
     /**
+     * Tripulacao do sistema
+     * @return List<Tripulcao>
+     */
+    public List<Tripulacao> getTripulacao() {
+        return tripulacao;
+    }
+
+    /**
      * Mapa das aeronaves
      * @return map
      */
@@ -145,7 +158,7 @@ public class AerogestSistema implements Serializable {
      */
     public Map<String, Carga> getCargas() {
         Map<String, Carga> r = new HashMap<String, Carga>();
-        for(Carga c : cargas.values()){
+        for (Carga c : cargas.values()) {
             r.put(c.getCodigo(), c.clone());
         }
         return r;
@@ -229,6 +242,20 @@ public class AerogestSistema implements Serializable {
         }
 
 
+        return s.toString();
+    }
+    
+    /**
+     * Imprime a informacao de todas as tripulacoes
+     * @return 
+     */
+    public String imprimeTripulacoes(){
+        StringBuilder s = new StringBuilder("TRIPULACOES\n**************************");
+        
+        for(Tripulacao t : tripulacao){
+            s.append(t.toString());
+        }
+        
         return s.toString();
     }
 
@@ -328,6 +355,32 @@ public class AerogestSistema implements Serializable {
     }
 
     /**
+     * Adicionar uma Tripulcao ao sistema
+     * @param t 
+     */
+    public void adicionaTripulacao(Tripulacao t) {
+        tripulacao.add(t);
+    }
+
+    /**
+     * Remove um tripulante do sistema
+     * @param t 
+     */
+    public void removeTripulacao(Tripulacao t) {
+        tripulacao.remove(t);
+    }
+
+    /**
+     * Adiciona um array com tripulacoes ao sistema
+     * @param t 
+     */
+    public void adicionaTripulacaoArray(List<Tripulacao> t) {
+        for (Tripulacao x : t) {
+            tripulacao.add(x);
+        }
+    }
+
+    /**
      * Adicionar uma aeronave ao mapa de aeronaves
      * @param aeronave
      */
@@ -379,23 +432,24 @@ public class AerogestSistema implements Serializable {
      * Adicionar uma carga ao sistema
      * @param carga
      */
-    public void adicionaCarga(Carga carga){
+    public void adicionaCarga(Carga carga) {
         cargas.put(carga.getCodigo(), carga);
     }
-    
+
     /**
      * Remover uma carga do sistema
      * @param carga 
      */
-    public void removerCarga(Carga carga){
+    public void removerCarga(Carga carga) {
         cargas.remove(carga.getCodigo());
     }
-    
-    public void adicionaCargaList(List<Carga> cs){
-        for(Carga c : cs){
+
+    public void adicionaCargaList(List<Carga> cs) {
+        for (Carga c : cs) {
             cargas.put(c.getCodigo(), c.clone());
         }
     }
+
     /**
      * Adicionar uma função ao array de funções
      * @param funcao 

@@ -150,16 +150,18 @@ public class Tripulacao implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("TRIPULACAO:\n");
+        StringBuilder s = new StringBuilder("***TRIPULACAO:***\n");
         s.append("Comandante: ");
-        s.append(comandante);
+        s.append(comandante.toString());
         s.append("\n");
         s.append("CoPiloto: ");
-        s.append(coPiloto);
+        s.append(coPiloto.toString());
         s.append("\n");
         s.append("TripulantesAdicionais: ");
-        s.append(tripulantesAdicionais);
-        s.append("\n");
+        for(Tripulante t : tripulantesAdicionais){
+            s.append(t.toString());
+        }
+        s.append("*******************\n");
         return s.toString();
     }
 }

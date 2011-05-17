@@ -503,6 +503,7 @@ public class GerarDados {
         aerogestSistema.setHoraActual(dataActual);
         aerogestSistema.adicionaFuncaoValidaList(funcoesValidas);
         aerogestSistema.adicionaCargaList(cargas);
+        aerogestSistema.adicionaTripulacaoArray(tripulacao);
 
 
         // qual destes dois é?? E igual, os elementos de 1 vao tar no outro
