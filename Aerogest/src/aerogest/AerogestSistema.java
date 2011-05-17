@@ -8,6 +8,7 @@ import Classes.Voo;
 import Classes.CoPiloto;
 import Classes.Comandante;
 import Classes.Aeronave;
+import Classes.Carga;
 import Classes.Porta;
 import Classes.Tripulante;
 import java.io.Serializable;
@@ -29,32 +30,35 @@ import java.util.TreeMap;
 public class AerogestSistema implements Serializable {
 
     private TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos;
-    private HashMap<String, Comandante> comandantes; // TreeMap ?
-    private Set<CoPiloto> coPilotos; // TreeMap ?
-    private Set<Tripulante> tribulantesAdicionais; // TreeMap ?
+    private Map<String, Comandante> comandantes;
+    private Map<String, CoPiloto> coPilotos;
+    private Map<String, Tripulante> tribulantesAdicionais;
     private Map<String, Aeronave> aeronaves;
     private Map<String, Porta> portas;
+    private Map<String, Carga> cargas;
     private Set<String> funcoesValidas;
     private GregorianCalendar dataActual;
 
     public AerogestSistema() {
         mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         comandantes = new HashMap<String, Comandante>();
-        coPilotos = new HashSet<CoPiloto>();
-        tribulantesAdicionais = new HashSet<Tripulante>();
+        coPilotos = new HashMap<String, CoPiloto>();
+        tribulantesAdicionais = new HashMap<String, Tripulante>();
         aeronaves = new TreeMap<String, Aeronave>();
         portas = new TreeMap<String, Porta>();
+        cargas = new HashMap<String, Carga>();
         funcoesValidas = new HashSet<String>();
         dataActual = new GregorianCalendar();
     }
 
     public AerogestSistema(AerogestSistema a) {
         mapaVoos = a.getMapaVoos();
-        comandantes = (HashMap<String, Comandante>) a.getComandantes();
+        comandantes = a.getComandantes();
         coPilotos = a.getCoPilotos();
         tribulantesAdicionais = a.getTripulantesAdicionais();
         aeronaves = a.getAeronave_All();
         portas = a.getPortas();
+        cargas = a.getCargas();
         funcoesValidas = a.getFuncoesValidas();
         dataActual = a.getHoraActual();
     }
@@ -87,14 +91,18 @@ public class AerogestSistema implements Serializable {
      * @return list
      */
     public Map<String, Comandante> getComandantes() {
-        return comandantes;
+        Map<String, Comandante> r = new HashMap<String, Comandante>();
+        for (Comandante c : comandantes.values()) {
+            r.put(c.getCodigo(), c);
+        }
+        return r;
     }
 
     /**
      * Lista com os CoPilots
      * @return list
      */
-    public Set getCoPilotos() {
+    public Map<String, CoPiloto> getCoPilotos() {
         return coPilotos;
     }
 
@@ -102,7 +110,7 @@ public class AerogestSistema implements Serializable {
      * Lista com os tripulantes adicionais
      * @return list
      */
-    public Set getTripulantesAdicionais() {
+    public Map<String, Tripulante> getTripulantesAdicionais() {
         return tribulantesAdicionais;
     }
 
@@ -129,6 +137,18 @@ public class AerogestSistema implements Serializable {
      */
     public Map<String, Porta> getPortas() {
         return portas;
+    }
+
+    /**
+     * Cargas do Sistema
+     * @return Map<String, Carga>
+     */
+    public Map<String, Carga> getCargas() {
+        Map<String, Carga> r = new HashMap<String, Carga>();
+        for(Carga c : cargas.values()){
+            r.put(c.getCodigo(), c.clone());
+        }
+        return r;
     }
 
     /**
@@ -260,7 +280,7 @@ public class AerogestSistema implements Serializable {
      * @param coPiloto 
      */
     public void adicionaCoPiloto(CoPiloto c) {
-        coPilotos.add(c);
+        coPilotos.put(c.getCodigo(), c);
     }
 
     /**
@@ -268,15 +288,7 @@ public class AerogestSistema implements Serializable {
      * @param coPiloto
      */
     public void removeCoPiloto(CoPiloto c) {
-        Iterator itr = coPilotos.iterator();
-        boolean encontrado = false;
-
-        while (itr.hasNext() && !encontrado) {
-            if (itr.next().equals(c)) {
-                encontrado = true;
-                if(encontrado) itr.remove();
-            }
-        }
+        coPilotos.remove(c.getCodigo());
     }
 
     /**
@@ -285,7 +297,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaCoPilotoArray(List<CoPiloto> c) {
         for (CoPiloto x : c) {
-            coPilotos.add(x);
+            coPilotos.put(x.getCodigo(), x);
         }
     }
 
@@ -294,7 +306,7 @@ public class AerogestSistema implements Serializable {
      * @param tripulante
      */
     public void adicionaTripulante(Tripulante t) {
-        tribulantesAdicionais.add(t);
+        tribulantesAdicionais.put(t.getCodigo(), t);
     }
 
     /**
@@ -302,7 +314,7 @@ public class AerogestSistema implements Serializable {
      * @param tripulante
      */
     public void removeTripulante(Tripulante t) {
-        tribulantesAdicionais.remove(t);
+        tribulantesAdicionais.remove(t.getCodigo());
     }
 
     /**
@@ -311,7 +323,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaTripulanteArray(List<Tripulante> t) {
         for (Tripulante x : t) {
-            tribulantesAdicionais.add(x);
+            tribulantesAdicionais.put(x.getCodigo(), x);
         }
     }
 
@@ -363,6 +375,27 @@ public class AerogestSistema implements Serializable {
         portas.putAll(p);
     }
 
+    /**
+     * Adicionar uma carga ao sistema
+     * @param carga
+     */
+    public void adicionaCarga(Carga carga){
+        cargas.put(carga.getCodigo(), carga);
+    }
+    
+    /**
+     * Remover uma carga do sistema
+     * @param carga 
+     */
+    public void removerCarga(Carga carga){
+        cargas.remove(carga.getCodigo());
+    }
+    
+    public void adicionaCargaList(List<Carga> cs){
+        for(Carga c : cs){
+            cargas.put(c.getCodigo(), c.clone());
+        }
+    }
     /**
      * Adicionar uma função ao array de funções
      * @param funcao 

@@ -36,6 +36,7 @@ public class GerarDados {
 
     private static ArrayList<Passageiro> passageiros;
     private static ArrayList<MembroGoverno> membrosGoverno;
+    private static ArrayList<Carga> cargas;
     private static ArrayList<CargaAlimentar> cargaAlimentar;
     private static ArrayList<CargaAnimal> cargaAnimal;
     private static ArrayList<CargaNormal> cargaNormal;
@@ -50,7 +51,6 @@ public class GerarDados {
     private static ArrayList<VooGovernamental> voosGovernamentais;
     private static ArrayList<VooMilitar> voosMilitares;
     private static ArrayList<VooPrivado> voosPrivados;
-    
     private static TreeMap<GregorianCalendar, TreeMap<String, Voo>> mapaVoos_;
     private static ArrayList<Comandante> comandantes_;
     private static ArrayList<CoPiloto> coPilotos_;
@@ -64,6 +64,7 @@ public class GerarDados {
     private static void init() {
         passageiros = new ArrayList<Passageiro>();
         membrosGoverno = new ArrayList<MembroGoverno>();
+        cargas = new ArrayList<Carga>();
         cargaAlimentar = new ArrayList<CargaAlimentar>();
         cargaAnimal = new ArrayList<CargaAnimal>();
         cargaNormal = new ArrayList<CargaNormal>();
@@ -96,6 +97,7 @@ public class GerarDados {
         geraCargaNormal();
         geraCargaQuimica();
         geraCargaVeiculo();
+        geraCargas();
         geraCoPilotos();
         geraComandantes();
         geraPortas();
@@ -260,33 +262,55 @@ public class GerarDados {
         cargaVeiculo.add(new CargaVeiculo("cargaVeiculo10", 19, "veiculo 10", 21, "pesado"));
     }
 
+    private static void geraCargas() {
+        for (CargaAlimentar c : cargaAlimentar) {
+            cargas.add(c);
+        }
+        
+        for(CargaAnimal c : cargaAnimal){
+            cargas.add(c);
+        }
+
+        for(CargaNormal c : cargaNormal){
+            cargas.add(c);
+        }
+        
+        for(CargaQuimica c : cargaQuimica){
+            cargas.add(c);
+        }
+        
+        for(CargaVeiculo c : cargaVeiculo){
+            cargas.add(c);
+        }
+    }
+
     private static void geraComandantes() {
-        comandantes.add(new Comandante("t01","Mike", "Inglesa"));
-        comandantes.add(new Comandante("t02","John", "Inglesa"));
-        comandantes.add(new Comandante("t03","Alexandre", "Portuguesa"));
-        comandantes.add(new Comandante("t04","Fábio", "Portuguesa"));
-        comandantes.add(new Comandante("t05","Miguel", "Portuguesa"));
+        comandantes.add(new Comandante("t01", "Mike", "Inglesa"));
+        comandantes.add(new Comandante("t02", "John", "Inglesa"));
+        comandantes.add(new Comandante("t03", "Alexandre", "Portuguesa"));
+        comandantes.add(new Comandante("t04", "Fábio", "Portuguesa"));
+        comandantes.add(new Comandante("t05", "Miguel", "Portuguesa"));
 
 
-        comandantes_.add(new Comandante("t06","Mike", "Inglesa"));
-        comandantes_.add(new Comandante("t07","John", "Inglesa"));
-        comandantes_.add(new Comandante("t08","Alexandre", "Portuguesa"));
-        comandantes_.add(new Comandante("t09","Fábio", "Portuguesa"));
-        comandantes_.add(new Comandante("t10","Miguel", "Portuguesa"));
+        comandantes_.add(new Comandante("t06", "Mike", "Inglesa"));
+        comandantes_.add(new Comandante("t07", "John", "Inglesa"));
+        comandantes_.add(new Comandante("t08", "Alexandre", "Portuguesa"));
+        comandantes_.add(new Comandante("t09", "Fábio", "Portuguesa"));
+        comandantes_.add(new Comandante("t10", "Miguel", "Portuguesa"));
     }
 
     private static void geraCoPilotos() {
-        coPilotos.add(new CoPiloto("t11","Pedro", "Espanhol"));
-        coPilotos.add(new CoPiloto("t12","Sofia", "portuguesa"));
-        coPilotos.add(new CoPiloto("t13","Joaquim", "Espanhol"));
-        coPilotos.add(new CoPiloto("t14","Sara", "Francesa"));
-        coPilotos.add(new CoPiloto("t15","Abel", "Norte Americano"));
+        coPilotos.add(new CoPiloto("t11", "Pedro", "Espanhol"));
+        coPilotos.add(new CoPiloto("t12", "Sofia", "portuguesa"));
+        coPilotos.add(new CoPiloto("t13", "Joaquim", "Espanhol"));
+        coPilotos.add(new CoPiloto("t14", "Sara", "Francesa"));
+        coPilotos.add(new CoPiloto("t15", "Abel", "Norte Americano"));
 
-        coPilotos_.add(new CoPiloto("t16","Pedro", "Espanhol"));
-        coPilotos_.add(new CoPiloto("t17","Sofia", "portuguesa"));
-        coPilotos_.add(new CoPiloto("t18","Joaquim", "Espanhol"));
-        coPilotos_.add(new CoPiloto("t19","Sara", "Francesa"));
-        coPilotos_.add(new CoPiloto("t20","Abel", "Norte Americano"));
+        coPilotos_.add(new CoPiloto("t16", "Pedro", "Espanhol"));
+        coPilotos_.add(new CoPiloto("t17", "Sofia", "portuguesa"));
+        coPilotos_.add(new CoPiloto("t18", "Joaquim", "Espanhol"));
+        coPilotos_.add(new CoPiloto("t19", "Sara", "Francesa"));
+        coPilotos_.add(new CoPiloto("t20", "Abel", "Norte Americano"));
     }
 
     private static void gereFuncoesValidas() {
@@ -299,11 +323,11 @@ public class GerarDados {
     }
 
     private static void geraTripulantes() {
-        tripulantes.add(new Tripulante("t21",funcoesValidas_.get(0), "Maria", "Portuguesa"));
-        tripulantes.add(new Tripulante("t22",funcoesValidas_.get(1), "Duarte", "Portuguesa"));
-        tripulantes.add(new Tripulante("t23",funcoesValidas_.get(2), "Vitor", "Portuguesa"));
-        tripulantes.add(new Tripulante("t24",funcoesValidas_.get(3), "Mario", "Portuguesa"));
-        tripulantes.add(new Tripulante("t25",funcoesValidas_.get(4), "Antonio", "Portuguesa"));
+        tripulantes.add(new Tripulante("t21", funcoesValidas_.get(0), "Maria", "Portuguesa"));
+        tripulantes.add(new Tripulante("t22", funcoesValidas_.get(1), "Duarte", "Portuguesa"));
+        tripulantes.add(new Tripulante("t23", funcoesValidas_.get(2), "Vitor", "Portuguesa"));
+        tripulantes.add(new Tripulante("t24", funcoesValidas_.get(3), "Mario", "Portuguesa"));
+        tripulantes.add(new Tripulante("t25", funcoesValidas_.get(4), "Antonio", "Portuguesa"));
     }
 
     private static void geraPortas() {
@@ -375,7 +399,7 @@ public class GerarDados {
         voosMilitares.add(new VooMilitar("vMilitar1", "Libia", new GregorianCalendar(), "Forças Armadas", passag, carga, 150, "Exercito", "codComu1"));
     }
 
-    private static void geraVoosPrivados(){
+    private static void geraVoosPrivados() {
         ArrayList<Passageiro> passag = new ArrayList<Passageiro>();
         passag.add(passageiros.get(1));
         passag.add(passageiros.get(3));
@@ -392,17 +416,21 @@ public class GerarDados {
     private static void geraMapaVoos() {
         TreeMap<String, Voo> v = new TreeMap<String, Voo>();
 
-        for (Voo x : voosComererciais)
-            v.put(x.getEntidade()+x.getCodigoVoo(), x);
+        for (Voo x : voosComererciais) {
+            v.put(x.getEntidade() + x.getCodigoVoo(), x);
+        }
 
-        for (Voo x : voosGovernamentais)
-            v.put(x.getEntidade()+x.getCodigoVoo(), x);
+        for (Voo x : voosGovernamentais) {
+            v.put(x.getEntidade() + x.getCodigoVoo(), x);
+        }
 
-        for (Voo x : voosMilitares) 
-            v.put(x.getEntidade()+x.getCodigoVoo(), x);
+        for (Voo x : voosMilitares) {
+            v.put(x.getEntidade() + x.getCodigoVoo(), x);
+        }
 
-        for (Voo x : voosPrivados)
-            v.put(x.getEntidade()+x.getCodigoVoo(), x);
+        for (Voo x : voosPrivados) {
+            v.put(x.getEntidade() + x.getCodigoVoo(), x);
+        }
 
 
         mapaVoos_.put(new GregorianCalendar(), v);
@@ -434,7 +462,9 @@ public class GerarDados {
         aerogestSistema.adicionaPortaMap(portas_);
         aerogestSistema.setHoraActual(dataActual_);
         aerogestSistema.adicionaFuncaoValidaList(funcoesValidas_);
-        
+        aerogestSistema.adicionaCargaList(cargas);
+
+
         // qual destes dois é?? E igual, os elementos de 1 vao tar no outro
         aerogestSistema.adicionaTripulanteArray(tripulantes);
         //aerogestSistema.adicionaTripulanteArray(tribulantesAdicionais_);
