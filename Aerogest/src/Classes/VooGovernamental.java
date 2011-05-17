@@ -142,7 +142,7 @@ public class VooGovernamental extends Voo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("\n\n_Voo Comercial_\n");
+        StringBuilder s = new StringBuilder("\n\n_Voo Governamental_\n");
         s.append("Codigo: ");
         s.append(this.getCodigoVoo());
         s.append("\n");
@@ -184,6 +184,18 @@ public class VooGovernamental extends Voo implements Serializable {
         Tripulacao t = this.getTripulacao();
         if(t != null) s.append(t.toString());
         s.append("\n");
+        
+        for(MembroGoverno m : membrosGoverno){
+            s.append(m.toString());
+        }
+        
+        for(Passageiro pa : jornalistas){
+            s.append(pa.toString());
+        }
+        
+        for(Passageiro pas : convidados){
+            s.append(pas.toString());
+        }
         
         s.append(this.getEstado());
         s.append("\n");

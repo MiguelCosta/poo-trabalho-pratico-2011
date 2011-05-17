@@ -28,12 +28,12 @@ public class VooPrivado extends Voo implements Serializable {
 
     @Override
     public Voo clone() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new VooPrivado(this);
     }
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("\n\n_Voo Comercial_\n");
+        StringBuilder s = new StringBuilder("\n\n_Voo Privado_\n");
         s.append("Codigo: ");
         s.append(this.getCodigoVoo());
         s.append("\n");
