@@ -100,6 +100,10 @@ public class Tripulacao implements Serializable {
     public void setTripulantesAdicionais(ArrayList<Tripulante> tripulantesAdicionais) {
         this.tripulantesAdicionais = tripulantesAdicionais;
     }
+    
+    public void addTripulante(Tripulante t){
+        tripulantesAdicionais.add(t);
+    }
 
     /** Equals | Clone | toString */
     /**
