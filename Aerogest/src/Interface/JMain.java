@@ -68,6 +68,8 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelaCoPilotos();
         actualizarTabelaTrpulantesAdicionais();
         actualizarTabelaCargas();
+        
+        
     }
 
     /*Isto nao está a funcionar! */
@@ -315,6 +317,8 @@ public class JMain extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCargas = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelData = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFicheiro = new javax.swing.JMenu();
         jMenuItemAbrirComo = new javax.swing.JMenuItem();
@@ -356,7 +360,7 @@ public class JMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -586,7 +590,7 @@ public class JMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Cargas", jPanel3);
@@ -599,10 +603,17 @@ public class JMain extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 482, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         jTabbedTripulacoes.addTab("Aeronaves", jPanel4);
+
+        jLabel1.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel1.setFont(new java.awt.Font("Gungsuh", 0, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Outros/logo.png"))); // NOI18N
+        jLabel1.setText("Aerogest");
+
+        jLabelData.setText("Data:");
 
         jMenuFicheiro.setText("Ficheiro");
 
@@ -660,15 +671,24 @@ public class JMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelData))
                 .addContainerGap())
         );
 
@@ -817,7 +837,7 @@ public class JMain extends javax.swing.JFrame {
         String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do tripulante");
         String nome = "" + JOptionPane.showInputDialog("Insira o nome do tripulante:");
         String nacionalidade = "" + JOptionPane.showInputDialog("Insira a nacionalidade do tripulante:");
-        
+
         // verifica se todos os campos foram preenchidos
         if (!funcao.equalsIgnoreCase("") && !nacionalidade.equalsIgnoreCase("") && !nome.equalsIgnoreCase("") && !codigo.equalsIgnoreCase("")) {
             Tripulante t = new Tripulante(codigo, funcao, nome, nacionalidade);
@@ -877,7 +897,7 @@ public class JMain extends javax.swing.JFrame {
         s = s + "       * 54822 Fábio Costa\n";
         s = s + "\n";
         s = s + "WebSite:\n http://code.google.com/p/poo-trabalho-pratico-2011/\n\n";
-        
+
         JOptionPane.showMessageDialog(rootPane, s, "Acerca", 1);
     }//GEN-LAST:event_jMenuItemAcercaActionPerformed
 
@@ -926,6 +946,8 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRemoveCoPiloto;
     private javax.swing.JButton jButtonRemoveComandante;
     private javax.swing.JButton jButtonRemoveTripulante;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelData;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFicheiro;
