@@ -264,20 +264,20 @@ public class GerarDados {
         for (CargaAlimentar c : cargaAlimentar) {
             cargas.add(c);
         }
-        
-        for(CargaAnimal c : cargaAnimal){
+
+        for (CargaAnimal c : cargaAnimal) {
             cargas.add(c);
         }
 
-        for(CargaNormal c : cargaNormal){
+        for (CargaNormal c : cargaNormal) {
             cargas.add(c);
         }
-        
-        for(CargaQuimica c : cargaQuimica){
+
+        for (CargaQuimica c : cargaQuimica) {
             cargas.add(c);
         }
-        
-        for(CargaVeiculo c : cargaVeiculo){
+
+        for (CargaVeiculo c : cargaVeiculo) {
             cargas.add(c);
         }
     }
@@ -337,37 +337,37 @@ public class GerarDados {
         tripulantes.add(new Tripulante("t34", funcoesValidas.get(3), "Ana", "Portuguesa"));
         tripulantes.add(new Tripulante("t35", funcoesValidas.get(4), "Ines", "Portuguesa"));
     }
-    
-    private static void geraTripulacoes(){
+
+    private static void geraTripulacoes() {
         Tripulacao t = new Tripulacao();
-        
+
         t.setComandante(comandantes.get(0));
         comandantes.get(0).setLivre(false);
-        
+
         t.setCoPiloto(coPilotos.get(0));
         coPilotos.get(0).setLivre(false);
-        
+
         t.addTripulante(tripulantes.get(0));
         tripulantes.get(0).setLivre(false);
-        
+
         t.addTripulante(tripulantes.get(1));
         tripulantes.get(1).setLivre(false);
-        
+
         tripulacao.add(t);
-        
+
         t = new Tripulacao();
         t.setComandante(comandantes.get(1));
         comandantes.get(1).setLivre(false);
-        
+
         t.setCoPiloto(coPilotos.get(1));
         coPilotos.get(1).setLivre(false);
-        
+
         t.addTripulante(tripulantes.get(2));
         tripulantes.get(2).setLivre(false);
-        
+
         t.addTripulante(tripulantes.get(3));
         tripulantes.get(3).setLivre(false);
-        
+
         tripulacao.add(t);
     }
 
@@ -403,12 +403,18 @@ public class GerarDados {
         ArrayList<Carga> carga = new ArrayList<Carga>();
         carga.add(cargaAlimentar.get(0));
 
-        voosComererciais.add(new VooComercial("vComercial1", "Paris", new GregorianCalendar(), "TAP", passag, carga));
+        VooComercial v1 = new VooComercial("vc1", "Paris", new GregorianCalendar(), "TAP", passag, carga);
+        v1.setPorta(portas.get(0));
+        v1.setAeronave(aeronaves.get(0));
+        voosComererciais.add(v1);
 
         carga.add(cargaAlimentar.get(1));
         passag.add(passageiros.get(3));
 
-        voosComererciais.add(new VooComercial("vComercial1", "Porto", new GregorianCalendar(), "TAP", passag, carga));
+        VooComercial v2 = new VooComercial("vc2", "Porto", new GregorianCalendar(), "TAP", passag, carga);
+        v2.setPorta(portas.get(1));
+        v2.setAeronave(aeronaves.get(1));
+        voosComererciais.add(v2);
 
     }
 
@@ -426,7 +432,7 @@ public class GerarDados {
         ArrayList<Passageiro> convi = new ArrayList<Passageiro>();
         convi.add(passageiros.get(12));
 
-        voosGovernamentais.add(new VooGovernamental("vGovern", "Londres", new GregorianCalendar(), "TAP", carga, mGov, jorn, convi));
+        voosGovernamentais.add(new VooGovernamental("vg1", "Londres", new GregorianCalendar(), "TAP", carga, mGov, jorn, convi));
     }
 
     private static void geraVoosMilitares() {
@@ -437,7 +443,7 @@ public class GerarDados {
         ArrayList<Carga> carga = new ArrayList<Carga>();
         carga.add(cargaNormal.get(0));
 
-        voosMilitares.add(new VooMilitar("vMilitar1", "Libia", new GregorianCalendar(), "Forças Armadas", passag, carga, 150, "Exercito", "codComu1"));
+        voosMilitares.add(new VooMilitar("vm1", "Libia", new GregorianCalendar(), "FA", passag, carga, 150, "Exercito", "codComu1"));
     }
 
     private static void geraVoosPrivados() {
@@ -451,7 +457,7 @@ public class GerarDados {
         carga.add(cargaNormal.get(0));
         carga.add(cargaNormal.get(1));
         carga.add(cargaVeiculo.get(1));
-        voosPrivados.add(new VooPrivado("vProvado1", "Lisboa", new GregorianCalendar(), "TAP", passag, carga));
+        voosPrivados.add(new VooPrivado("vp1", "Lisboa", new GregorianCalendar(), "TAP", passag, carga));
     }
 
     private static void geraMapaVoos() {
@@ -473,10 +479,6 @@ public class GerarDados {
             v.put(x.getEntidade() + x.getCodigoVoo(), x);
         }
 
-
-        for(Voo voo : v.values()){
-            System.out.println(voo.toString());
-        }
         mapaVoos.put(new GregorianCalendar(), v);
     }
 
@@ -508,10 +510,11 @@ public class GerarDados {
         aerogestSistema.adicionaCargaList(cargas);
         aerogestSistema.adicionaTripulacaoArray(tripulacao);
 
-
         // qual destes dois é?? E igual, os elementos de 1 vao tar no outro
         aerogestSistema.adicionaTripulanteArray(tripulantes);
         //aerogestSistema.adicionaTripulanteArray(tribulantesAdicionais_);
+        
+        aerogestSistema.adicionaMapaVoos(mapaVoos);
     }
 
     public static void main() {

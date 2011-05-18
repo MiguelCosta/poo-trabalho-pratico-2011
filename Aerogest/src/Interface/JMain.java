@@ -10,6 +10,7 @@
  */
 package Interface;
 
+import Classes.Aeronave;
 import Classes.Carga;
 import Classes.CargaAlimentar;
 import Classes.CargaAnimal;
@@ -17,8 +18,8 @@ import Classes.CargaQuimica;
 import Classes.CargaVeiculo;
 import Classes.CoPiloto;
 import Classes.Comandante;
-import Classes.Tripulacao;
 import Classes.Tripulante;
+import Classes.Voo;
 import Importer.SaveLoadDB;
 import aerogest.AerogestSistema;
 import java.awt.Component;
@@ -28,9 +29,8 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.TreeMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -43,10 +43,12 @@ import javax.swing.table.DefaultTableModel;
 public class JMain extends javax.swing.JFrame {
 
     private DefaultTableModel mapa_voos;
+    private DefaultTableModel placard;
     private DefaultTableModel comandantes;
     private DefaultTableModel copilotos;
     private DefaultTableModel tripulantesAdicionais;
     private DefaultTableModel cargas;
+    private DefaultTableModel aeronaves;
     private static AerogestSistema aerogestSistema;
 
     /** Creates new form JMain */
@@ -56,13 +58,14 @@ public class JMain extends javax.swing.JFrame {
         centerOnScreen(this);
         aerogestSistema = new AerogestSistema(a);
         mapa_voos = new DefaultTableModel();
+        placard = new DefaultTableModel();
         comandantes = new DefaultTableModel();
         copilotos = new DefaultTableModel();
         tripulantesAdicionais = new DefaultTableModel();
         cargas = new DefaultTableModel();
+        aeronaves = new DefaultTableModel();
 
         actualizarTabelas();
-        a.getMapaVoos();
     }
 
     private void actualizarTabelas() {
@@ -70,71 +73,127 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelaCoPilotos();
         actualizarTabelaTrpulantesAdicionais();
         actualizarTabelaCargas();
-        
+        actualizarTabelaMapaVoos();
+        actualizarTabelaAeronaves();
+        actualizarTabelaPlacard();
         actualizarData();
     }
 
-    private void actualizarData(){
+    private void actualizarData() {
         GregorianCalendar d = new GregorianCalendar();
         String s = "Data: ";
-        s = s + d.get(Calendar.DAY_OF_MONTH);
-        s = s + "/";
-        s = s + (d.get(Calendar.MONDAY)+1);
-        s = s + "/";
-        s = s + d.get(Calendar.YEAR);
-        
+        s = s + diaEmString(d);
+
         jLabelData.setText(s);
-        
+
+        String s1 = diaEmString(d);
+        String s2 = horaEmString(d);
+        jLabelPlacardHora.setText(s2);
+        jLabelPlacardDia.setText(s1);
+
     }
-    /*Isto nao está a funcionar! */
+
     private void actualizarTabelaMapaVoos() {
-
-        //System.out.println("*******Tabela:\n"+aerogestSistema.getHoraActual().toString());
-        //System.out.println(aerogestSistema.getHoraActual().toString());
-
-        //String s = aerogestSistema.imprimePortas();
-        //System.out.print(s);
-
-        String s = aerogestSistema.imprimeComandantes();
-        System.out.print(s);
-
-        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
-                new String[][]{ //{"v1","braga","14:15:16","pronto"}
-                },
-                new String[]{
-                    "VOO", "DESTINO", "HORA PARTIDA", "ESTADO"
-                }));
+        mapa_voos = new DefaultTableModel();
+        mapa_voos.addColumn("Dia");
+        mapa_voos.addColumn("Tipo Voo");
+        mapa_voos.addColumn("Voo");
+        mapa_voos.addColumn("Destino");
+        mapa_voos.addColumn("Hora Partida");
+        mapa_voos.addColumn("Aeronave");
+        mapa_voos.addColumn("Porta");
+        mapa_voos.addColumn("Estado");
+        mapa_voos.addColumn("Obs");
+        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        r = aerogestSistema.getMapaVoos();
 
 
-        /*
-        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
-        new String[][]{
-        {"Miguel", "Pinto","Costa"},
-        {"Fábio", "Costa",""},
-        {"Sofia", "Vieira",""},
-        {"Pinto", "Costa",""}
-        },
-        new String[]{
-        "Primeiro Nome", "Meio", "Ultimo Nome"
-        }));
-         */
-        /**
-        System.out.println("Nome das Colunas:");
-        for (int i = 0; i < jTablePlacard.getColumnCount(); i++) {
-        System.out.println(jTablePlacard.getColumnName(i));
-        }*/
-        // apenas para testar como funcionam as tabelas
-        // http://download.oracle.com/javase/tutorial/uiswing/components/table.html
-        /*
-        System.out.println("\nValores nas celulas:");
-        int numLinhas = jTablePlacard.getRowCount();
-        int numColunas = jTablePlacard.getColumnCount();
-        for (int i = 0; i < numLinhas; i++) {
-        for (int j = 0; j < numColunas; j++) {
-        System.out.println("Celula("+i+","+j+"): "+jTablePlacard.getValueAt(i, j).toString());
+        for (GregorianCalendar d : r.keySet()) {
+            for (Voo voo : r.get(d).values()) {
+                String dia = diaEmString(d);
+                String nome_classe = voo.getClass().getName();
+                if (nome_classe.equalsIgnoreCase("Classes.VooComercial")) {
+                    mapa_voos.addRow(linhaMapaVoos(dia, voo, "Comercial"));
+                } else if (nome_classe.equalsIgnoreCase("Classes.VooGovernamental")) {
+                    mapa_voos.addRow(linhaMapaVoos(dia, voo, "VooGovernamental"));
+                } else if (nome_classe.equalsIgnoreCase("Classes.VooMilitar")) {
+                    mapa_voos.addRow(linhaMapaVoos(dia, voo, "Militar"));
+                } else if (nome_classe.equalsIgnoreCase("Classes.VooPrivado")) {
+                    mapa_voos.addRow(linhaMapaVoos(dia, voo, "Privado"));
+                }
+
+            }
         }
-        
-        }*/
+
+        jTableMapaVoos.setModel(mapa_voos);
+    }
+
+    /**
+     * Devolve a informacao para adicionar uma linha à tabela de mapa de voos
+     * @param dia
+     * @param voo
+     * @param nome_classe
+     * @return 
+     */
+    private String[] linhaMapaVoos(String dia, Voo voo, String nome_classe) {
+        String ref = voo.getEntidade() + voo.getCodigoVoo();
+        String dst = voo.getDestino();
+        String hPa = horaEmString(voo.getHoraPartida());
+        String aer = "";
+        if (voo.getAeronave() != null) {
+            aer = voo.getAeronave().getMatricula();
+        }
+        String por = "";
+        if (voo.getPorta() != null) {
+            por = voo.getPorta().getCodPorta();
+        }
+        String est = voo.getEstado();
+        String obs = voo.getObservacoes();
+        String[] v = {dia, nome_classe, ref, dst, hPa, aer, por, est, obs};
+
+        return v;
+    }
+
+    private void actualizarTabelaPlacard() {
+        placard = new DefaultTableModel();
+        placard.addColumn("Voo");
+        placard.addColumn("Destino");
+        placard.addColumn("Partida");
+        placard.addColumn("Porta");
+        placard.addColumn("Estado");
+        placard.addColumn("Obs");
+
+        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        r = aerogestSistema.getMapaVoos();
+
+
+        for (GregorianCalendar d : r.keySet()) {
+            for (Voo voo : r.get(d).values()) {
+                String dia = diaEmString(d);
+                String nome_classe = voo.getClass().getName();
+                if (nome_classe.equalsIgnoreCase("Classes.VooComercial")) {
+                    placard.addRow(linhaPlacard(voo));
+                }
+            }
+        }
+
+        jTablePlacard.setModel(placard);
+    }
+
+    private String[] linhaPlacard(Voo voo) {
+        String ref = voo.getEntidade() + voo.getCodigoVoo();
+        String dst = voo.getDestino();
+        String hPa = horaEmString(voo.getHoraPartida());
+
+        String por = "";
+        if (voo.getPorta() != null) {
+            por = voo.getPorta().getCodPorta();
+        }
+        String est = voo.getEstado();
+        String obs = voo.getObservacoes();
+        String[] v = {ref, dst, hPa, por, est, obs};
+
+        return v;
     }
 
     /**
@@ -295,6 +354,28 @@ public class JMain extends javax.swing.JFrame {
 
     }
 
+    private void actualizarTabelaAeronaves() {
+        aeronaves = new DefaultTableModel();
+        aeronaves.addColumn("Matricula");
+        aeronaves.addColumn("Designacao");
+        aeronaves.addColumn("N.º Passageiros");
+        aeronaves.addColumn("Capacidade Carda");
+        aeronaves.addColumn("Velocidade Max.");
+        aeronaves.addColumn("Estado");
+
+        Map<String, Aeronave> ma = new HashMap<String, Aeronave>();
+        ma = aerogestSistema.getAeronave_All();
+
+        for (Aeronave a : ma.values()) {
+            boolean estado = a.getOcupacao();
+            if (estado) {
+                String[] livre = {a.getMatricula(), a.getDesignacao()};
+                aeronaves.addRow(livre);
+            }
+
+        }
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -307,7 +388,7 @@ public class JMain extends javax.swing.JFrame {
         jTabbedTripulacoes = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTablePlacard = new javax.swing.JTable();
+        jTableMapaVoos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanelTripulacaoComandantes = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -331,8 +412,17 @@ public class JMain extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCargas = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableAeronaves = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTablePlacard = new javax.swing.JTable();
+        jLabelPlacard = new javax.swing.JLabel();
+        jLabelPlacardDia = new javax.swing.JLabel();
+        jLabelPlacardHora = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
+        jButtonActualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuFicheiro = new javax.swing.JMenu();
         jMenuItemAbrirComo = new javax.swing.JMenuItem();
@@ -348,7 +438,7 @@ public class JMain extends javax.swing.JFrame {
 
         jTabbedTripulacoes.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMapaVoos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -359,7 +449,7 @@ public class JMain extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTablePlacard);
+        jScrollPane1.setViewportView(jTableMapaVoos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -609,25 +699,113 @@ public class JMain extends javax.swing.JFrame {
 
         jTabbedTripulacoes.addTab("Cargas", jPanel3);
 
+        jTableAeronaves.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableAeronaves.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane7.setViewportView(jTableAeronaves);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 737, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 439, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Aeronaves", jPanel4);
 
+        jTablePlacard.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(jTablePlacard);
+
+        jLabelPlacard.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacard.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelPlacard.setText("Aeroporto de Gualtar");
+
+        jLabelPlacardDia.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacardDia.setText("placard");
+
+        jLabelPlacardHora.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacardHora.setText("placard");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                            .addComponent(jLabelPlacardDia))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabelPlacard)
+                        .addGap(234, 234, 234))))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(629, Short.MAX_VALUE)
+                    .addComponent(jLabelPlacardHora)
+                    .addGap(20, 20, 20)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jLabelPlacard)
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelPlacardDia)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(389, Short.MAX_VALUE)
+                    .addComponent(jLabelPlacardHora)
+                    .addGap(21, 21, 21)))
+        );
+
+        jTabbedTripulacoes.addTab("Placard", jPanel5);
+
         jLabel1.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel1.setFont(new java.awt.Font("Gungsuh", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Gungsuh", 0, 18));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Outros/logo.png"))); // NOI18N
         jLabel1.setText("Aerogest");
 
         jLabelData.setText("Data:");
+
+        jButtonActualizar.setText("ACTUALIZAR");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
 
         jMenuFicheiro.setText("Ficheiro");
 
@@ -687,11 +865,13 @@ public class JMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonActualizar)
+                        .addGap(170, 170, 170)
                         .addComponent(jLabel1)))
                 .addContainerGap())
         );
@@ -701,7 +881,9 @@ public class JMain extends javax.swing.JFrame {
                 .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelData))
                 .addContainerGap())
         );
@@ -915,6 +1097,10 @@ public class JMain extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, s, "Acerca", 1);
     }//GEN-LAST:event_jMenuItemAcercaActionPerformed
 
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        actualizarTabelas();
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
     /**
      * Evento que remove um comandante
      * @param evt 
@@ -934,7 +1120,7 @@ public class JMain extends javax.swing.JFrame {
         });
     }
 
-    public static void centerOnScreen(final Component target) {
+    private static void centerOnScreen(final Component target) {
         if (target != null) {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             Dimension dialogSize = target.getSize();
@@ -950,10 +1136,30 @@ public class JMain extends javax.swing.JFrame {
                     (screenSize.height - dialogSize.height) / 2);
         }
     }
+
+    private static String diaEmString(GregorianCalendar d) {
+        String s = "";
+        s = s + d.get(Calendar.DAY_OF_MONTH);
+        s = s + "/";
+        s = s + (d.get(Calendar.MONDAY) + 1);
+        s = s + "/";
+        s = s + d.get(Calendar.YEAR);
+        return s;
+    }
+
+    private static String horaEmString(GregorianCalendar d) {
+        String s = "";
+        s = s + d.get(Calendar.HOUR_OF_DAY);
+        s = s + "h";
+        s = s + d.get(Calendar.MINUTE);
+        s = s + "min";
+        return s;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAdicionarCoPiloto;
     private javax.swing.JButton jButtonAdicionarComandante;
     private javax.swing.JButton jButtonAdicionarTripulante;
@@ -962,6 +1168,9 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRemoveTripulante;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelData;
+    private javax.swing.JLabel jLabelPlacard;
+    private javax.swing.JLabel jLabelPlacardDia;
+    private javax.swing.JLabel jLabelPlacardHora;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFicheiro;
@@ -974,6 +1183,7 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelTripulacao;
     private javax.swing.JPanel jPanelTripulacaoCoPilotos;
     private javax.swing.JPanel jPanelTripulacaoComandantes;
@@ -982,12 +1192,16 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedTripulacoes;
+    private javax.swing.JTable jTableAeronaves;
     private javax.swing.JTable jTableCargas;
     private javax.swing.JTable jTableCoPilotos;
     private javax.swing.JTable jTableComandantes;
+    private javax.swing.JTable jTableMapaVoos;
     private javax.swing.JTable jTablePlacard;
     private javax.swing.JTable jTableTripulantes;
     // End of variables declaration//GEN-END:variables

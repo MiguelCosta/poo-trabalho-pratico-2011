@@ -143,65 +143,21 @@ public class VooGovernamental extends Voo implements Serializable {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("\n\n_Voo Governamental_\n");
-        s.append("Codigo: ");
-        s.append(this.getCodigoVoo());
-        s.append("\n");
-        s.append("Destino: ");
-        s.append(this.getDestino());
-        s.append("\n");
         
-        s.append("Hora Partida: ");
-        String hora_partida = "";
-        hora_partida = hora_partida + this.getHoraPartida().get(Calendar.HOUR_OF_DAY);
-        hora_partida = hora_partida + ":" + this.getHoraPartida().get(Calendar.MINUTE); 
-        s.append(hora_partida);
-        s.append("\n");
-        
-        s.append("Entidade: ");
-        s.append(this.getEntidade());
-        s.append("\n");
-        
-        s.append("Passageiros: ");
-        for(Passageiro p : this.getPassageiros()){
-            s.append(p.toString());
-        }
-        s.append("\n");
-        
-        s.append("Cargas: ");
-        for(Carga c : this.getCarga()){
-            s.append(c.toString());
-        }
-        s.append("\n");
-        
-        Aeronave a = this.getAeronave();
-        if(a != null) s.append(a.toString());
-        s.append("\n");
-        
-        Porta p = this.getPorta();
-        if(p != null) s.append(p.toString());
-        s.append("\n");
-        
-        Tripulacao t = this.getTripulacao();
-        if(t != null) s.append(t.toString());
-        s.append("\n");
+        s.append(super.toString());
         
         for(MembroGoverno m : membrosGoverno){
-            s.append(m.toString());
+            if(m != null) s.append(m.toString());
         }
         
         for(Passageiro pa : jornalistas){
-            s.append(pa.toString());
+            if(pa != null) s.append(pa.toString());
         }
         
         for(Passageiro pas : convidados){
-            s.append(pas.toString());
+            if(pas != null) s.append(pas.toString());
         }
-        
-        s.append(this.getEstado());
-        s.append("\n");
-        s.append(this.getObservacoes());
-        s.append("\n");
-        
+    
         return s.toString();
     }
 }

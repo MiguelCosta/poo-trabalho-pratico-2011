@@ -18,7 +18,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,10 +74,12 @@ public class AerogestSistema implements Serializable {
     public TreeMap<GregorianCalendar, TreeMap<String, Voo>> getMapaVoos() {
 
         TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
-        System.out.println("aqui");
         for (GregorianCalendar d : mapaVoos.keySet()) {
-            System.out.println(d.toString());
-
+            TreeMap<String, Voo> tmp_v = new TreeMap<String, Voo>();
+            for (Voo voo : mapaVoos.get(d).values()) {
+                tmp_v.put(voo.getEntidade()+voo.getCodigoVoo(), voo);
+            }
+            r.put(d, tmp_v);
         }
 
         return r;
@@ -475,6 +476,20 @@ public class AerogestSistema implements Serializable {
     public void adicionaFuncaoValidaList(List<String> f) {
         for (String s : f) {
             funcoesValidas.add(s);
+        }
+    }
+
+    /**
+     * Adiciona ao sistema o mapa de voos
+     * @param mv 
+     */
+    public void adicionaMapaVoos(TreeMap<GregorianCalendar, TreeMap<String, Voo>> mv) {
+        for (GregorianCalendar d : mv.keySet()) {
+            TreeMap<String, Voo> temp_v = new TreeMap<String, Voo>();
+            for (Voo voo : mv.get(d).values()) {
+                temp_v.put(voo.getEntidade() + voo.getCodigoVoo(), voo);
+            }
+            mapaVoos.put(d, temp_v);
         }
     }
 }

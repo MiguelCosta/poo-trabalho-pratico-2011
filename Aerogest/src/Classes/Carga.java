@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Carga implements Serializable {
+public abstract class Carga implements Serializable {
 
     /** Variaveis de instancia */
     private String codigo;
@@ -150,9 +150,7 @@ public class Carga implements Serializable {
      * @return Carga
      */
     @Override
-    public Carga clone() {
-        return new Carga(this);
-    }
+    public abstract Carga clone();
 
     /**
      * toString

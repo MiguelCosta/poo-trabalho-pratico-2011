@@ -4,12 +4,14 @@
  */
 package Classes;
 
+import java.io.Serializable;
+
 /**
  * Possui todos os métodos necessários para criar e gerir a entidade Passageiro
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Passageiro {
+public class Passageiro implements Serializable {
 
     /** Variaveis de instancia */
     private String codPassageiro;
