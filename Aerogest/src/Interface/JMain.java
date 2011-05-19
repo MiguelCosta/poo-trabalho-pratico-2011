@@ -31,9 +31,14 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,6 +58,9 @@ public class JMain extends javax.swing.JFrame {
 
     /** Creates new form JMain */
     public JMain(AerogestSistema a) {
+
+        alterarTema();      
+        
         initComponents();
 
         centerOnScreen(this);
@@ -68,6 +76,31 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelas();
     }
 
+    private void alterarTema(){
+        /* Temas instalados
+            javax.swing.plaf.metal.MetalLookAndFeel
+            com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+            com.sun.java.swing.plaf.motif.MotifLookAndFeel
+            com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+            com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel
+         * 
+            UIManager.LookAndFeelInfo[] instalados = UIManager.getInstalledLookAndFeels(); 
+            System.out.println(instalados[0].getClassName());
+            System.out.println(instalados[1].getClassName());
+            System.out.println(instalados[2].getClassName());
+            System.out.println(instalados[3].getClassName());
+            System.out.println(instalados[4].getClassName());
+         * 
+         */
+        
+        try {
+           UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível carregar o \"Skin\" padrão. Definindo o padrão original.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }
     private void actualizarTabelas() {
         actualizarTabelaComandantes();
         actualizarTabelaCoPilotos();
@@ -104,7 +137,7 @@ public class JMain extends javax.swing.JFrame {
         mapa_voos.addColumn("Porta");
         mapa_voos.addColumn("Estado");
         mapa_voos.addColumn("Obs");
-		// estrutura para o mapa de voos
+        // estrutura para o mapa de voos
         TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         r = aerogestSistema.getMapaVoos();
 
@@ -467,7 +500,7 @@ public class JMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -637,7 +670,7 @@ public class JMain extends javax.swing.JFrame {
             jPanelTripulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTripulacaoLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelTripulacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRemoveTripulante)
                     .addComponent(jButton5)
@@ -666,8 +699,8 @@ public class JMain extends javax.swing.JFrame {
                     .addComponent(jPanelTripulacaoComandantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelTripulacaoCoPilotos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanelTripulacao, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addComponent(jPanelTripulacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Tripulações", jPanel1);
@@ -697,7 +730,7 @@ public class JMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Cargas", jPanel3);
@@ -717,7 +750,6 @@ public class JMain extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
@@ -725,11 +757,10 @@ public class JMain extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 439, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Aeronaves", jPanel4);
@@ -747,14 +778,14 @@ public class JMain extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(jTablePlacard);
 
-        jLabelPlacard.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacard.setFont(new java.awt.Font("Tahoma", 1, 24));
         jLabelPlacard.setForeground(new java.awt.Color(255, 51, 51));
         jLabelPlacard.setText("Aeroporto de Gualtar");
 
-        jLabelPlacardDia.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacardDia.setFont(new java.awt.Font("Tahoma", 1, 24));
         jLabelPlacardDia.setText("placard");
 
-        jLabelPlacardHora.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelPlacardHora.setFont(new java.awt.Font("Tahoma", 1, 24));
         jLabelPlacardHora.setText("placard");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -765,10 +796,11 @@ public class JMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
-                            .addComponent(jLabelPlacardDia))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
                         .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabelPlacardDia)
+                        .addContainerGap(639, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabelPlacard)
                         .addGap(234, 234, 234))))
@@ -783,13 +815,13 @@ public class JMain extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabelPlacard)
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelPlacardDia)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                    .addContainerGap(389, Short.MAX_VALUE)
+                    .addContainerGap(413, Short.MAX_VALUE)
                     .addComponent(jLabelPlacardHora)
                     .addGap(21, 21, 21)))
         );
@@ -866,13 +898,13 @@ public class JMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                         .addComponent(jButtonActualizar)
                         .addGap(170, 170, 170)
                         .addComponent(jLabel1)))
@@ -880,8 +912,8 @@ public class JMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
