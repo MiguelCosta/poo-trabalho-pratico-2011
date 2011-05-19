@@ -104,9 +104,9 @@ public class JMain extends javax.swing.JFrame {
         mapa_voos.addColumn("Porta");
         mapa_voos.addColumn("Estado");
         mapa_voos.addColumn("Obs");
+		// estrutura para o mapa de voos
         TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         r = aerogestSistema.getMapaVoos();
-
 
         for (GregorianCalendar d : r.keySet()) {
             for (Voo voo : r.get(d).values()) {
@@ -124,7 +124,6 @@ public class JMain extends javax.swing.JFrame {
 
             }
         }
-
         jTableMapaVoos.setModel(mapa_voos);
     }
 
@@ -359,21 +358,25 @@ public class JMain extends javax.swing.JFrame {
         aeronaves.addColumn("Matricula");
         aeronaves.addColumn("Designacao");
         aeronaves.addColumn("N.º Passageiros");
-        aeronaves.addColumn("Capacidade Carda");
+        aeronaves.addColumn("Capacidade Carga");
         aeronaves.addColumn("Velocidade Max.");
         aeronaves.addColumn("Estado");
-
+        // ..
         Map<String, Aeronave> ma = new HashMap<String, Aeronave>();
         ma = aerogestSistema.getAeronave_All();
 
         for (Aeronave a : ma.values()) {
             boolean estado = a.getOcupacao();
             if (estado) {
-                String[] livre = {a.getMatricula(), a.getDesignacao()};
+                String[] livre = {a.getMatricula(), a.getDesignacao(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "livre"};
                 aeronaves.addRow(livre);
+            } else {
+                String[] ocupada = {a.getMatricula(), a.getDesignacao(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "ocupada"};
+                aeronaves.addRow(ocupada);
             }
-
         }
+
+        jTableAeronaves.setModel(aeronaves);
     }
 
     /** This method is called from within the constructor to
