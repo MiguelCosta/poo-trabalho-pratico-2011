@@ -5,6 +5,9 @@
 package Importer;
 
 import Classes.Aeronave;
+import Classes.AeronaveAviao;
+import Classes.AeronaveHelicopetro;
+import Classes.AeronaveJacto;
 import Classes.Carga;
 import Classes.CargaAlimentar;
 import Classes.CargaAnimal;
@@ -385,14 +388,14 @@ public class GerarDados {
     }
 
     private static void geraAeronaves() {
-        aeronaves.add(new Aeronave("00-00-00", "Aviao", 150, 200, 700));
-        aeronaves.add(new Aeronave("01-01-01", "Aviao pequeno", 20, 15, 900));
-        aeronaves.add(new Aeronave("02-02-02", "Jacto", 100, 50, 1300));
-        aeronaves.add(new Aeronave("03-04-05", "Aviao", 150, 200, 700));
-        aeronaves.add(new Aeronave("06-07-08", "Helicopetro", 8, 10, 90));
-        aeronaves.add(new Aeronave("09-10-11", "Aviao", 150, 200, 700));
-        aeronaves.add(new Aeronave("14-13-12", "Aviao", 250, 400, 700));
-        aeronaves.add(new Aeronave("15-19-17", "Aviao", 140, 40, 700));
+        aeronaves.add(new AeronaveAviao("00-00-00", 150, 200, 700));
+        aeronaves.add(new AeronaveAviao("01-01-01", 20, 15, 900));
+        aeronaves.add(new AeronaveJacto("02-02-02", 100, 50, 1300));
+        aeronaves.add(new AeronaveAviao("03-04-05", 150, 200, 700));
+        aeronaves.add(new AeronaveHelicopetro("06-07-08", 8, 10, 90));
+        aeronaves.add(new AeronaveAviao("09-10-11", 150, 200, 700));
+        aeronaves.add(new AeronaveAviao("14-13-12", 250, 400, 700));
+        aeronaves.add(new AeronaveAviao("15-19-17", 140, 40, 700));
     }
 
     private static void geraVoosComerciais() {

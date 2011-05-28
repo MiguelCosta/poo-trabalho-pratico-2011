@@ -11,11 +11,10 @@ import java.io.Serializable;
  * 
  * @author Fábio Costa, Miguel Costa, Sofia Vieira
  */
-public class Aeronave implements Serializable{
+public abstract class Aeronave implements Serializable{
 
     /** Variaveis de instancia */
     private String matricula;
-    private String designacao;
     private int capacidadePassageiros;
     private double capacidadeCarga; //toneladas
     private double velocidadeMaxima;
@@ -26,7 +25,6 @@ public class Aeronave implements Serializable{
      */
     public Aeronave() {
         matricula = "";
-        designacao = "";
         capacidadePassageiros = 0;
         capacidadeCarga = 0;
         velocidadeMaxima = 0;
@@ -41,9 +39,8 @@ public class Aeronave implements Serializable{
      * @param capacidadeCarga
      * @param velocidadeMaxima 
      */
-    public Aeronave(String matricula, String designacao, int capacidadePassageiros, double capacidadeCarga, double velocidadeMaxima) {
+    public Aeronave(String matricula, int capacidadePassageiros, double capacidadeCarga, double velocidadeMaxima) {
         this.matricula = matricula;
-        this.designacao = designacao;
         this.capacidadePassageiros = capacidadePassageiros;
         this.capacidadeCarga = capacidadeCarga;
         this.velocidadeMaxima = velocidadeMaxima;
@@ -56,7 +53,6 @@ public class Aeronave implements Serializable{
      */
     public Aeronave(Aeronave aeronave) {
         matricula = aeronave.getMatricula();
-        designacao = aeronave.getDesignacao();
         capacidadePassageiros = aeronave.getCapacidadePassageiros();
         capacidadeCarga = aeronave.getCapacidadeCarga();
         velocidadeMaxima = aeronave.getVelocidadeMaxima();
@@ -70,14 +66,6 @@ public class Aeronave implements Serializable{
      */
     public String getMatricula() {
         return matricula;
-    }
-
-    /**
-     * Designação da aeronave
-     * @return String
-     */
-    public String getDesignacao() {
-        return designacao;
     }
 
     /**
@@ -119,14 +107,6 @@ public class Aeronave implements Serializable{
      */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
-    }
-
-    /**
-     * Alterar designação da aeronave
-     * @param designacao 
-     */
-    public void setDesignacao(String designacao) {
-        this.designacao = designacao;
     }
 
     /**
@@ -176,7 +156,6 @@ public class Aeronave implements Serializable{
         }
         Aeronave aeronave = (Aeronave) o;
         if (this.matricula.equals(aeronave.getMatricula())
-                && this.designacao.equals(aeronave.getDesignacao())
                 && this.capacidadePassageiros == aeronave.getCapacidadePassageiros()
                 && this.capacidadeCarga == aeronave.getCapacidadeCarga()
                 && this.velocidadeMaxima == aeronave.getVelocidadeMaxima()
@@ -192,9 +171,7 @@ public class Aeronave implements Serializable{
      * @return Aeronave 
      */
     @Override
-    public Aeronave clone() {
-        return new Aeronave(this);
-    }
+    public abstract Aeronave clone();
 
     /**
      * toString
@@ -204,7 +181,6 @@ public class Aeronave implements Serializable{
     public String toString() {
         StringBuilder s = new StringBuilder("AERONAVE:\n");
         s.append("Matricula: ").append(matricula).append("\n");
-        s.append("Designacao: ").append(designacao).append("\n");
         s.append("CapacidadePassageiros: ").append(capacidadePassageiros).append("\n");
         s.append("CapacidadeCarga: ").append(capacidadeCarga).append("\n");
         s.append("VelocidadeMaxima: ").append(velocidadeMaxima).append("\n");

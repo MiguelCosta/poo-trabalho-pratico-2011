@@ -388,8 +388,8 @@ public class JMain extends javax.swing.JFrame {
 
     private void actualizarTabelaAeronaves() {
         aeronaves = new DefaultTableModel();
+        aeronaves.addColumn("Tipo");
         aeronaves.addColumn("Matricula");
-        aeronaves.addColumn("Designacao");
         aeronaves.addColumn("N.º Passageiros");
         aeronaves.addColumn("Capacidade Carga");
         aeronaves.addColumn("Velocidade Max.");
@@ -401,15 +401,27 @@ public class JMain extends javax.swing.JFrame {
         for (Aeronave a : ma.values()) {
             boolean estado = a.getOcupacao();
             if (estado) {
-                String[] livre = {a.getMatricula(), a.getDesignacao(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "livre"};
+                String tipo = tipoDeAeronave(a);
+                String[] livre = {tipo, a.getMatricula(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "livre"};
                 aeronaves.addRow(livre);
             } else {
-                String[] ocupada = {a.getMatricula(), a.getDesignacao(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "ocupada"};
+                String tipo = tipoDeAeronave(a);
+                String[] ocupada = {tipo, a.getMatricula(), "" + a.getCapacidadePassageiros(), "" + a.getCapacidadeCarga(), "" + a.getVelocidadeMaxima(), "ocupada"};
                 aeronaves.addRow(ocupada);
             }
         }
 
         jTableAeronaves.setModel(aeronaves);
+    }
+    
+    private String tipoDeAeronave(Aeronave a){
+        String r = a.getClass().getName();
+        
+        if(r.equalsIgnoreCase("Classes.AeronaveAviao")) r = "Aviao";
+        if(r.equalsIgnoreCase("Classes.AeronaveHelicopetro")) r = "Helicopetro";
+        if(r.equalsIgnoreCase("Classes.AeronaveJacto")) r = "Jacto";
+        
+        return r;
     }
 
     /** This method is called from within the constructor to
