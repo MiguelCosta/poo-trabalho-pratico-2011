@@ -1,5 +1,3 @@
-
-
 package Importer;
 
 import aerogest.AerogestSistema;
@@ -7,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -19,7 +18,7 @@ public class SaveLoadDB {
 
     public static final String DefualtObjectFileName = "aeroguest.obj";
 
-    public static void saveDB(AerogestSistema as, String filename){
+    public static void saveDB(AerogestSistema as, String filename) {
         try {
             FileOutputStream fich = new FileOutputStream(filename);
             ObjectOutputStream ficheiro = new ObjectOutputStream(fich);
@@ -32,7 +31,7 @@ public class SaveLoadDB {
         }
     }
 
-    public static AerogestSistema loadDB(String filename){
+    public static AerogestSistema loadDB(String filename) {
         try {
             FileInputStream fich = new FileInputStream(filename);
             ObjectInputStream ficheiro = new ObjectInputStream(fich);
@@ -42,13 +41,19 @@ public class SaveLoadDB {
             ficheiro.close();
             fich.close();
             return as;
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.out.println("ERRO (load DB): " + ex.getMessage());
             return null;
-        }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ERRO (load DB): " + ex.getMessage());
+            return null;
+        } catch (ClassFormatError ex) {
+            System.out.println("ERRO (load DB): " + ex.getMessage());
+            return null;
+        } 
     }
 
-    public static void showDBInFile(AerogestSistema as, String filename){
+    public static void showDBInFile(AerogestSistema as, String filename) {
         try {
             FileWriter fich = new FileWriter(filename);
             BufferedWriter ficheiro = new BufferedWriter(fich);
@@ -58,5 +63,4 @@ public class SaveLoadDB {
             System.out.println("ERRO (save File DB): " + ex.getMessage());
         }
     }
-
 }
