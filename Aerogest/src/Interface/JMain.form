@@ -870,7 +870,6 @@
                                           <Component id="jButtonEspecificadoAtribuirAeronave" alignment="0" max="32767" attributes="1"/>
                                           <Component id="jButtonEspecificadoAtribuirPorta" alignment="0" max="32767" attributes="1"/>
                                           <Component id="jButtonEspecificadoTransitar" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jButton2" alignment="0" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
@@ -890,9 +889,7 @@
                               <Component id="jButtonEspecificadoAtribuirPorta" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonEspecificadoTransitar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="40" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -925,6 +922,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Atribuir Porta"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEspecificadoAtribuirPortaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButtonEspecificadoTransitar">
                       <Properties>
@@ -933,11 +933,6 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEspecificadoTransitarActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Cancelar"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -959,9 +954,9 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jButtonPreparacao1AtribuirCarga" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jButtonPreparacao1Transitar" alignment="0" max="32767" attributes="1"/>
                                           <Component id="jButtonPreparacao1Cancelar" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButtonPreparacao1AtribuirCarga" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButtonPreparacao1Transitar" alignment="1" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -974,9 +969,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jComboBoxPreparacao1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonPreparacao1Transitar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonPreparacao1AtribuirCarga" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonPreparacao1Transitar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonPreparacao1Cancelar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="69" max="32767" attributes="0"/>
@@ -996,16 +991,25 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Transitar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao1TransitarActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButtonPreparacao1Cancelar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cancelar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao1CancelarActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButtonPreparacao1AtribuirCarga">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="AtribuirCarga"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao1AtribuirCargaActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1023,14 +1027,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jComboBoxPreparacao2" alignment="0" pref="195" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxPreparacao2" alignment="0" pref="205" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jButtonPreparacao2Embarcar" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButton2" alignment="1" max="32767" attributes="1"/>
                                           <Component id="jButtonPreparacao2Transitar" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jButtonPreparacao2Cancelar" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButtonPreparacao2Embarcar" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButtonPreparacaoEmbarcaONE" alignment="0" max="32767" attributes="1"/>
                                       </Group>
+                                      <EmptySpace pref="39" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1042,12 +1048,14 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jComboBoxPreparacao2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonPreparacaoEmbarcaONE" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                               <Component id="jButtonPreparacao2Embarcar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonPreparacao2Transitar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonPreparacao2Cancelar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="69" max="32767" attributes="0"/>
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="42" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1064,16 +1072,33 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Transitar"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButtonPreparacao2Cancelar">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Cancelar"/>
-                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao2TransitarActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButtonPreparacao2Embarcar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Embarcar Passgeiros"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao2EmbarcarActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonPreparacaoEmbarcaONE">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="EmbarcarPassageiro"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacaoEmbarcaONEActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Atrasar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1090,17 +1115,19 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jComboBoxPreparacao2Atrasado" pref="201" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jComboBoxPreparacao2Atrasado" pref="201" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="jButtonPreparacao2Embarcar1" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="80" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1109,8 +1136,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jComboBoxPreparacao2Atrasado" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonPreparacao2Embarcar1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="97" max="32767" attributes="0"/>
+                              <EmptySpace pref="68" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1127,6 +1156,14 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Transitar"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonPreparacao2Embarcar1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Embarcar Passgeiros"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreparacao2Embarcar1ActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1150,7 +1187,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jButtonProntoCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1163,7 +1203,9 @@
                               <Component id="jComboBoxPronto" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="97" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonProntoCancelar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="68" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1180,6 +1222,14 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Transitar"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonProntoCancelar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cancelar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProntoCancelarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

@@ -674,5 +674,7 @@ public class AerogestSistema implements Serializable {
 
     public void adicionaObservacao(String voo, String obs){
         mapaVoos.get(dataActual).get(voo).setObservacoes(obs);
+        System.out.println(mapaVoos.get(dataActual).get(voo).toString());
+        System.out.println(obs);
     }
 }

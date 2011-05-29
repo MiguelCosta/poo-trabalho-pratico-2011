@@ -375,10 +375,10 @@ public class GerarDados {
     }
 
     private static void geraPortas() {
-        portas.add(new Porta("porta1", false));
-        portas.add(new Porta("porta2", false));
-        portas.add(new Porta("porta3", false));
-        portas.add(new Porta("porta4", false));
+        portas.add(new Porta("porta1", true));
+        portas.add(new Porta("porta2", true));
+        portas.add(new Porta("porta3", true));
+        portas.add(new Porta("porta4", true));
         portas.add(new Porta("porta5", false));
         portas.add(new Porta("porta6", false));
         portas.add(new Porta("porta7", false));

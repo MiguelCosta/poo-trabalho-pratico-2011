@@ -384,6 +384,29 @@ public abstract class Voo implements Serializable {
             }
         }
     }
+    
+    
+    /**
+     * Embarcar um passageiro no Voo
+     * @param passageiro
+     */
+    public void embarquePassageiroALL() {
+        for(Passageiro p : passageiros){
+            listaEmbarquePassageiros.add(p.getCodPassageiro());
+        }
+        setVooPronto();
+    }
+
+    /**
+     * Embarcar a carga no Voo
+     * @param c 
+     */
+    public void embarqueCargaALL() {
+        for(Carga c : carga){
+            listaEmbarqueCarga.add(c.getCodigo());
+        }
+        setVooEmPreparacao2();
+    }
 
     /**
      * Retirar um passageiro do Voo

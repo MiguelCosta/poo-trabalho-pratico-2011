@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Tripulacao implements Serializable {
 
     /** Variaveis de instancia */
+    private String codigo;
     private Comandante comandante;
     private CoPiloto coPiloto;
     private ArrayList<Tripulante> tripulantesAdicionais;
@@ -24,6 +25,7 @@ public class Tripulacao implements Serializable {
      * Construtor Tripulacao
      */
     public Tripulacao() {
+        codigo = "";
         comandante = new Comandante();
         coPiloto = new CoPiloto();
         tripulantesAdicionais = new ArrayList<Tripulante>();
@@ -35,7 +37,8 @@ public class Tripulacao implements Serializable {
      * @param coPiloto
      * @param tripulantesAdicionais 
      */
-    public Tripulacao(Comandante comandante, CoPiloto coPiloto, ArrayList<Tripulante> tripulantesAdicionais) {
+    public Tripulacao(String codigo, Comandante comandante, CoPiloto coPiloto, ArrayList<Tripulante> tripulantesAdicionais) {
+        this.codigo = codigo;
         this.comandante = comandante;
         this.coPiloto = coPiloto;
         this.tripulantesAdicionais = tripulantesAdicionais;
@@ -46,6 +49,7 @@ public class Tripulacao implements Serializable {
      * @param tripulacao 
      */
     public Tripulacao(Tripulacao tripulacao) {
+        codigo = tripulacao.getCodigo();
         comandante = tripulacao.getComandante();
         coPiloto = tripulacao.getCoPiloto();
         tripulantesAdicionais = tripulacao.getTripulantesAdicionais();
@@ -56,6 +60,10 @@ public class Tripulacao implements Serializable {
      * Comandante da Tripulação
      * @return 
      */
+    public String getCodigo() {
+        return codigo;
+    }
+
     public Comandante getComandante() {
         return comandante.clone();
     }
@@ -74,13 +82,17 @@ public class Tripulacao implements Serializable {
      */
     public ArrayList<Tripulante> getTripulantesAdicionais() {
         ArrayList<Tripulante> r = new ArrayList<Tripulante>();
-        for(Tripulante t : tripulantesAdicionais){
+        for (Tripulante t : tripulantesAdicionais) {
             r.add(t.clone());
         }
         return r;
     }
 
     /** sets */
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     /**
      * Alterar o Comandante da Tripulação
      * @param comandante 
@@ -105,7 +117,7 @@ public class Tripulacao implements Serializable {
         this.tripulantesAdicionais = tripulantesAdicionais;
     }
     
-    public void addTripulante(Tripulante t){
+    public void addTripulante(Tripulante t) {
         tripulantesAdicionais.add(t);
     }
 
@@ -124,7 +136,8 @@ public class Tripulacao implements Serializable {
             return false;
         }
         Tripulacao tripulacao = (Tripulacao) o;
-        if (this.comandante == tripulacao.getComandante()
+        if (this.codigo.equalsIgnoreCase(tripulacao.getCodigo())
+                && this.comandante == tripulacao.getComandante()
                 && this.coPiloto == tripulacao.getCoPiloto()
                 && this.tripulantesAdicionais.size() == tripulacao.getTripulantesAdicionais().size()) {
             boolean iguais = true;
@@ -162,7 +175,7 @@ public class Tripulacao implements Serializable {
         s.append(coPiloto.toString());
         s.append("\n");
         s.append("TripulantesAdicionais: ");
-        for(Tripulante t : tripulantesAdicionais){
+        for (Tripulante t : tripulantesAdicionais) {
             s.append(t.toString());
         }
         s.append("*******************\n");
