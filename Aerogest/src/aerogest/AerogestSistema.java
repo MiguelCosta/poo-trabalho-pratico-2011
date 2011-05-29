@@ -13,6 +13,7 @@ import Classes.Porta;
 import Classes.Tripulacao;
 import Classes.Tripulante;
 import java.io.Serializable;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -43,13 +44,13 @@ public class AerogestSistema implements Serializable {
 
     public AerogestSistema() {
         mapaVoos = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
-        comandantes = new HashMap<String, Comandante>();
-        coPilotos = new HashMap<String, CoPiloto>();
-        tribulantesAdicionais = new HashMap<String, Tripulante>();
-        tripulacao = new ArrayList<Tripulacao>();
+        comandantes = new HashMap<String, Comandante>();                    // TreeMap??
+        coPilotos = new HashMap<String, CoPiloto>();                        // TreeMap??
+        tribulantesAdicionais = new HashMap<String, Tripulante>();          // TreeMap??
+        tripulacao = new ArrayList<Tripulacao>();                           // e aqui ??
         aeronaves = new TreeMap<String, Aeronave>();
         portas = new TreeMap<String, Porta>();
-        cargas = new HashMap<String, Carga>();
+        cargas = new HashMap<String, Carga>();                              //TreeMap??
         funcoesValidas = new HashSet<String>();
         dataActual = new GregorianCalendar();
     }
@@ -77,7 +78,7 @@ public class AerogestSistema implements Serializable {
         for (GregorianCalendar d : mapaVoos.keySet()) {
             TreeMap<String, Voo> tmp_v = new TreeMap<String, Voo>();
             for (Voo voo : mapaVoos.get(d).values()) {
-                tmp_v.put(voo.getEntidade()+voo.getCodigoVoo(), voo);
+                tmp_v.put(voo.getEntidade()+voo.getCodigoVoo(), voo.clone());
             }
             r.put(d, tmp_v);
         }
@@ -101,7 +102,7 @@ public class AerogestSistema implements Serializable {
     public Map<String, Comandante> getComandantes() {
         Map<String, Comandante> r = new HashMap<String, Comandante>();
         for (Comandante c : comandantes.values()) {
-            r.put(c.getCodigo(), c);
+            r.put(c.getCodigo(), c.clone());
         }
         return r;
     }
@@ -111,7 +112,11 @@ public class AerogestSistema implements Serializable {
      * @return list
      */
     public Map<String, CoPiloto> getCoPilotos() {
-        return coPilotos;
+        Map<String, CoPiloto> r =  new TreeMap<String, CoPiloto>();
+        for(CoPiloto c : coPilotos.values()){
+            r.put(c.getCodigo(), c.clone());
+        }
+        return r;
     }
 
     /**
@@ -119,7 +124,12 @@ public class AerogestSistema implements Serializable {
      * @return list
      */
     public Map<String, Tripulante> getTripulantesAdicionais() {
-        return tribulantesAdicionais;
+        Map<String, Tripulante> r = new TreeMap<String, Tripulante>();
+        for(Tripulante t : tribulantesAdicionais.values()){
+            r.put(t.getCodigo(), t.clone());
+        }
+        
+        return r;
     }
 
     /**
@@ -127,7 +137,11 @@ public class AerogestSistema implements Serializable {
      * @return List<Tripulcao>
      */
     public List<Tripulacao> getTripulacao() {
-        return tripulacao;
+        List<Tripulacao> r = new ArrayList<Tripulacao>();
+        for(Tripulacao t : tripulacao){
+            r.add(t.clone());
+        }
+        return r;
     }
 
     /**
@@ -135,6 +149,10 @@ public class AerogestSistema implements Serializable {
      * @return map
      */
     public Map<String, Aeronave> getAeronave_All() {
+        Map<String, Aeronave> r = new TreeMap<String, Aeronave>();
+        for(Aeronave a : aeronaves.values()){
+            r.put(a.getMatricula(), a.clone());
+        }
         return aeronaves;
     }
 
@@ -144,7 +162,7 @@ public class AerogestSistema implements Serializable {
      * @return aeronave
      */
     public Aeronave getAeronave_One(String matricula) {
-        return aeronaves.get(matricula);
+        return aeronaves.get(matricula).clone();
     }
 
     /**
@@ -152,6 +170,10 @@ public class AerogestSistema implements Serializable {
      * @return map
      */
     public Map<String, Porta> getPortas() {
+        Map<String, Porta> r = new TreeMap<String, Porta>();
+        for(Porta p : portas.values()){
+            r.put(p.getCodPorta(), p.clone());
+        }
         return portas;
     }
 
@@ -181,7 +203,6 @@ public class AerogestSistema implements Serializable {
      */
     public Set<String> getFuncoesValidas() {
         Set<String> r = new HashSet<String>();
-
         for (String f : funcoesValidas) {
             r.add(f);
         }
@@ -270,12 +291,12 @@ public class AerogestSistema implements Serializable {
 
         if (mapaVoos.get(v.getHoraPartida()) == null) {
             TreeMap<String, Voo> x = new TreeMap<String, Voo>();
-            x.put(v.getEntidade() + v.getCodigoVoo(), v);
+            x.put(v.getEntidade() + v.getCodigoVoo(), v.clone());
 
             mapaVoos.put(v.getHoraPartida(), x);
         } else {
             TreeMap<String, Voo> x = mapaVoos.get(v.getHoraPartida());
-            x.put(v.getEntidade() + v.getCodigoVoo(), v);
+            x.put(v.getEntidade() + v.getCodigoVoo(), v.clone());
         }
     }
 
@@ -284,7 +305,7 @@ public class AerogestSistema implements Serializable {
      * @param comandante 
      */
     public void adicionaComandante(Comandante c) {
-        comandantes.put(c.getCodigo(), c);
+        comandantes.put(c.getCodigo(), c.clone());
     }
 
     /**
@@ -301,7 +322,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaComandateArray(List<Comandante> c) {
         for (Comandante x : c) {
-            comandantes.put(x.getCodigo(), x);
+            comandantes.put(x.getCodigo(), x.clone());
         }
     }
 
@@ -310,7 +331,7 @@ public class AerogestSistema implements Serializable {
      * @param coPiloto 
      */
     public void adicionaCoPiloto(CoPiloto c) {
-        coPilotos.put(c.getCodigo(), c);
+        coPilotos.put(c.getCodigo(), c.clone());
     }
 
     /**
@@ -327,7 +348,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaCoPilotoArray(List<CoPiloto> c) {
         for (CoPiloto x : c) {
-            coPilotos.put(x.getCodigo(), x);
+            coPilotos.put(x.getCodigo(), x.clone());
         }
     }
 
@@ -336,7 +357,7 @@ public class AerogestSistema implements Serializable {
      * @param tripulante
      */
     public void adicionaTripulante(Tripulante t) {
-        tribulantesAdicionais.put(t.getCodigo(), t);
+        tribulantesAdicionais.put(t.getCodigo(), t.clone());
     }
 
     /**
@@ -353,7 +374,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaTripulanteArray(List<Tripulante> t) {
         for (Tripulante x : t) {
-            tribulantesAdicionais.put(x.getCodigo(), x);
+            tribulantesAdicionais.put(x.getCodigo(), x.clone());
         }
     }
 
@@ -362,7 +383,7 @@ public class AerogestSistema implements Serializable {
      * @param t 
      */
     public void adicionaTripulacao(Tripulacao t) {
-        tripulacao.add(t);
+        tripulacao.add(t.clone());
     }
 
     /**
@@ -379,7 +400,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaTripulacaoArray(List<Tripulacao> t) {
         for (Tripulacao x : t) {
-            tripulacao.add(x);
+            tripulacao.add(x.clone());
         }
     }
 
@@ -388,7 +409,7 @@ public class AerogestSistema implements Serializable {
      * @param aeronave
      */
     public void adicionaAeronave(Aeronave a) {
-        aeronaves.put(a.getMatricula(), a);
+        aeronaves.put(a.getMatricula(), a.clone());
     }
 
     /**
@@ -412,7 +433,7 @@ public class AerogestSistema implements Serializable {
      * @param porta
      */
     public void adicionaPorta(Porta p) {
-        portas.put(p.getCodPorta(), p);
+        portas.put(p.getCodPorta(), p.clone());
     }
 
     /**
@@ -436,7 +457,7 @@ public class AerogestSistema implements Serializable {
      * @param carga
      */
     public void adicionaCarga(Carga carga) {
-        cargas.put(carga.getCodigo(), carga);
+        cargas.put(carga.getCodigo(), carga.clone());
     }
 
     /**
@@ -487,7 +508,7 @@ public class AerogestSistema implements Serializable {
         for (GregorianCalendar d : mv.keySet()) {
             TreeMap<String, Voo> temp_v = new TreeMap<String, Voo>();
             for (Voo voo : mv.get(d).values()) {
-                temp_v.put(voo.getEntidade() + voo.getCodigoVoo(), voo);
+                temp_v.put(voo.getEntidade() + voo.getCodigoVoo(), voo.clone());
             }
             mapaVoos.put(d, temp_v);
         }

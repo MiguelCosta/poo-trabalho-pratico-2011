@@ -15,9 +15,9 @@ import java.util.GregorianCalendar;
  */
 public class VooGovernamental extends Voo implements Serializable {
 
-    private ArrayList<MembroGoverno> membrosGoverno;
-    private ArrayList<Passageiro> jornalistas;
-    private ArrayList<Passageiro> convidados;
+    private ArrayList<MembroGoverno> membrosGoverno = new ArrayList<MembroGoverno>();
+    private ArrayList<Passageiro> jornalistas = new ArrayList<Passageiro>();
+    private ArrayList<Passageiro> convidados = new ArrayList<Passageiro>();
 
     /**
      * Construtor Voo Governamental
@@ -54,7 +54,9 @@ public class VooGovernamental extends Voo implements Serializable {
      */
     public VooGovernamental(VooGovernamental vg) {
         super(vg);
-
+        membrosGoverno = getMembrosGoverno();
+        jornalistas = getJornalistas();
+        convidados = getConvidados();
     }
 
     /**
@@ -62,7 +64,11 @@ public class VooGovernamental extends Voo implements Serializable {
      * @return ArrayList<MembroGoverno>
      */
     public ArrayList<MembroGoverno> getMembrosGoverno() {
-        return membrosGoverno;
+        ArrayList<MembroGoverno> r = new ArrayList<MembroGoverno>();
+        for(MembroGoverno m : membrosGoverno){
+            r.add(m.clone());
+        }
+        return r;
     }
 
     /**
@@ -70,7 +76,11 @@ public class VooGovernamental extends Voo implements Serializable {
      * @return ArrayList<Passageiro>
      */
     public ArrayList<Passageiro> getJornalistas() {
-        return jornalistas;
+        ArrayList<Passageiro> r = new ArrayList<Passageiro>();
+        for(Passageiro p : jornalistas){
+            r.add(p.clone());
+        }
+        return r;
     }
 
     /**
@@ -78,7 +88,11 @@ public class VooGovernamental extends Voo implements Serializable {
      * @return <Passageiro>
      */
     public ArrayList<Passageiro> getConvidados() {
-        return convidados;
+        ArrayList<Passageiro> r = new ArrayList<Passageiro>();
+        for(Passageiro p : convidados){
+            r.add(p.clone());
+        }
+        return r;
     }
 
     /**

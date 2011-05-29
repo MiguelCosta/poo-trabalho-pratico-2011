@@ -111,15 +111,23 @@ public abstract class Voo implements Serializable {
      * @return ArrayList<Passageiro>
      */
     public ArrayList<Passageiro> getPassageiros() {
-        return passageiros;
+        ArrayList<Passageiro> r = new ArrayList<Passageiro>();
+        for (Passageiro p : passageiros) {
+            r.add(p.clone());
+        }
+        return r;
     }
 
     /**
-     * Carga do Voo
+     * Carga do Voo 
      * @return ArrayList<Carga>
      */
     public ArrayList<Carga> getCarga() {
-        return carga;
+        ArrayList<Carga> r = new ArrayList<Carga>();
+        for (Carga c : carga) {
+            r.add(c.clone());
+        }
+        return r;
     }
 
     /**
@@ -127,7 +135,13 @@ public abstract class Voo implements Serializable {
      * @return Aeronave
      */
     public Aeronave getAeronave() {
-        return aeronave;
+        Aeronave a;
+        try {
+            a = aeronave.clone();
+        } catch(NullPointerException e) {
+            a = null;
+        }
+        return a;
     }
 
     /**
@@ -135,7 +149,13 @@ public abstract class Voo implements Serializable {
      * @return Porta
      */
     public Porta getPorta() {
-        return porta;
+        Porta p;
+        try {
+            p = porta.clone();
+        } catch(NullPointerException e) {
+            p = null;
+        }
+        return p;
     }
 
     /**
@@ -143,7 +163,7 @@ public abstract class Voo implements Serializable {
      * @return Tripulação
      */
     public Tripulacao getTripulacao() {
-        return tripulacao;
+        return tripulacao.clone();
     }
 
     /**

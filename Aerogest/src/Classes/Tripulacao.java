@@ -57,7 +57,7 @@ public class Tripulacao implements Serializable {
      * @return 
      */
     public Comandante getComandante() {
-        return comandante;
+        return comandante.clone();
     }
 
     /**
@@ -65,7 +65,7 @@ public class Tripulacao implements Serializable {
      * @return 
      */
     public CoPiloto getCoPiloto() {
-        return coPiloto;
+        return coPiloto.clone();
     }
 
     /**
@@ -73,7 +73,11 @@ public class Tripulacao implements Serializable {
      * @return 
      */
     public ArrayList<Tripulante> getTripulantesAdicionais() {
-        return tripulantesAdicionais;
+        ArrayList<Tripulante> r = new ArrayList<Tripulante>();
+        for(Tripulante t : tripulantesAdicionais){
+            r.add(t.clone());
+        }
+        return r;
     }
 
     /** sets */
