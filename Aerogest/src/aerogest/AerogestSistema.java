@@ -620,6 +620,15 @@ public class AerogestSistema implements Serializable {
     public void atribui_aeronave_voo(String codAeronave, String voo ){
         Aeronave a = aeronaves.get(codAeronave);
 
+        alteraEstadoAeronave(codAeronave);
         mapaVoos.get(dataActual).get(voo).setAeronave(a);
+    }
+
+    public void atribui_porta(String codPorta, String voo){
+        Porta p = portas.get(codPorta);
+
+        portas.get(codPorta).setLivre(false);
+
+        mapaVoos.get(dataActual).get(voo).setPorta(p);
     }
 }
