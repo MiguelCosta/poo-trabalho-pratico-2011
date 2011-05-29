@@ -659,12 +659,20 @@ public class AerogestSistema implements Serializable {
     }
 
     public List<Carga> cargasLivres(){
-        List<Carga> cs = new ArrayList<Carga>();
-
-        for (Carga c : cargas.values())
-            cs.add(c);
-
-        return cs;
+        return new ArrayList<Carga>(cargas.values());
     }
 
+    public void transitaAutomatico(){
+        for( Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
+            (new GregorianCalendar()).after(v.getHoraPartida()))
+                v.setEstado(Voo.VooPronto);
+
+    }
+
+    
+
+    public void adicionaObservacao(String voo, String obs){
+        mapaVoos.get(dataActual).get(voo).setObservacoes(obs);
+    }
 }
