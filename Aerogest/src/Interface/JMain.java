@@ -25,14 +25,18 @@ import aerogest.AerogestSistema;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ItemListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
@@ -46,7 +50,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Miguel
  */
 public class JMain extends javax.swing.JFrame {
-
+    
     private DefaultTableModel mapa_voos;
     private DefaultTableModel placard;
     private DefaultTableModel comandantes;
@@ -58,11 +62,11 @@ public class JMain extends javax.swing.JFrame {
 
     /** Creates new form JMain */
     public JMain(AerogestSistema a) {
-
-        alterarTema();      
+        
+        alterarTema();
         
         initComponents();
-
+        
         centerOnScreen(this);
         aerogestSistema = new AerogestSistema(a);
         mapa_voos = new DefaultTableModel();
@@ -72,35 +76,35 @@ public class JMain extends javax.swing.JFrame {
         tripulantesAdicionais = new DefaultTableModel();
         cargas = new DefaultTableModel();
         aeronaves = new DefaultTableModel();
-
         actualizarTabelas();
     }
-
-    private void alterarTema(){
+    
+    private void alterarTema() {
         /* Temas instalados
-            javax.swing.plaf.metal.MetalLookAndFeel
-            com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
-            com.sun.java.swing.plaf.motif.MotifLookAndFeel
-            com.sun.java.swing.plaf.windows.WindowsLookAndFeel
-            com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel
+        javax.swing.plaf.metal.MetalLookAndFeel
+        com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+        com.sun.java.swing.plaf.motif.MotifLookAndFeel
+        com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+        com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel
          * 
-            UIManager.LookAndFeelInfo[] instalados = UIManager.getInstalledLookAndFeels(); 
-            System.out.println(instalados[0].getClassName());
-            System.out.println(instalados[1].getClassName());
-            System.out.println(instalados[2].getClassName());
-            System.out.println(instalados[3].getClassName());
-            System.out.println(instalados[4].getClassName());
+        UIManager.LookAndFeelInfo[] instalados = UIManager.getInstalledLookAndFeels(); 
+        System.out.println(instalados[0].getClassName());
+        System.out.println(instalados[1].getClassName());
+        System.out.println(instalados[2].getClassName());
+        System.out.println(instalados[3].getClassName());
+        System.out.println(instalados[4].getClassName());
          * 
          */
         
         try {
-           UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Não foi possível carregar o \"Skin\" padrão. Definindo o padrão original.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         
         
     }
+    
     private void actualizarTabelas() {
         actualizarTabelaComandantes();
         actualizarTabelaCoPilotos();
@@ -110,22 +114,23 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelaAeronaves();
         actualizarTabelaPlacard();
         actualizarData();
+        actualizarComboBoxs();
     }
-
+    
     private void actualizarData() {
         GregorianCalendar d = new GregorianCalendar();
         String s = "Data: ";
         s = s + diaEmString(d);
-
+        
         jLabelData.setText(s);
-
+        
         String s1 = diaEmString(d);
         String s2 = horaEmString(d);
         jLabelPlacardHora.setText(s2);
         jLabelPlacardDia.setText(s1);
-
+        
     }
-
+    
     private void actualizarTabelaMapaVoos() {
         mapa_voos = new DefaultTableModel();
         mapa_voos.addColumn("Dia");
@@ -140,7 +145,7 @@ public class JMain extends javax.swing.JFrame {
         // estrutura para o mapa de voos
         TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         r = aerogestSistema.getMapaVoos();
-
+        
         for (GregorianCalendar d : r.keySet()) {
             for (Voo voo : r.get(d).values()) {
                 String dia = diaEmString(d);
@@ -154,7 +159,7 @@ public class JMain extends javax.swing.JFrame {
                 } else if (nome_classe.equalsIgnoreCase("Classes.VooPrivado")) {
                     mapa_voos.addRow(linhaMapaVoos(dia, voo, "Privado"));
                 }
-
+                
             }
         }
         jTableMapaVoos.setModel(mapa_voos);
@@ -182,10 +187,10 @@ public class JMain extends javax.swing.JFrame {
         String est = voo.getEstado();
         String obs = voo.getObservacoes();
         String[] v = {dia, nome_classe, ref, dst, hPa, aer, por, est, obs};
-
+        
         return v;
     }
-
+    
     private void actualizarTabelaPlacard() {
         placard = new DefaultTableModel();
         placard.addColumn("Voo");
@@ -194,11 +199,11 @@ public class JMain extends javax.swing.JFrame {
         placard.addColumn("Porta");
         placard.addColumn("Estado");
         placard.addColumn("Obs");
-
+        
         TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
         r = aerogestSistema.getMapaVoos();
-
-
+        
+        
         for (GregorianCalendar d : r.keySet()) {
             for (Voo voo : r.get(d).values()) {
                 String dia = diaEmString(d);
@@ -208,15 +213,15 @@ public class JMain extends javax.swing.JFrame {
                 }
             }
         }
-
+        
         jTablePlacard.setModel(placard);
     }
-
+    
     private String[] linhaPlacard(Voo voo) {
         String ref = voo.getEntidade() + voo.getCodigoVoo();
         String dst = voo.getDestino();
         String hPa = horaEmString(voo.getHoraPartida());
-
+        
         String por = "";
         if (voo.getPorta() != null) {
             por = voo.getPorta().getCodPorta();
@@ -224,7 +229,7 @@ public class JMain extends javax.swing.JFrame {
         String est = voo.getEstado();
         String obs = voo.getObservacoes();
         String[] v = {ref, dst, hPa, por, est, obs};
-
+        
         return v;
     }
 
@@ -237,13 +242,13 @@ public class JMain extends javax.swing.JFrame {
         comandantes.addColumn("Nome");
         comandantes.addColumn("Nacionalidade");
         comandantes.addColumn("Estado");
-
+        
         Map<String, Comandante> cms = new HashMap<String, Comandante>();
         cms = aerogestSistema.getComandantes();
-
+        
         for (Comandante c : cms.values()) {
             boolean estado = c.getLivre();
-
+            
             if (estado) {
                 String[] livre = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "livre"};
                 comandantes.addRow(livre);
@@ -252,7 +257,7 @@ public class JMain extends javax.swing.JFrame {
                 comandantes.addRow(ocupado);
             }
         }
-
+        
         jTableComandantes.setModel(comandantes);
     }
 
@@ -265,13 +270,13 @@ public class JMain extends javax.swing.JFrame {
         copilotos.addColumn("Nome");
         copilotos.addColumn("Nacionalidade");
         copilotos.addColumn("Estado");
-
+        
         Map<String, CoPiloto> cps = new HashMap<String, CoPiloto>();
         cps = aerogestSistema.getCoPilotos();
-
+        
         for (CoPiloto c : cps.values()) {
             boolean estado = c.getLivre();
-
+            
             if (estado) {
                 String[] livre = {c.getCodigo(), c.getNome(), c.getNacionalidade(), "livre"};
                 copilotos.addRow(livre);
@@ -280,10 +285,10 @@ public class JMain extends javax.swing.JFrame {
                 copilotos.addRow(ocupado);
             }
         }
-
+        
         jTableCoPilotos.setModel(copilotos);
     }
-
+    
     private void actualizarTabelaTrpulantesAdicionais() {
         tripulantesAdicionais = new DefaultTableModel();
         tripulantesAdicionais.addColumn("Funcao");
@@ -291,13 +296,13 @@ public class JMain extends javax.swing.JFrame {
         tripulantesAdicionais.addColumn("Nome");
         tripulantesAdicionais.addColumn("Nacionalidade");
         tripulantesAdicionais.addColumn("Estado");
-
+        
         Map<String, Tripulante> tri = new HashMap<String, Tripulante>();
         tri = aerogestSistema.getTripulantesAdicionais();
-
+        
         for (Tripulante t : tri.values()) {
             boolean estado = t.getLivre();
-
+            
             if (estado) {
                 String[] livre = {t.getFuncao(), t.getCodigo(), t.getNome(), t.getNacionalidade(), "livre"};
                 tripulantesAdicionais.addRow(livre);
@@ -306,10 +311,10 @@ public class JMain extends javax.swing.JFrame {
                 tripulantesAdicionais.addRow(ocupado);
             }
         }
-
+        
         jTableTripulantes.setModel(tripulantesAdicionais);
     }
-
+    
     private void actualizarTabelaCargas() {
         cargas = new DefaultTableModel();
         cargas.addColumn("Tipo");
@@ -322,15 +327,15 @@ public class JMain extends javax.swing.JFrame {
         cargas.addColumn("Estado");
         cargas.addColumn("Toxidade");
         cargas.addColumn("Tipo Veiculo");
-
+        
         jTableCargas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
+        
         Map<String, Carga> cs = new HashMap<String, Carga>();
         cs = aerogestSistema.getCargas();
-
+        
         for (Carga c : cs.values()) {
             String s = c.getClass().getName();
-
+            
             if (s.equalsIgnoreCase("Classes.CargaAlimentar")) {
                 CargaAlimentar ca = (CargaAlimentar) c;
                 String dia = "" + ca.getdataValidade().get(Calendar.DAY_OF_MONTH);
@@ -379,13 +384,13 @@ public class JMain extends javax.swing.JFrame {
                 String[] info = {"Veiculo", codigo, peso, descricao, tmp_carr, "", "", "", "", tipo};
                 cargas.addRow(info);
             }
-
+            
         }
-
+        
         jTableCargas.setModel(cargas);
-
+        
     }
-
+    
     private void actualizarTabelaAeronaves() {
         aeronaves = new DefaultTableModel();
         aeronaves.addColumn("Tipo");
@@ -397,7 +402,7 @@ public class JMain extends javax.swing.JFrame {
         // ..
         Map<String, Aeronave> ma = new HashMap<String, Aeronave>();
         ma = aerogestSistema.getAeronave_All();
-
+        
         for (Aeronave a : ma.values()) {
             boolean estado = a.getOcupacao();
             if (estado) {
@@ -410,18 +415,41 @@ public class JMain extends javax.swing.JFrame {
                 aeronaves.addRow(ocupada);
             }
         }
-
+        
         jTableAeronaves.setModel(aeronaves);
     }
     
-    private String tipoDeAeronave(Aeronave a){
+    private String tipoDeAeronave(Aeronave a) {
         String r = a.getClass().getName();
         
-        if(r.equalsIgnoreCase("Classes.AeronaveAviao")) r = "Aviao";
-        if(r.equalsIgnoreCase("Classes.AeronaveHelicopetro")) r = "Helicopetro";
-        if(r.equalsIgnoreCase("Classes.AeronaveJacto")) r = "Jacto";
+        if (r.equalsIgnoreCase("Classes.AeronaveAviao")) {
+            r = "Aviao";
+        }
+        if (r.equalsIgnoreCase("Classes.AeronaveHelicopetro")) {
+            r = "Helicopetro";
+        }
+        if (r.equalsIgnoreCase("Classes.AeronaveJacto")) {
+            r = "Jacto";
+        }
         
         return r;
+    }
+    
+    private void actualizarComboBoxs() {
+        
+        TreeMap<GregorianCalendar, TreeMap<String, Voo>> r = new TreeMap<GregorianCalendar, TreeMap<String, Voo>>();
+        r = aerogestSistema.getMapaVoos();
+        for (GregorianCalendar d : r.keySet()) {
+            for (Voo voo : r.get(d).values()) {
+                String estado = voo.getEstado();
+                if (estado.equalsIgnoreCase("Voo Especidicado")) {
+                    jComboBoxEspecificados.addItem(voo.getEntidade()+voo.getCodigoVoo());
+                } else if (estado.equalsIgnoreCase("Voo Em Preparação 1")) {
+                    jComboBoxEspecificados.addItem(voo.getEntidade()+voo.getCodigoVoo());
+                }
+            }
+        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -468,6 +496,17 @@ public class JMain extends javax.swing.JFrame {
         jLabelPlacard = new javax.swing.JLabel();
         jLabelPlacardDia = new javax.swing.JLabel();
         jLabelPlacardHora = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jComboBoxEspecificados = new javax.swing.JComboBox();
+        jButtonEspecificadoAtribuirAeronave = new javax.swing.JButton();
+        jButtonEspecificadoAtribuirTripulacao = new javax.swing.JButton();
+        jButtonEspecificadoAtribuirPorta = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jComboBoxPreparacao1 = new javax.swing.JComboBox();
+        jPanel10 = new javax.swing.JPanel();
+        jComboBoxPreparacao2 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
         jButtonActualizar = new javax.swing.JButton();
@@ -513,8 +552,8 @@ public class JMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedTripulacoes.addTab("Mapa de Voos", jPanel2);
@@ -841,6 +880,132 @@ public class JMain extends javax.swing.JFrame {
 
         jTabbedTripulacoes.addTab("Placard", jPanel5);
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Transicoes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Voos Especificados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jButtonEspecificadoAtribuirAeronave.setText("Atribuir Aeronave");
+        jButtonEspecificadoAtribuirAeronave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEspecificadoAtribuirAeronaveActionPerformed(evt);
+            }
+        });
+
+        jButtonEspecificadoAtribuirTripulacao.setText("Atribuir Tripulacao");
+        jButtonEspecificadoAtribuirTripulacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEspecificadoAtribuirTripulacaoActionPerformed(evt);
+            }
+        });
+
+        jButtonEspecificadoAtribuirPorta.setText("Atribuir Porta");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jComboBoxEspecificados, 0, 201, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonEspecificadoAtribuirTripulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEspecificadoAtribuirAeronave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEspecificadoAtribuirPorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(51, 51, 51))))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jComboBoxEspecificados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEspecificadoAtribuirAeronave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEspecificadoAtribuirTripulacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEspecificadoAtribuirPorta)
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Em Preparacao 1", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jComboBoxPreparacao1, 0, 204, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jComboBoxPreparacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Em Preparacao 2", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jComboBoxPreparacao2, 0, 197, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jComboBoxPreparacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedTripulacoes.addTab("Controlo dos Voos", jPanel6);
+
         jLabel1.setBackground(new java.awt.Color(255, 51, 51));
         jLabel1.setFont(new java.awt.Font("Gungsuh", 0, 18));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Outros/logo.png"))); // NOI18N
@@ -920,16 +1085,16 @@ public class JMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                         .addComponent(jButtonActualizar)
                         .addGap(170, 170, 170)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(jTabbedTripulacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -981,7 +1146,7 @@ public class JMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonRemoveComandanteActionPerformed
-
+    
     private void jButtonRemoveCoPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveCoPilotoActionPerformed
         // linha que está seleccionada
         int linha = jTableCoPilotos.getSelectedRow();
@@ -1014,19 +1179,19 @@ public class JMain extends javax.swing.JFrame {
             }
         }
 }//GEN-LAST:event_jButtonRemoveCoPilotoActionPerformed
-
+    
     private void jMenuItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarComoActionPerformed
         JFileChooser fc = new JFileChooser();
-
+        
         int returnVal = fc.showSaveDialog(this);
-
+        
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             String nome = fc.getSelectedFile().getAbsolutePath();
             SaveLoadDB.saveDB(aerogestSistema, nome);
         }
-
+        
     }//GEN-LAST:event_jMenuItemGuardarComoActionPerformed
-
+    
     private void jMenuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarActionPerformed
         int op = JOptionPane.showConfirmDialog(rootPane, "Pertende guardar a informacao?");
         if (op == 0) {
@@ -1034,7 +1199,7 @@ public class JMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Guardado com sucesso", "", 1);
         }
     }//GEN-LAST:event_jMenuItemGuardarActionPerformed
-
+    
     private void jMenuItemAbrirComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirComoActionPerformed
         JFileChooser fc = new JFileChooser();
 
@@ -1047,9 +1212,9 @@ public class JMain extends javax.swing.JFrame {
             actualizarTabelas();
         }
     }//GEN-LAST:event_jMenuItemAbrirComoActionPerformed
-
+    
     private void jButtonAdicionarComandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarComandanteActionPerformed
-
+        
         String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do comandante:");
         String nome = "" + JOptionPane.showInputDialog("Insira o nome do comandante:");
         String nacionalidade = "" + JOptionPane.showInputDialog("Insira a nacionalidade do comandante:");
@@ -1064,10 +1229,10 @@ public class JMain extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Comandante não adicionado");
         }
-
+        
         actualizarTabelas();
     }//GEN-LAST:event_jButtonAdicionarComandanteActionPerformed
-
+    
     private void jButtonAdicionarCoPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarCoPilotoActionPerformed
         String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do CoPiloto:");
         String nome = "" + JOptionPane.showInputDialog("Insira o nome do CoPiloto:");
@@ -1081,10 +1246,10 @@ public class JMain extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "CoPiloto não adicionado");
         }
-
+        
         actualizarTabelas();
     }//GEN-LAST:event_jButtonAdicionarCoPilotoActionPerformed
-
+    
     private void jButtonAdicionarTripulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarTripulanteActionPerformed
         String funcao = "" + JOptionPane.showInputDialog("Insira a função do tripulante:");
         String codigo = "" + JOptionPane.showInputDialog("Insira o codigo do tripulante");
@@ -1099,7 +1264,7 @@ public class JMain extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "CoPiloto não adicionado");
         }
-
+        
         actualizarTabelas();
     }//GEN-LAST:event_jButtonAdicionarTripulanteActionPerformed
 
@@ -1141,7 +1306,7 @@ public class JMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonRemoveTripulanteActionPerformed
-
+    
     private void jMenuItemAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaActionPerformed
         String s = "PROGRAMAÇÃO ORIENTADA AOS OBJECTOS\n\n";
         s = s + "Software criado por:\n";
@@ -1150,24 +1315,52 @@ public class JMain extends javax.swing.JFrame {
         s = s + "       * 54822 Fábio Costa\n";
         s = s + "\n";
         s = s + "WebSite:\n http://code.google.com/p/poo-trabalho-pratico-2011/\n\n";
-
+        
         JOptionPane.showMessageDialog(rootPane, s, "Acerca", 1);
     }//GEN-LAST:event_jMenuItemAcercaActionPerformed
-
+    
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         actualizarTabelas();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
-
+    
     private void jMenuItemGuardarTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarTextoActionPerformed
         JFileChooser fc = new JFileChooser();
-
+        
         int returnVal = fc.showSaveDialog(this);
-
+        
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             String nome = fc.getSelectedFile().getAbsolutePath();
             SaveLoadDB.showDBInFile(aerogestSistema, nome);
         }
     }//GEN-LAST:event_jMenuItemGuardarTextoActionPerformed
+    
+    private void jButtonEspecificadoAtribuirAeronaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoAtribuirAeronaveActionPerformed
+        String codigo_voo = jComboBoxEspecificados.getSelectedItem().toString();
+        
+        if (!codigo_voo.equalsIgnoreCase("") || !codigo_voo.equalsIgnoreCase(null)) {
+            boolean temAeronave = aerogestSistema.vooTemAeronave(codigo_voo);
+            if(!temAeronave){
+                List<Aeronave> livres = new ArrayList<Aeronave>();
+                livres = aerogestSistema.aeronavesLivers();
+                String opcoes = "Aeronaves Livres:\n";
+                
+                for(Aeronave a : livres){
+                    opcoes += a.getMatricula()+"\n";
+                }
+                
+                String escolha = JOptionPane.showInputDialog(opcoes);
+                aerogestSistema.alteraEstadoAeronave(escolha);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "O voo "+codigo_voo+" já tem uma aeronave associada!");
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonEspecificadoAtribuirAeronaveActionPerformed
+
+    private void jButtonEspecificadoAtribuirTripulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoAtribuirTripulacaoActionPerformed
+        
+        
+    }//GEN-LAST:event_jButtonEspecificadoAtribuirTripulacaoActionPerformed
 
     /**
      * Evento que remove um comandante
@@ -1178,33 +1371,33 @@ public class JMain extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             JMain principal = new JMain(aerogestSistema);
-
+            
             public void run() {
-
+                
                 principal.setVisible(true);
             }
         });
     }
-
+    
     private static void centerOnScreen(final Component target) {
         if (target != null) {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             Dimension dialogSize = target.getSize();
-
+            
             if (dialogSize.height > screenSize.height) {
                 dialogSize.height = screenSize.height;
             }
             if (dialogSize.width > screenSize.width) {
                 dialogSize.width = screenSize.width;
             }
-
+            
             target.setLocation((screenSize.width - dialogSize.width) / 2,
                     (screenSize.height - dialogSize.height) / 2);
         }
     }
-
+    
     private static String diaEmString(GregorianCalendar d) {
         String s = "";
         s = s + d.get(Calendar.DAY_OF_MONTH);
@@ -1214,7 +1407,7 @@ public class JMain extends javax.swing.JFrame {
         s = s + d.get(Calendar.YEAR);
         return s;
     }
-
+    
     private static String horaEmString(GregorianCalendar d) {
         String s = "";
         s = s + d.get(Calendar.HOUR_OF_DAY);
@@ -1231,9 +1424,15 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAdicionarCoPiloto;
     private javax.swing.JButton jButtonAdicionarComandante;
     private javax.swing.JButton jButtonAdicionarTripulante;
+    private javax.swing.JButton jButtonEspecificadoAtribuirAeronave;
+    private javax.swing.JButton jButtonEspecificadoAtribuirPorta;
+    private javax.swing.JButton jButtonEspecificadoAtribuirTripulacao;
     private javax.swing.JButton jButtonRemoveCoPiloto;
     private javax.swing.JButton jButtonRemoveComandante;
     private javax.swing.JButton jButtonRemoveTripulante;
+    private javax.swing.JComboBox jComboBoxEspecificados;
+    private javax.swing.JComboBox jComboBoxPreparacao1;
+    private javax.swing.JComboBox jComboBoxPreparacao2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelPlacard;
@@ -1249,10 +1448,15 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGuardarComo;
     private javax.swing.JMenuItem jMenuItemGuardarTexto;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelTripulacao;
     private javax.swing.JPanel jPanelTripulacaoCoPilotos;
     private javax.swing.JPanel jPanelTripulacaoComandantes;

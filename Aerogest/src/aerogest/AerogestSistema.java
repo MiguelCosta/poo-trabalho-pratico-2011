@@ -78,7 +78,7 @@ public class AerogestSistema implements Serializable {
         for (GregorianCalendar d : mapaVoos.keySet()) {
             TreeMap<String, Voo> tmp_v = new TreeMap<String, Voo>();
             for (Voo voo : mapaVoos.get(d).values()) {
-                tmp_v.put(voo.getEntidade()+voo.getCodigoVoo(), voo.clone());
+                tmp_v.put(voo.getEntidade() + voo.getCodigoVoo(), voo.clone());
             }
             r.put(d, tmp_v);
         }
@@ -112,8 +112,8 @@ public class AerogestSistema implements Serializable {
      * @return list
      */
     public Map<String, CoPiloto> getCoPilotos() {
-        Map<String, CoPiloto> r =  new TreeMap<String, CoPiloto>();
-        for(CoPiloto c : coPilotos.values()){
+        Map<String, CoPiloto> r = new TreeMap<String, CoPiloto>();
+        for (CoPiloto c : coPilotos.values()) {
             r.put(c.getCodigo(), c.clone());
         }
         return r;
@@ -125,10 +125,10 @@ public class AerogestSistema implements Serializable {
      */
     public Map<String, Tripulante> getTripulantesAdicionais() {
         Map<String, Tripulante> r = new TreeMap<String, Tripulante>();
-        for(Tripulante t : tribulantesAdicionais.values()){
+        for (Tripulante t : tribulantesAdicionais.values()) {
             r.put(t.getCodigo(), t.clone());
         }
-        
+
         return r;
     }
 
@@ -138,7 +138,7 @@ public class AerogestSistema implements Serializable {
      */
     public List<Tripulacao> getTripulacao() {
         List<Tripulacao> r = new ArrayList<Tripulacao>();
-        for(Tripulacao t : tripulacao){
+        for (Tripulacao t : tripulacao) {
             r.add(t.clone());
         }
         return r;
@@ -150,7 +150,7 @@ public class AerogestSistema implements Serializable {
      */
     public Map<String, Aeronave> getAeronave_All() {
         Map<String, Aeronave> r = new TreeMap<String, Aeronave>();
-        for(Aeronave a : aeronaves.values()){
+        for (Aeronave a : aeronaves.values()) {
             r.put(a.getMatricula(), a.clone());
         }
         return aeronaves;
@@ -171,7 +171,7 @@ public class AerogestSistema implements Serializable {
      */
     public Map<String, Porta> getPortas() {
         Map<String, Porta> r = new TreeMap<String, Porta>();
-        for(Porta p : portas.values()){
+        for (Porta p : portas.values()) {
             r.put(p.getCodPorta(), p.clone());
         }
         return portas;
@@ -513,13 +513,36 @@ public class AerogestSistema implements Serializable {
             mapaVoos.put(d, temp_v);
         }
     }
+
+    public boolean vooTemAeronave(String codigoVoo) {
+        Voo v = null;
+        boolean tem;
+
+        tem = mapaVoos.get(dataActual).containsKey(codigoVoo);
+
+        return tem;
+    }
     
+    public List<Aeronave> aeronavesLivers(){
+        List<Aeronave> r = new ArrayList<Aeronave>();
+        
+        for(Aeronave a : aeronaves.values()){
+            if(a.getOcupacao()) r.add(a.clone());
+        }
+        
+        return r;
+    }
+    
+    public void alteraEstadoAeronave(String codigo){
+        aeronaves.get(codigo).setLivre(false);
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder("###################################################\n");
         s.append("############### AEROGEST SISTEMA ##################\n");
         s.append("###################################################\n");
-        
+
         //mapa de voos
         s.append("\n*************** Mapa de voos **********************\n");
         for (GregorianCalendar d : mapaVoos.keySet()) {
@@ -530,59 +553,58 @@ public class AerogestSistema implements Serializable {
                 s.append(voo.toString());
             }
         }
-        
+
         //comandantes
         s.append("\n*************** Comandantes ***********************\n");
-        for(Comandante c : comandantes.values()){
+        for (Comandante c : comandantes.values()) {
             s.append(c.toString());
         }
-        
+
         //copiloto
         s.append("\n**************** Copilotos ************************\n");
-        for(CoPiloto c : coPilotos.values()){
+        for (CoPiloto c : coPilotos.values()) {
             s.append(c.toString());
         }
-        
+
         //tripulantes adicionais
         s.append("\n*********** Tripulantes Adicionais ****************\n");
-        for(Tripulante t : tribulantesAdicionais.values()){
+        for (Tripulante t : tribulantesAdicionais.values()) {
             s.append(t.toString());
         }
-        
+
         // falta a tripulação
-        
+
         //aeronaves
         s.append("\n***************** Aeronaves ***********************\n");
-        for(Aeronave a : aeronaves.values()){
+        for (Aeronave a : aeronaves.values()) {
             s.append(a.toString());
         }
-        
+
         //portas
         s.append("\n******************* Portas ************************\n");
-        for(Porta p : portas.values()){
+        for (Porta p : portas.values()) {
             s.append(p.toString());
         }
-        
+
         //cargas
         s.append("\n******************* Cargas ************************\n");
-        for(Carga c : cargas.values()){
+        for (Carga c : cargas.values()) {
             s.append(c.toString());
         }
-        
+
         //funcoes validas
         s.append("\n*************** Funcoes Validas *******************\n");
-        for(String f : funcoesValidas){
+        for (String f : funcoesValidas) {
             s.append(f);
         }
-        
+
         //Data Actual
         s.append("\n***************** Data Actual *********************\n");
         s.append(diaEmString(dataActual));
-        
+
         return s.toString();
     }
-    
-    
+
     // metodo auxiliar
     private static String diaEmString(GregorianCalendar d) {
         String s = "";
