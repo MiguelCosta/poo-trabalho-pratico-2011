@@ -477,6 +477,7 @@ public class JMain extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemGuardar = new javax.swing.JMenuItem();
         jMenuItemGuardarComo = new javax.swing.JMenuItem();
+        jMenuItemGuardarTexto = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -883,6 +884,15 @@ public class JMain extends javax.swing.JFrame {
             }
         });
         jMenuFicheiro.add(jMenuItemGuardarComo);
+
+        jMenuItemGuardarTexto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemGuardarTexto.setText("Guardar em texto");
+        jMenuItemGuardarTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGuardarTextoActionPerformed(evt);
+            }
+        });
+        jMenuFicheiro.add(jMenuItemGuardarTexto);
         jMenuFicheiro.add(jSeparator2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -1148,6 +1158,17 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelas();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
+    private void jMenuItemGuardarTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarTextoActionPerformed
+        JFileChooser fc = new JFileChooser();
+
+        int returnVal = fc.showSaveDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String nome = fc.getSelectedFile().getAbsolutePath();
+            SaveLoadDB.showDBInFile(aerogestSistema, nome);
+        }
+    }//GEN-LAST:event_jMenuItemGuardarTextoActionPerformed
+
     /**
      * Evento que remove um comandante
      * @param evt 
@@ -1226,6 +1247,7 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAcerca;
     private javax.swing.JMenuItem jMenuItemGuardar;
     private javax.swing.JMenuItem jMenuItemGuardarComo;
+    private javax.swing.JMenuItem jMenuItemGuardarTexto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

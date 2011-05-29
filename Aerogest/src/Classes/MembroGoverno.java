@@ -23,6 +23,7 @@ public class MembroGoverno extends Passageiro {
      * @param contacto
      * @param origem 
      */
+    
     public MembroGoverno(String codPassageiro, String nome, String nacionalidade,
             String contacto, String origem) {
         super(codPassageiro, nome, nacionalidade, contacto);

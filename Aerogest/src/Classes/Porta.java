@@ -117,8 +117,8 @@ public class Porta implements Serializable{
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("PORTA:\n");
-        s.append("CodPorta: " + codPorta + "\n");
-        s.append("Livre: " + livre + "\n");
+        s.append("CodPorta: ").append(codPorta).append("\n");
+        s.append("Livre: ").append(livre).append("\n");
         return s.toString();
     }
 }

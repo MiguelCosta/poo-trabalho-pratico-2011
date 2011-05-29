@@ -492,4 +492,84 @@ public class AerogestSistema implements Serializable {
             mapaVoos.put(d, temp_v);
         }
     }
+    
+    @Override
+    public String toString(){
+        StringBuilder s = new StringBuilder("###################################################\n");
+        s.append("############### AEROGEST SISTEMA ##################\n");
+        s.append("###################################################\n");
+        
+        //mapa de voos
+        s.append("\n*************** Mapa de voos **********************\n");
+        for (GregorianCalendar d : mapaVoos.keySet()) {
+            s.append("DIA: ");
+            s.append(diaEmString(d));
+            s.append("\n");
+            for (Voo voo : mapaVoos.get(d).values()) {
+                s.append(voo.toString());
+            }
+        }
+        
+        //comandantes
+        s.append("\n*************** Comandantes ***********************\n");
+        for(Comandante c : comandantes.values()){
+            s.append(c.toString());
+        }
+        
+        //copiloto
+        s.append("\n**************** Copilotos ************************\n");
+        for(CoPiloto c : coPilotos.values()){
+            s.append(c.toString());
+        }
+        
+        //tripulantes adicionais
+        s.append("\n*********** Tripulantes Adicionais ****************\n");
+        for(Tripulante t : tribulantesAdicionais.values()){
+            s.append(t.toString());
+        }
+        
+        // falta a tripulação
+        
+        //aeronaves
+        s.append("\n***************** Aeronaves ***********************\n");
+        for(Aeronave a : aeronaves.values()){
+            s.append(a.toString());
+        }
+        
+        //portas
+        s.append("\n******************* Portas ************************\n");
+        for(Porta p : portas.values()){
+            s.append(p.toString());
+        }
+        
+        //cargas
+        s.append("\n******************* Cargas ************************\n");
+        for(Carga c : cargas.values()){
+            s.append(c.toString());
+        }
+        
+        //funcoes validas
+        s.append("\n*************** Funcoes Validas *******************\n");
+        for(String f : funcoesValidas){
+            s.append(f);
+        }
+        
+        //Data Actual
+        s.append("\n***************** Data Actual *********************\n");
+        s.append(diaEmString(dataActual));
+        
+        return s.toString();
+    }
+    
+    
+    // metodo auxiliar
+    private static String diaEmString(GregorianCalendar d) {
+        String s = "";
+        s = s + d.get(Calendar.DAY_OF_MONTH);
+        s = s + "/";
+        s = s + (d.get(Calendar.MONDAY) + 1);
+        s = s + "/";
+        s = s + d.get(Calendar.YEAR);
+        return s;
+    }
 }

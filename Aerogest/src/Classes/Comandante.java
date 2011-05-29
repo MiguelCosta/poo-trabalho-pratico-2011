@@ -30,6 +30,15 @@ public class Comandante extends Tripulante implements Serializable {
         super(codigo, "Comandante", nome, nacionalidade);
     }
     
+    /**
+     * 
+     * @param c 
+     */
+    public Comandante(Comandante c){
+        super(c);
+        super.setFuncao("Comandante");
+    }
+    
     @Override
     public String toString(){
         return super.toString();
@@ -38,5 +47,10 @@ public class Comandante extends Tripulante implements Serializable {
     @Override
     public boolean equals(Object o){
         return super.equals(o);
+    }
+    
+    @Override
+    public Comandante clone(){
+        return new Comandante(this);
     }
 }

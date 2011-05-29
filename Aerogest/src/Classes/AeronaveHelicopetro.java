@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class AeronaveHelicopetro extends Aeronave implements Serializable {
     /**
-     * Cria um Aviao
+     * Cria um Helicopetro
      */
     public AeronaveHelicopetro() {
         super();
@@ -30,7 +30,7 @@ public class AeronaveHelicopetro extends Aeronave implements Serializable {
     }
 
     /**
-     * Através de um Avião cria outro
+     * Através de um Helicopetro cria outro
      * @param a 
      */
     public AeronaveHelicopetro(AeronaveHelicopetro a) {
