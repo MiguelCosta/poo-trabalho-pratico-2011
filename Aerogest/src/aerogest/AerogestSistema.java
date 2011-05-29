@@ -658,6 +658,13 @@ public class AerogestSistema implements Serializable {
         mapaVoos.get(dataActual).get(codvoo).setEstado(novoEstado);
     }
 
-    
+    public List<Carga> cargasLivres(){
+        List<Carga> cs = new ArrayList<Carga>();
+
+        for (Carga c : cargas.values())
+            cs.add(c);
+
+        return cs;
+    }
 
 }
