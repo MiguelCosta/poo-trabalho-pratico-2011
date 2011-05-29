@@ -70,7 +70,7 @@ public abstract class Voo implements Serializable {
         entidade = voo.getEntidade();
         passageiros = voo.getPassageiros();
         carga = voo.getCarga();
-        estado = VooEspecificado;
+        estado = voo.getEstado();
     }
 
     /** gets */
@@ -163,7 +163,7 @@ public abstract class Voo implements Serializable {
      * @return Tripulação
      */
     public Tripulacao getTripulacao() {
-        return tripulacao.clone();
+        return tripulacao;
     }
 
     /**
