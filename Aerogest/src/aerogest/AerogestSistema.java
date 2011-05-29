@@ -515,12 +515,13 @@ public class AerogestSistema implements Serializable {
     }
 
     public boolean vooTemAeronave(String codigoVoo) {
-        Voo v = null;
-        boolean tem;
+        Voo v;
 
-        tem = mapaVoos.get(dataActual).containsKey(codigoVoo);
-
-        return tem;
+        v = mapaVoos.get(dataActual).get(codigoVoo);
+        
+        Aeronave a = v.getAeronave();
+        
+        return a!=null;
     }
     
     public List<Aeronave> aeronavesLivers(){
