@@ -653,5 +653,11 @@ public class AerogestSistema implements Serializable {
 
         mapaVoos.get(dataActual).get(voo).setCarga((ArrayList<Carga>) cs);
     }
+
+    public void  vooMudaEstado(String codvoo,String novoEstado){
+        mapaVoos.get(dataActual).get(codvoo).setEstado(novoEstado);
+    }
+
     
+
 }
