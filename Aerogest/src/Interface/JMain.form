@@ -854,6 +854,8 @@
                                           <Component id="jButtonEspecificadoAtribuirTripulacao" alignment="0" max="32767" attributes="1"/>
                                           <Component id="jButtonEspecificadoAtribuirAeronave" alignment="0" max="32767" attributes="1"/>
                                           <Component id="jButtonEspecificadoAtribuirPorta" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButtonEspecificadoTransitar" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jButton2" alignment="0" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                   </Group>
@@ -871,7 +873,11 @@
                               <Component id="jButtonEspecificadoAtribuirTripulacao" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonEspecificadoAtribuirPorta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="91" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonEspecificadoTransitar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="33" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -903,6 +909,19 @@
                     <Component class="javax.swing.JButton" name="jButtonEspecificadoAtribuirPorta">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Atribuir Porta"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButtonEspecificadoTransitar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Transitar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEspecificadoTransitarActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cancelar"/>
                       </Properties>
                     </Component>
                   </SubComponents>

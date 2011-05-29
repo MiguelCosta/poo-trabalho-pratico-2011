@@ -503,6 +503,8 @@ public class JMain extends javax.swing.JFrame {
         jButtonEspecificadoAtribuirAeronave = new javax.swing.JButton();
         jButtonEspecificadoAtribuirTripulacao = new javax.swing.JButton();
         jButtonEspecificadoAtribuirPorta = new javax.swing.JButton();
+        jButtonEspecificadoTransitar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jComboBoxPreparacao1 = new javax.swing.JComboBox();
         jPanel10 = new javax.swing.JPanel();
@@ -900,6 +902,15 @@ public class JMain extends javax.swing.JFrame {
 
         jButtonEspecificadoAtribuirPorta.setText("Atribuir Porta");
 
+        jButtonEspecificadoTransitar.setText("Transitar");
+        jButtonEspecificadoTransitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEspecificadoTransitarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -914,7 +925,9 @@ public class JMain extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonEspecificadoAtribuirTripulacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonEspecificadoAtribuirAeronave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonEspecificadoAtribuirPorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonEspecificadoAtribuirPorta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonEspecificadoTransitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(51, 51, 51))))
         );
         jPanel8Layout.setVerticalGroup(
@@ -927,7 +940,11 @@ public class JMain extends javax.swing.JFrame {
                 .addComponent(jButtonEspecificadoAtribuirTripulacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEspecificadoAtribuirPorta)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonEspecificadoTransitar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Em Preparacao 1", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -1358,9 +1375,13 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEspecificadoAtribuirAeronaveActionPerformed
 
     private void jButtonEspecificadoAtribuirTripulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoAtribuirTripulacaoActionPerformed
-        
+        String codigo_voo = jComboBoxEspecificados.getSelectedItem().toString();
         
     }//GEN-LAST:event_jButtonEspecificadoAtribuirTripulacaoActionPerformed
+
+    private void jButtonEspecificadoTransitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoTransitarActionPerformed
+        
+    }//GEN-LAST:event_jButtonEspecificadoTransitarActionPerformed
 
     /**
      * Evento que remove um comandante
@@ -1417,6 +1438,7 @@ public class JMain extends javax.swing.JFrame {
         return s;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1427,6 +1449,7 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEspecificadoAtribuirAeronave;
     private javax.swing.JButton jButtonEspecificadoAtribuirPorta;
     private javax.swing.JButton jButtonEspecificadoAtribuirTripulacao;
+    private javax.swing.JButton jButtonEspecificadoTransitar;
     private javax.swing.JButton jButtonRemoveCoPiloto;
     private javax.swing.JButton jButtonRemoveComandante;
     private javax.swing.JButton jButtonRemoveTripulante;
