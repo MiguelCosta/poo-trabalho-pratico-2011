@@ -616,4 +616,10 @@ public class AerogestSistema implements Serializable {
         s = s + d.get(Calendar.YEAR);
         return s;
     }
+
+    public void atribui_aeronave_voo(String codAeronave, String voo ){
+        Aeronave a = aeronaves.get(codAeronave);
+
+        mapaVoos.get(dataActual).get(voo).setAeronave(a);
+    }
 }
