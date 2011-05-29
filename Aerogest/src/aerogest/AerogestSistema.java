@@ -631,4 +631,27 @@ public class AerogestSistema implements Serializable {
 
         mapaVoos.get(dataActual).get(voo).setPorta(p);
     }
+    
+    public boolean vooTemPorta(String voo){
+        return mapaVoos.get(dataActual).get(voo).getPorta() != null;
+    }
+
+    public List<Porta> portasLivres(){
+        List<Porta> ps = new ArrayList<Porta>();
+
+        for (Porta p : portas.values())
+            if (p.getLivre())
+                ps.add(p);
+        return ps;
+    }
+
+    public void atribui_carga(String codCarga, String voo){
+        Carga c = cargas.get(codCarga);
+
+        List<Carga> cs = new ArrayList<Carga>();
+        cs.add(c);
+
+        mapaVoos.get(dataActual).get(voo).setCarga((ArrayList<Carga>) cs);
+    }
+    
 }
