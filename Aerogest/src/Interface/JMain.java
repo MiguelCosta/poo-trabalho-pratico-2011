@@ -1096,6 +1096,11 @@ public class JMain extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Em Preparacao 2 com Atraso", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jButton1.setText("Transitar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButtonPreparacao2Embarcar1.setText("Embarcar Passgeiros");
         jButtonPreparacao2Embarcar1.addActionListener(new java.awt.event.ActionListener() {
@@ -1135,6 +1140,11 @@ public class JMain extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Voo Pronto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jButton6.setText("Transitar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButtonProntoCancelar.setText("Cancelar");
         jButtonProntoCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -1732,6 +1742,18 @@ public class JMain extends javax.swing.JFrame {
         Voo v = aerogestSistema.getMapaVoos().get(aerogestSistema.getHoraActual()).get(codigo_voo);
         aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooCancelado);
     }//GEN-LAST:event_jButtonPreparacao1CancelarActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String codigo_voo = jComboBoxPronto.getSelectedItem().toString();
+        Voo v = aerogestSistema.getMapaVoos().get(aerogestSistema.getHoraActual()).get(codigo_voo);
+        aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooNoAr);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String codigo_voo = jComboBoxPreparacao2Atrasado.getSelectedItem().toString();
+        Voo v = aerogestSistema.getMapaVoos().get(aerogestSistema.getHoraActual()).get(codigo_voo);
+        aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooPronto);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * Evento que remove um comandante
