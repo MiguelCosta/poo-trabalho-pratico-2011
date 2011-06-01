@@ -19,6 +19,7 @@ import Classes.CargaVeiculo;
 import Classes.CoPiloto;
 import Classes.Comandante;
 import Classes.Porta;
+import Classes.Tripulacao;
 import Classes.Tripulante;
 import Classes.Voo;
 import Importer.SaveLoadDB;
@@ -1616,21 +1617,21 @@ public class JMain extends javax.swing.JFrame {
         String codigo_voo = jComboBoxEspecificados.getSelectedItem().toString();
 
         if (!codigo_voo.equalsIgnoreCase("") || !codigo_voo.equalsIgnoreCase(null)) {
-            boolean temAeronave = aerogestSistema.vooTemAeronave(codigo_voo);
-            if (!temAeronave) {
-                List<Aeronave> livres = new ArrayList<Aeronave>();
-                livres = aerogestSistema.aeronavesLivers();
-                String opcoes = "Aeronaves Livres:\n";
+            boolean temTripulacao = aerogestSistema.vooTemTripulacao(codigo_voo);
+            if (!temTripulacao) {
+                List<Tripulacao> livres = new ArrayList<Tripulacao>();
+                livres = aerogestSistema.getTripulacao();
+                String opcoes = "Tripulacoes Livres:\n";
 
-                for (Aeronave a : livres) {
-                    opcoes += a.getMatricula() + "\n";
+                for (Tripulacao a : livres) {
+                    opcoes += a.getCodigo() + "\n";
                 }
 
                 String escolha = JOptionPane.showInputDialog(opcoes);
-                aerogestSistema.alteraEstadoAeronave(escolha);
-                aerogestSistema.atribui_aeronave_voo(escolha, codigo_voo);
+                aerogestSistema.tripulacaoMudaEstado(escolha,true);
+                aerogestSistema.atribui_tripulacao(escolha, codigo_voo);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma aeronave associada!");
+                JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma tripulacao associada!");
             }
         }
 

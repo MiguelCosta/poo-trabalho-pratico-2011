@@ -667,14 +667,36 @@ public class AerogestSistema implements Serializable {
             if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
             (new GregorianCalendar()).after(v.getHoraPartida()))
                 v.setEstado(Voo.VooPronto);
-
     }
-
-    
 
     public void adicionaObservacao(String voo, String obs){
         mapaVoos.get(dataActual).get(voo).setObservacoes(obs);
         System.out.println(mapaVoos.get(dataActual).get(voo).toString());
         System.out.println(obs);
+    }
+
+    public boolean vooTemTripulacao(String voo){
+        return mapaVoos.get(dataActual).get(voo).getTripulacao() != null;
+    }
+
+    public void tripulacaoMudaEstado(String cod, boolean estado){
+        boolean found = false;
+        for (int i = 0 ; i < tripulacao.size() && !found ; i++)
+            if ( tripulacao.get(i).getCodigo().equals(cod)){
+                found = true;
+                tripulacao.get(i).setOcupacao(estado);
+            }
+    }
+
+    public void atribui_tripulacao(String cod, String voo){
+        Tripulacao t = null;
+        boolean found = false;
+        for (int i = 0 ; i < tripulacao.size() && !found ; i++)
+            if ( tripulacao.get(i).getCodigo().equals(cod)){
+                found = true;
+                t = tripulacao.get(i);
+            }
+
+        mapaVoos.get(dataActual).get(voo).setTripulacao(t);
     }
 }

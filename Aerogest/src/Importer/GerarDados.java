@@ -169,16 +169,16 @@ public class GerarDados {
         cargaAlimentar.add(new CargaAlimentar("cargaAlim08", 107.1, "Alimento 8", 14, new GregorianCalendar()));
         cargaAlimentar.add(new CargaAlimentar("cargaAlim09", 108.1, "Alimento 9", 14, new GregorianCalendar()));
         cargaAlimentar.add(new CargaAlimentar("cargaAlim10", 109.1, "Alimento 10", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim11", 100.1, "Alimento 11", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim12", 111.1, "Alimento 12", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim13", 112.1, "Alimento 13", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim14", 113.1, "Alimento 14", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim15", 114.1, "Alimento 15", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim16", 115.1, "Alimento 16", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim17", 116.1, "Alimento 17", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim18", 117.1, "Alimento 18", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim19", 118.1, "Alimento 19", 14, new GregorianCalendar()));
-        cargaAlimentar.add(new CargaAlimentar("cargaAlim20", 119.1, "Alimento 20", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim11", 100.1, "Alimento 11", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim12", 111.1, "Alimento 12", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim13", 112.1, "Alimento 13", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim14", 113.1, "Alimento 14", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim15", 114.1, "Alimento 15", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim16", 115.1, "Alimento 16", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim17", 116.1, "Alimento 17", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim18", 117.1, "Alimento 18", 14, new GregorianCalendar()));
+        //cargaAlimentar.add(new CargaAlimentar("cargaAlim19", 118.1, "Alimento 19", 14, new GregorianCalendar()));
+        //scargaAlimentar.add(new CargaAlimentar("cargaAlim20", 119.1, "Alimento 20", 14, new GregorianCalendar()));
     }
 
     private static void geraCargaAnimal() {
@@ -192,16 +192,16 @@ public class GerarDados {
         cargaAnimal.add(new CargaAnimal("carAnimal08", 27, "Animal 8", 8, 17));
         cargaAnimal.add(new CargaAnimal("carAnimal09", 28, "Animal 9", 9, 18));
         cargaAnimal.add(new CargaAnimal("carAnimal10", 29, "Animal 10", 10, 19));
-        cargaAnimal.add(new CargaAnimal("carAnimal11", 30, "Animal 11", 11, 20));
-        cargaAnimal.add(new CargaAnimal("carAnimal12", 31, "Animal 12", 12, 21));
-        cargaAnimal.add(new CargaAnimal("carAnimal13", 32, "Animal 13", 13, 22));
-        cargaAnimal.add(new CargaAnimal("carAnimal14", 33, "Animal 14", 14, 23));
-        cargaAnimal.add(new CargaAnimal("carAnimal15", 34, "Animal 15", 15, 24));
-        cargaAnimal.add(new CargaAnimal("carAnimal16", 35, "Animal 16", 16, 25));
-        cargaAnimal.add(new CargaAnimal("carAnimal17", 36, "Animal 17", 17, 26));
-        cargaAnimal.add(new CargaAnimal("carAnimal18", 37, "Animal 18", 18, 27));
-        cargaAnimal.add(new CargaAnimal("carAnimal19", 38, "Animal 19", 19, 28));
-        cargaAnimal.add(new CargaAnimal("carAnimal20", 39, "Animal 20", 20, 29));
+        //cargaAnimal.add(new CargaAnimal("carAnimal11", 30, "Animal 11", 11, 20));
+        //cargaAnimal.add(new CargaAnimal("carAnimal12", 31, "Animal 12", 12, 21));
+        //cargaAnimal.add(new CargaAnimal("carAnimal13", 32, "Animal 13", 13, 22));
+        //cargaAnimal.add(new CargaAnimal("carAnimal14", 33, "Animal 14", 14, 23));
+        //cargaAnimal.add(new CargaAnimal("carAnimal15", 34, "Animal 15", 15, 24));
+        //cargaAnimal.add(new CargaAnimal("carAnimal16", 35, "Animal 16", 16, 25));
+        //cargaAnimal.add(new CargaAnimal("carAnimal17", 36, "Animal 17", 17, 26));
+        //cargaAnimal.add(new CargaAnimal("carAnimal18", 37, "Animal 18", 18, 27));
+        //cargaAnimal.add(new CargaAnimal("carAnimal19", 38, "Animal 19", 19, 28));
+        //cargaAnimal.add(new CargaAnimal("carAnimal20", 39, "Animal 20", 20, 29));
     }
 
     private static void geraCargaNormal() {
@@ -214,17 +214,17 @@ public class GerarDados {
         cargaNormal.add(new CargaNormal("cargaNorma7", 26, "Carga 7", 18));
         cargaNormal.add(new CargaNormal("cargaNorma8", 27, "Carga 8", 19));
         cargaNormal.add(new CargaNormal("cargaNorma9", 28, "Carga 9", 20));
-        cargaNormal.add(new CargaNormal("cargaNormal0", 29, "Carga 10", 21));
-        cargaNormal.add(new CargaNormal("cargaNormal1", 30, "Carga 11", 22));
-        cargaNormal.add(new CargaNormal("cargaNormal2", 31, "Carga 12", 23));
-        cargaNormal.add(new CargaNormal("cargaNormal3", 32, "Carga 13", 24));
-        cargaNormal.add(new CargaNormal("cargaNormal4", 33, "Carga 14", 25));
-        cargaNormal.add(new CargaNormal("cargaNormal5", 34, "Carga 15", 26));
-        cargaNormal.add(new CargaNormal("cargaNormal6", 35, "Carga 16", 27));
-        cargaNormal.add(new CargaNormal("cargaNormal7", 36, "Carga 17", 28));
-        cargaNormal.add(new CargaNormal("cargaNormal8", 37, "Carga 18", 29));
-        cargaNormal.add(new CargaNormal("cargaNormal9", 38, "Carga 19", 30));
-        cargaNormal.add(new CargaNormal("cargaNorma20", 39, "Carga 20", 31));
+        cargaNormal.add(new CargaNormal("cargaNormal10", 29, "Carga 10", 21));
+        //cargaNormal.add(new CargaNormal("cargaNormal11", 30, "Carga 11", 22));
+        //cargaNormal.add(new CargaNormal("cargaNormal12", 31, "Carga 12", 23));
+        //cargaNormal.add(new CargaNormal("cargaNormal13", 32, "Carga 13", 24));
+        //cargaNormal.add(new CargaNormal("cargaNormal14", 33, "Carga 14", 25));
+        //cargaNormal.add(new CargaNormal("cargaNormal15", 34, "Carga 15", 26));
+        //cargaNormal.add(new CargaNormal("cargaNormal16", 35, "Carga 16", 27));
+        //cargaNormal.add(new CargaNormal("cargaNormal17", 36, "Carga 17", 28));
+        //cargaNormal.add(new CargaNormal("cargaNormal18", 37, "Carga 18", 29));
+        //cargaNormal.add(new CargaNormal("cargaNormal19", 38, "Carga 19", 30));
+        //cargaNormal.add(new CargaNormal("cargaNormal20", 39, "Carga 20", 31));
     }
 
     private static void geraCargaQuimica() {
@@ -238,16 +238,16 @@ public class GerarDados {
         cargaQuimica.add(new CargaQuimica("cargaQuimica8", 19, "Quimico 8", 20, "liquido", "muito toxico"));
         cargaQuimica.add(new CargaQuimica("cargaQuimica9", 20, "Quimico 9", 21, "liquido", "muito toxico"));
         cargaQuimica.add(new CargaQuimica("cargaQuimica10", 21, "Quimico 10", 22, "liquido", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica11", 22, "Quimico 11", 23, "gasoso", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica12", 23, "Quimico 12", 24, "gasoso", "pouco toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica13", 24, "Quimico 13", 25, "gasoso", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica14", 25, "Quimico 14", 26, "po", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica15", 26, "Quimico 15", 27, "gasoso", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica16", 27, "Quimico 16", 28, "gasoso", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica17", 28, "Quimico 17", 29, "cristais", "pouco toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica18", 29, "Quimico 18", 30, "cristais", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica19", 30, "Quimico 19", 31, "cristais", "muito toxico"));
-        cargaQuimica.add(new CargaQuimica("cargaQuimica20", 31, "Quimico 20", 32, "po", "toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica11", 22, "Quimico 11", 23, "gasoso", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica12", 23, "Quimico 12", 24, "gasoso", "pouco toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica13", 24, "Quimico 13", 25, "gasoso", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica14", 25, "Quimico 14", 26, "po", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica15", 26, "Quimico 15", 27, "gasoso", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica16", 27, "Quimico 16", 28, "gasoso", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica17", 28, "Quimico 17", 29, "cristais", "pouco toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica18", 29, "Quimico 18", 30, "cristais", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica19", 30, "Quimico 19", 31, "cristais", "muito toxico"));
+        //cargaQuimica.add(new CargaQuimica("cargaQuimica20", 31, "Quimico 20", 32, "po", "toxico"));
     }
 
     private static void geraCargaVeiculo() {
@@ -286,32 +286,29 @@ public class GerarDados {
     }
 
     private static void geraComandantes() {
-        comandantes.add(new Comandante("t01", "Mike", "Inglesa"));
-        comandantes.add(new Comandante("t02", "John", "Inglesa"));
-        comandantes.add(new Comandante("t03", "Alexandre", "Portuguesa"));
-        comandantes.add(new Comandante("t04", "Fábio", "Portuguesa"));
-        comandantes.add(new Comandante("t05", "Miguel", "Portuguesa"));
-
-
-        comandantes.add(new Comandante("t06", "Mike", "Inglesa"));
-        comandantes.add(new Comandante("t07", "John", "Inglesa"));
-        comandantes.add(new Comandante("t08", "Alexandre", "Portuguesa"));
-        comandantes.add(new Comandante("t09", "Fábio", "Portuguesa"));
-        comandantes.add(new Comandante("t10", "Miguel", "Portuguesa"));
+        comandantes.add(new Comandante("c01", "Mike", "Inglesa"));
+        comandantes.add(new Comandante("c02", "John", "Inglesa"));
+        comandantes.add(new Comandante("c03", "Alexandre", "Portuguesa"));
+        comandantes.add(new Comandante("c04", "Fábio", "Portuguesa"));
+        comandantes.add(new Comandante("c05", "Miguel", "Portuguesa"));
+        comandantes.add(new Comandante("c06", "Mike", "Inglesa"));
+        comandantes.add(new Comandante("c07", "John", "Inglesa"));
+        comandantes.add(new Comandante("c08", "Alexandre", "Portuguesa"));
+        comandantes.add(new Comandante("c09", "Fábio", "Portuguesa"));
+        comandantes.add(new Comandante("c10", "Miguel", "Portuguesa"));
     }
 
     private static void geraCoPilotos() {
-        coPilotos.add(new CoPiloto("t11", "Pedro", "Espanhol"));
-        coPilotos.add(new CoPiloto("t12", "Sofia", "portuguesa"));
-        coPilotos.add(new CoPiloto("t13", "Joaquim", "Espanhol"));
-        coPilotos.add(new CoPiloto("t14", "Sara", "Francesa"));
-        coPilotos.add(new CoPiloto("t15", "Abel", "Norte Americano"));
-
-        coPilotos.add(new CoPiloto("t16", "Pedro", "Espanhol"));
-        coPilotos.add(new CoPiloto("t17", "Sofia", "portuguesa"));
-        coPilotos.add(new CoPiloto("t18", "Joaquim", "Espanhol"));
-        coPilotos.add(new CoPiloto("t19", "Sara", "Francesa"));
-        coPilotos.add(new CoPiloto("t20", "Abel", "Norte Americano"));
+        coPilotos.add(new CoPiloto("co1", "Pedro", "Espanhol"));
+        coPilotos.add(new CoPiloto("co2", "Sofia", "portuguesa"));
+        coPilotos.add(new CoPiloto("co3", "Joaquim", "Espanhol"));
+        coPilotos.add(new CoPiloto("co4", "Sara", "Francesa"));
+        coPilotos.add(new CoPiloto("co5", "Abel", "Norte Americano"));
+        coPilotos.add(new CoPiloto("co6", "Pedro", "Espanhol"));
+        coPilotos.add(new CoPiloto("co7", "Sofia", "portuguesa"));
+        coPilotos.add(new CoPiloto("co8", "Joaquim", "Espanhol"));
+        coPilotos.add(new CoPiloto("co9", "Sara", "Francesa"));
+        coPilotos.add(new CoPiloto("co10", "Abel", "Norte Americano"));
     }
 
     private static void gereFuncoesValidas() {
@@ -324,21 +321,21 @@ public class GerarDados {
     }
 
     private static void geraTripulantes() {
-        tripulantes.add(new Tripulante("t21", funcoesValidas.get(0), "Maria", "Portuguesa"));
-        tripulantes.add(new Tripulante("t22", funcoesValidas.get(1), "Duarte", "Brasileira"));
-        tripulantes.add(new Tripulante("t23", funcoesValidas.get(2), "Vitor", "Portuguesa"));
-        tripulantes.add(new Tripulante("t24", funcoesValidas.get(3), "Mario", "Brasileira"));
-        tripulantes.add(new Tripulante("t25", funcoesValidas.get(4), "Antonio", "Portuguesa"));
-        tripulantes.add(new Tripulante("t26", funcoesValidas.get(0), "Rosa", "Portuguesa"));
-        tripulantes.add(new Tripulante("t27", funcoesValidas.get(1), "Joao", "Portuguesa"));
-        tripulantes.add(new Tripulante("t28", funcoesValidas.get(2), "Rafael", "Portuguesa"));
-        tripulantes.add(new Tripulante("t29", funcoesValidas.get(3), "Tiago", "Portuguesa"));
-        tripulantes.add(new Tripulante("t30", funcoesValidas.get(4), "Sofia", "Italiana"));
-        tripulantes.add(new Tripulante("t31", funcoesValidas.get(0), "Fabio", "Portuguesa"));
-        tripulantes.add(new Tripulante("t32", funcoesValidas.get(1), "Mario", "Portuguesa"));
-        tripulantes.add(new Tripulante("t33", funcoesValidas.get(2), "Isabel", "Portuguesa"));
-        tripulantes.add(new Tripulante("t34", funcoesValidas.get(3), "Ana", "Portuguesa"));
-        tripulantes.add(new Tripulante("t35", funcoesValidas.get(4), "Ines", "Portuguesa"));
+        tripulantes.add(new Tripulante("a1", funcoesValidas.get(0), "Maria", "Portuguesa"));
+        tripulantes.add(new Tripulante("a2", funcoesValidas.get(1), "Duarte", "Brasileira"));
+        tripulantes.add(new Tripulante("a3", funcoesValidas.get(2), "Vitor", "Portuguesa"));
+        tripulantes.add(new Tripulante("a4", funcoesValidas.get(3), "Mario", "Brasileira"));
+        tripulantes.add(new Tripulante("a5", funcoesValidas.get(4), "Antonio", "Portuguesa"));
+        tripulantes.add(new Tripulante("a6", funcoesValidas.get(0), "Rosa", "Portuguesa"));
+        tripulantes.add(new Tripulante("a7", funcoesValidas.get(1), "Joao", "Portuguesa"));
+        tripulantes.add(new Tripulante("a8", funcoesValidas.get(2), "Rafael", "Portuguesa"));
+        tripulantes.add(new Tripulante("a9", funcoesValidas.get(3), "Tiago", "Portuguesa"));
+        tripulantes.add(new Tripulante("a10", funcoesValidas.get(4), "Sofia", "Italiana"));
+        tripulantes.add(new Tripulante("a11", funcoesValidas.get(0), "Fabio", "Portuguesa"));
+        tripulantes.add(new Tripulante("a12", funcoesValidas.get(1), "Mario", "Portuguesa"));
+        tripulantes.add(new Tripulante("a13", funcoesValidas.get(2), "Isabel", "Portuguesa"));
+        tripulantes.add(new Tripulante("a14", funcoesValidas.get(3), "Ana", "Portuguesa"));
+        tripulantes.add(new Tripulante("a15", funcoesValidas.get(4), "Ines", "Portuguesa"));
     }
 
     private static void geraTripulacoes() {
@@ -405,20 +402,72 @@ public class GerarDados {
         passag.add(passageiros.get(2));
         ArrayList<Carga> carga = new ArrayList<Carga>();
         carga.add(cargaAlimentar.get(0));
-
+        carga.add(cargaNormal.get(0));
+        carga.add(cargaNormal.get(1));
         VooComercial v1 = new VooComercial("vc1", "Paris", new GregorianCalendar(), "TAP", passag, carga);
+        v1.setTripulacao(tripulacao.get(0));
         v1.setPorta(portas.get(0));
         v1.setAeronave(aeronaves.get(0));
+        v1.setVooPronto();
         voosComererciais.add(v1);
 
-        carga.add(cargaAlimentar.get(1));
-        passag.add(passageiros.get(3));
 
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
         VooComercial v2 = new VooComercial("vc2", "Porto", new GregorianCalendar(), "TAP", passag, carga);
-        v2.setPorta(portas.get(1));
-        v2.setAeronave(aeronaves.get(1));
+        v2.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
         voosComererciais.add(v2);
 
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        passag.add(passageiros.get(5));
+        passag.add(passageiros.get(6));
+        carga.add(cargaNormal.get(2));
+        carga.add(cargaNormal.get(3));
+        carga.add(cargaNormal.get(4));
+        carga.add(cargaNormal.get(5));
+        VooComercial v3 = new VooComercial("vc3", "Lisboa", new GregorianCalendar(), "RAIANAIR", passag, carga);
+        voosComererciais.add(v3);
+
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        passag.add(passageiros.get(7));
+        passag.add(passageiros.get(8));
+        carga.add(cargaNormal.get(2));
+        carga.add(cargaNormal.get(3));
+        carga.add(cargaNormal.get(4));
+        carga.add(cargaNormal.get(5));
+        VooComercial v4 = new VooComercial("vc4", "Madrid", new GregorianCalendar(), "TAP", passag, carga);
+        v2.setVooEmPreparacao1(aeronaves.get(2), tripulacao.get(1), portas.get(2));
+        v2.setVooAtrasado(new GregorianCalendar());
+        voosComererciais.add(v4);
+
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        passag.add(passageiros.get(7));
+        passag.add(passageiros.get(8));
+        carga.add(cargaNormal.get(2));
+        carga.add(cargaNormal.get(3));
+        carga.add(cargaNormal.get(4));
+        carga.add(cargaNormal.get(5));
+        VooComercial v5 = new VooComercial("vc5", "Porto", new GregorianCalendar(), "VAIC AIR", passag, carga);
+        voosComererciais.add(v5);
+
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        passag.add(passageiros.get(7));
+        passag.add(passageiros.get(8));
+        carga.add(cargaNormal.get(2));
+        carga.add(cargaNormal.get(3));
+        carga.add(cargaNormal.get(4));
+        carga.add(cargaNormal.get(5));
+        VooComercial v6 = new VooComercial("vc6", "Berlim", new GregorianCalendar(), "VAIC AIR", passag, carga);
+        voosComererciais.add(v6);
     }
 
     private static void geraVoosGovernamentais() {

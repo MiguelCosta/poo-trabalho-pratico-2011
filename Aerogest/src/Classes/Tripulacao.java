@@ -19,6 +19,7 @@ public class Tripulacao implements Serializable {
     private Comandante comandante;
     private CoPiloto coPiloto;
     private ArrayList<Tripulante> tripulantesAdicionais;
+    private boolean ocupado;
 
     /** Construtores */
     /**
@@ -29,6 +30,7 @@ public class Tripulacao implements Serializable {
         comandante = new Comandante();
         coPiloto = new CoPiloto();
         tripulantesAdicionais = new ArrayList<Tripulante>();
+        ocupado = false;
     }
 
     /**
@@ -42,6 +44,7 @@ public class Tripulacao implements Serializable {
         this.comandante = comandante;
         this.coPiloto = coPiloto;
         this.tripulantesAdicionais = tripulantesAdicionais;
+        ocupado = false;
     }
 
     /**
@@ -53,6 +56,7 @@ public class Tripulacao implements Serializable {
         comandante = tripulacao.getComandante();
         coPiloto = tripulacao.getCoPiloto();
         tripulantesAdicionais = tripulacao.getTripulantesAdicionais();
+        ocupado = false;
     }
 
     /** gets */
@@ -86,6 +90,13 @@ public class Tripulacao implements Serializable {
             r.add(t.clone());
         }
         return r;
+    }
+
+    public boolean  getOcupacao(){
+        return ocupado;
+    }
+    public void setOcupacao(boolean b){
+        ocupado = b;
     }
 
     /** sets */
