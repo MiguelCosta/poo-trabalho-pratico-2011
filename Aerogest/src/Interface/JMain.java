@@ -127,7 +127,28 @@ public class JMain extends javax.swing.JFrame {
         jLabel_Voos_Conc;
 
         //pass
-        
+        jLabel_Pass_total;
+        jLabel_Pass_emb;
+        jLabel_Pass_nemb;
+        jLabel_Pass_dif;
+
+        //pass com
+        jLabel_Pass_Com_total;
+        jLabel_Pass_emb;
+        jLabel_Pass_nemb;
+        jLabel_Pass_dif;
+
+        //carga
+        jLabel_Cargas_total;
+        jLabel_Cargas_emb;
+        jLabel_Cargas_nemb;
+        jLabel_Cargas_dif;
+
+        //cargas peso
+        jLabel_Cargas_Peso_total;
+        jLabel_Cargas_Peso_emb;
+        jLabel_Cargas_Peso_nemb;
+        jLabel_Cargas_Peso_dif;
     }
 
     private void actualizarData(GregorianCalendar data) {
