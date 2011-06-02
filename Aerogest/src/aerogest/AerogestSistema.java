@@ -514,6 +514,11 @@ public class AerogestSistema implements Serializable {
         }
     }
 
+    /**
+     * Diz se um voo tem ou não uma Aeronave atribuida
+     * @param codigoVoo
+     * @return 
+     */
     public boolean vooTemAeronave(String codigoVoo) {
         Voo v;
 
@@ -524,6 +529,10 @@ public class AerogestSistema implements Serializable {
         return a!=null;
     }
     
+    /**
+     * Lista de aeronaves livres
+     * @return 
+     */
     public List<Aeronave> aeronavesLivers(){
         List<Aeronave> r = new ArrayList<Aeronave>();
         
@@ -534,6 +543,10 @@ public class AerogestSistema implements Serializable {
         return r;
     }
     
+    /**
+     * Altera o estado de uma aeronave
+     * @param codigo 
+     */
     public void alteraEstadoAeronave(String codigo){
         aeronaves.get(codigo).setLivre(false);
     }
@@ -617,6 +630,11 @@ public class AerogestSistema implements Serializable {
         return s;
     }
 
+    /**
+     * Atribui a um Voo uma aeronave
+     * @param codAeronave
+     * @param voo 
+     */
     public void atribui_aeronave_voo(String codAeronave, String voo ){
         Aeronave a = aeronaves.get(codAeronave);
 
@@ -624,6 +642,12 @@ public class AerogestSistema implements Serializable {
         mapaVoos.get(dataActual).get(voo).setAeronave(a);
     }
 
+    
+    /**
+     * Atribuida uma porta a um Voo
+     * @param codPorta
+     * @param voo 
+     */
     public void atribui_porta(String codPorta, String voo){
         Porta p = portas.get(codPorta);
 
@@ -632,6 +656,11 @@ public class AerogestSistema implements Serializable {
         mapaVoos.get(dataActual).get(voo).setPorta(p);
     }
     
+    /**
+     * Verifica se um Voo já possui porta
+     * @param voo
+     * @return 
+     */
     public boolean vooTemPorta(String voo){
         return mapaVoos.get(dataActual).get(voo).getPorta() != null;
     }
@@ -645,6 +674,11 @@ public class AerogestSistema implements Serializable {
         return ps;
     }
 
+    /**
+     * Atribui uma carga a um voo
+     * @param codCarga
+     * @param voo 
+     */
     public void atribui_carga(String codCarga, String voo){
         Carga c = cargas.get(codCarga);
 
@@ -654,14 +688,27 @@ public class AerogestSistema implements Serializable {
         mapaVoos.get(dataActual).get(voo).setCarga((ArrayList<Carga>) cs);
     }
 
+    
+    /**
+     * Muda o estado de um Voo
+     * @param codvoo
+     * @param novoEstado 
+     */
     public void  vooMudaEstado(String codvoo,String novoEstado){
         mapaVoos.get(dataActual).get(codvoo).setEstado(novoEstado);
     }
 
+    /**
+     * Lista de cargas
+     * @return 
+     */
     public List<Carga> cargasLivres(){
         return new ArrayList<Carga>(cargas.values());
     }
 
+    /**
+     * Transita um Voo automaticamente
+     */
     public void transitaAutomatico(){
         for( Voo v : mapaVoos.get(dataActual).values())
             if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
@@ -669,16 +716,31 @@ public class AerogestSistema implements Serializable {
                 v.setEstado(Voo.VooPronto);
     }
 
+    /**
+     * 
+     * @param voo
+     * @param obs 
+     */
     public void adicionaObservacao(String voo, String obs){
         mapaVoos.get(dataActual).get(voo).setObservacoes(obs);
         System.out.println(mapaVoos.get(dataActual).get(voo).toString());
         System.out.println(obs);
     }
 
+    /**
+     * Verifica se um Voo já tem uma tripulação atribuida
+     * @param voo
+     * @return 
+     */
     public boolean vooTemTripulacao(String voo){
         return mapaVoos.get(dataActual).get(voo).getTripulacao() != null;
     }
 
+    /**
+     * Muda o estado de uma tripulação
+     * @param cod
+     * @param estado 
+     */
     public void tripulacaoMudaEstado(String cod, boolean estado){
         boolean found = false;
         for (int i = 0 ; i < tripulacao.size() && !found ; i++)
@@ -688,6 +750,11 @@ public class AerogestSistema implements Serializable {
             }
     }
 
+    /**
+     * Atribui a um Voo uma tripulação
+     * @param cod
+     * @param voo 
+     */
     public void atribui_tripulacao(String cod, String voo){
         Tripulacao t = null;
         boolean found = false;
@@ -701,6 +768,11 @@ public class AerogestSistema implements Serializable {
         t.setOcupacao(true);
     }
 
+    /**
+     * Verifica se um voo tem carga
+     * @param cod
+     * @return 
+     */
     public boolean vooTemCarga(String cod){
         return mapaVoos.get(dataActual).get(cod).getCarga() != null;
     }
