@@ -481,12 +481,12 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,5);
         VooComercial v1 = new VooComercial("vc1", "Paris", horaPartida, "TAP", passag, carga);
-        v1.setTripulacao(tripulacao.get(0));
-        v1.setPorta(portas.get(0));
-        v1.setAeronave(aeronaves.get(0));
+        GregorianCalendar horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,2);
+        v1.setVooEmPreparacao1(aeronaves.get(0), tripulacao.get(0), portas.get(0), horaPreparacao);
         v1.embarqueCargaALL();
         v1.embarquePassageiroALL();
-        v1.setVooPronto();
         voosComererciais.add(v1);
         // </editor-fold>
 
@@ -503,9 +503,10 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,10);
         VooComercial v2 = new VooComercial("vc2", "London", horaPartida, "TAP", passag, carga);
-        v2.setTripulacao(tripulacao.get(0));
-        v2.setPorta(portas.get(0));
-        v2.setAeronave(aeronaves.get(0));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,5);
+        v1.setVooEmPreparacao1(aeronaves.get(0), tripulacao.get(0), portas.get(0), horaPreparacao);
         v2.embarqueCargaALL();
         v2.embarquePassageiro(passageiros.get(0));
         v2.embarquePassageiro(passageiros.get(1));
@@ -524,8 +525,11 @@ public class GerarDados {
         horaPartida = new GregorianCalendar();
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,15);
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,10);
         VooComercial v3 = new VooComercial("vc3", "Porto", horaPartida, "TAP", passag, carga);
-        v3.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        v3.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1), horaPreparacao);
         v3.embarqueCargaALL();
         v3.embarquePassageiro(passageiros.get(3));
         voosComererciais.add(v3);
@@ -543,7 +547,10 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,17);
         VooComercial v4 = new VooComercial("vc4", "Berlim", horaPartida, "TAP", passag, carga);
-        v4.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,15);
+        v4.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1), horaPreparacao);
         v4.embarqueCargaALL();
         voosComererciais.add(v4);
         // </editor-fold>
@@ -560,7 +567,10 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,18);
         VooComercial v5 = new VooComercial("vc5", "Paris", horaPartida, "TAP", passag, carga);
-        v5.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,15);
+        v5.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1),horaPreparacao);
         v5.embarqueCargaALL();
         voosComererciais.add(v5);
         // </editor-fold>
@@ -575,9 +585,12 @@ public class GerarDados {
         passag.add(passageiros.get(4));
         horaPartida = new GregorianCalendar();
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
-        horaPartida.set(GregorianCalendar.MINUTE,30);
+        horaPartida.set(GregorianCalendar.MINUTE,50);
         VooComercial v6 = new VooComercial("vc6", "Paris", horaPartida, "TAP", passag, carga);
-        v6.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,15);
+        v6.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1),horaPreparacao);
         v6.embarqueCarga(cargaAlimentar.get(1));
         v6.embarqueCarga(cargaAlimentar.get(2));
         voosComererciais.add(v6);
@@ -595,7 +608,10 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,40);
         VooComercial v7 = new VooComercial("vc7", "New York", horaPartida, "TAP", passag, carga);
-        v7.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,35);
+        v7.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1),horaPreparacao);
         voosComererciais.add(v7);
         // </editor-fold>
 
@@ -611,7 +627,10 @@ public class GerarDados {
         horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPartida.set(GregorianCalendar.MINUTE,40);
         VooComercial v8 = new VooComercial("vc8", "Brasil", horaPartida, "VAIC AIR", passag, carga);
-        v8.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        horaPreparacao = new GregorianCalendar();
+        horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPreparacao.set(GregorianCalendar.MINUTE,35);
+        v8.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1), horaPartida);
         voosComererciais.add(v8);
         // </editor-fold>
 
@@ -890,8 +909,9 @@ public class GerarDados {
 
     private static void gereHoraSistema() {
         dataActual = new GregorianCalendar();
-        dataActual.set(GregorianCalendar.HOUR_OF_DAY, 0);
-        dataActual.set(GregorianCalendar.MINUTE, 0);
+        dataActual.
+        //dataActual.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        //dataActual.set(GregorianCalendar.MINUTE, 0);
     }
 
     private static void geraAerogestSistema() {

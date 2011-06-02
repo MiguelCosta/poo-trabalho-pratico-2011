@@ -12,6 +12,7 @@ import Classes.Carga;
 import Classes.Porta;
 import Classes.Tripulacao;
 import Classes.Tripulante;
+import Classes.VooComercial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -214,6 +215,15 @@ public class AerogestSistema implements Serializable {
      */
     public void setHoraActual(GregorianCalendar d) {
         dataActual = d;
+    }
+
+    /**
+     * Alterar a data actual do AerogestSistema
+     * @param data
+     */
+    public void setHoraActual(int hora, int minuto) {
+        dataActual.set(GregorianCalendar.HOUR_OF_DAY, hora);
+        dataActual.set(GregorianCalendar.MINUTE, minuto);
     }
 
     /**
@@ -714,12 +724,36 @@ public class AerogestSistema implements Serializable {
     /**
      * Transita um Voo automaticamente
      */
-    /*public void transitaAutomatico(){
+    public void updateAtrasados(){
         for( Voo v : mapaVoos.get(dataActual).values())
             if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
-            (new GregorianCalendar()).after(v.getHoraPartida()))
-                v.setEstado(Voo.VooPronto);
-    }*/
+            (dataActual).after(v.getHoraPartida())){
+                GregorianCalendar nh = dataActual;
+                nh.add(GregorianCalendar.MINUTE, 30);
+                v.setVooAtrasado(nh);
+            } else if (v.getEstado().equals(Voo.VooEmPreparacao2) &&
+            (dataActual).after(v.getHoraPartida())){
+                GregorianCalendar nh = dataActual;
+                nh.add(GregorianCalendar.MINUTE, 30);
+                v.setVooAtrasado(nh);
+            }
+    }
+
+    /**
+     * Transita um Voo automaticamente
+     */
+    public void updatePreparacao1(){
+        for( Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEmPreparacao1)){
+                GregorianCalendar p = v.getHoraPreparacao1();
+                v.embarqueCarga(v.getCarga().get(0));
+                p.add(GregorianCalendar.MINUTE, (int) v.getCarga().get(0).getTempoCarregamento());
+                for (int i = 1 ; i <  v.getCarga().size() && dataActual.after(p) ; i++ ){
+                    v.embarqueCarga(v.getCarga().get(i));
+                    p.add(GregorianCalendar.MINUTE, (int)v.getCarga().get(i).getTempoCarregamento());
+                }
+            }
+    }
 
     /**
      * Adiciona uma observação ao voo
@@ -788,5 +822,188 @@ public class AerogestSistema implements Serializable {
         }
 
         return r;
+    }
+
+    public int getNumVoos(){
+        return mapaVoos.get(dataActual).size();
+    }
+
+    public int getVoosEspecificados(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEspecificado))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosP1(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEmPreparacao1))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosP2(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEmPreparacao2))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosAtr(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosPtr(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooPronto))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosAr(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooNoAr))
+                num++;
+
+        return num;
+    }
+
+    public int getVoosCan(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooCancelado))
+                num++;
+
+        return num;
+    }
+
+    public int getNumCargasTotal(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+           num+=v.getCarga().size();
+
+        return num;
+    }
+
+    public int getNumCargasEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (!v.getEstado().equals(Voo.VooEspecificado) &&
+            !v.getEstado().equals(Voo.VooCancelado))
+                num+=v.getCargasCarregadas().size();
+
+        return num;
+    }
+
+    public int getNumCargasNEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooCancelado))
+                num+=v.getCarga().size();
+
+        return num;
+    }
+
+    public double getNumCargasPesoTotal(){
+        double num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            for( Carga c : v.getCarga())
+                num+=c.getPeso();
+
+        return num;
+    }
+
+    public double getNumCargasPesoEmb(){
+        double num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (!v.getEstado().equals(Voo.VooEspecificado) &&
+            !v.getEstado().equals(Voo.VooCancelado))
+                for( Carga c : v.getCarga())
+                    num+=v.getCargasCarregadas().size();
+
+        return num;
+    }
+
+    public double getNumCargasPesoNEmb(){
+        double num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooCancelado))
+                for( Carga c : v.getCarga())
+                    num+=v.getCarga().size();
+
+        return num;
+    }
+
+    public int getNumPassTotal(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+           num+=v.getPassageiros().size();
+
+        return num;
+    }
+
+    public int getNumPassEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (!v.getEstado().equals(Voo.VooEspecificado) &&
+                !v.getEstado().equals(Voo.VooCancelado) &&
+                !v.getEstado().equals(Voo.VooEmPreparacao1))
+                    num+=v.getPassageirosEmbarcados().size();
+
+        return num;
+    }
+
+    public int getNumPassNEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getEstado().equals(Voo.VooCancelado))
+                    num+=v.getPassageiros().size();
+
+        return num;
+    }
+
+    public int getNumPassComTotal(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getClass() == VooComercial.class)
+                num+=v.getPassageiros().size();
+
+        return num;
+    }
+
+    public int getNumPassComEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getClass() == VooComercial.class)
+                if (!v.getEstado().equals(Voo.VooEspecificado) &&
+                !v.getEstado().equals(Voo.VooCancelado) &&
+                !v.getEstado().equals(Voo.VooEmPreparacao1))
+                    num+=v.getPassageirosEmbarcados().size();
+
+        return num;
+    }
+
+    public int getNumPassComNEmb(){
+        int num = 0;
+        for (Voo v : mapaVoos.get(dataActual).values())
+            if (v.getClass() == VooComercial.class)
+                if (v.getEstado().equals(Voo.VooCancelado))
+                    num+=v.getPassageiros().size();
+
+        return num;
     }
 }

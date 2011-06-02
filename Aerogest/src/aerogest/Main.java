@@ -62,13 +62,9 @@ public class Main {
             }
 
 */
-        GerarDados.main();
-        a = new AerogestSistema();
-        
+        GerarDados.main();    
         a = SaveLoadDB.loadDB("aeroguest.obj");
-        
-        
-        
+          
         JFrame j = new JMain(a);
         // não deixa alterar o tamanho da janela
         j.setResizable(false);

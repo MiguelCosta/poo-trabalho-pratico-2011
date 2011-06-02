@@ -116,39 +116,35 @@ public class JMain extends javax.swing.JFrame {
 
     private void actualizarEstatisticas(){
         //voos
-        jLabel_Voos_Previstos;
-        jLabel_Voos_Especificados;
-        jLabel_Voos_P1;
-        jLabel_Voos_P2;
-        jLabel_Voos_Atr;
-        jLabel_Voos_Ptr;
-        jLabel_Voos_ar;
-        jLabel_Voos_Can;
-        jLabel_Voos_Conc;
+        jLabel_Voos_Previstos.setText(""+aerogestSistema.getNumVoos());
+        jLabel_Voos_Especificados.setText(""+aerogestSistema.getVoosEspecificados());
+        jLabel_Voos_P1.setText(""+aerogestSistema.getVoosP1());
+        jLabel_Voos_P2.setText(""+aerogestSistema.getVoosP2());
+        jLabel_Voos_Atr.setText(""+aerogestSistema.getVoosAtr());
+        jLabel_Voos_Ptr.setText(""+aerogestSistema.getVoosPtr());
+        jLabel_Voos_ar.setText(""+aerogestSistema.getVoosAr());
+        jLabel_Voos_Can.setText(""+aerogestSistema.getVoosCan());
+        jLabel_Voos_Conc.setText(""+aerogestSistema.getVoosAr());
 
         //pass
-        jLabel_Pass_total;
-        jLabel_Pass_emb;
-        jLabel_Pass_nemb;
-        jLabel_Pass_dif;
+        jLabel_Pass_total.setText(""+aerogestSistema.getNumPassTotal());
+        jLabel_Pass_emb.setText(""+aerogestSistema.getNumPassEmb());
+        jLabel_Pass_nemb.setText(""+aerogestSistema.getNumPassNEmb());
 
         //pass com
-        jLabel_Pass_Com_total;
-        jLabel_Pass_emb;
-        jLabel_Pass_nemb;
-        jLabel_Pass_dif;
+        jLabel_Pass_Com_total.setText(""+aerogestSistema.getNumPassComTotal());
+        jLabel_Pass_Com_emb.setText(""+aerogestSistema.getNumPassComEmb());
+        jLabel_Pass_Com_nemb.setText(""+aerogestSistema.getNumPassComNEmb());
 
         //carga
-        jLabel_Cargas_total;
-        jLabel_Cargas_emb;
-        jLabel_Cargas_nemb;
-        jLabel_Cargas_dif;
+        jLabel_Cargas_total.setText(""+aerogestSistema.getNumCargasTotal());
+        jLabel_Cargas_emb.setText(""+aerogestSistema.getNumCargasEmb());
+        jLabel_Cargas_nemb.setText(""+aerogestSistema.getNumCargasNEmb());
 
         //cargas peso
-        jLabel_Cargas_Peso_total;
-        jLabel_Cargas_Peso_emb;
-        jLabel_Cargas_Peso_nemb;
-        jLabel_Cargas_Peso_dif;
+        jLabel_Cargas_Peso_total.setText(""+aerogestSistema.getNumCargasPesoTotal());
+        jLabel_Cargas_Peso_emb.setText(""+aerogestSistema.getNumCargasPesoEmb());
+        jLabel_Cargas_Peso_nemb.setText(""+aerogestSistema.getNumCargasPesoNEmb());
     }
 
     private void actualizarData(GregorianCalendar data) {
@@ -578,8 +574,6 @@ public class JMain extends javax.swing.JFrame {
         jLabel_Pass_emb = new javax.swing.JLabel();
         jLabelData6 = new javax.swing.JLabel();
         jLabel_Pass_nemb = new javax.swing.JLabel();
-        jLabel_Pass_dif = new javax.swing.JLabel();
-        jLabelData15 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabelData20 = new javax.swing.JLabel();
         jLabel_Voos_Previstos = new javax.swing.JLabel();
@@ -606,8 +600,6 @@ public class JMain extends javax.swing.JFrame {
         jLabel_Pass_Com_emb = new javax.swing.JLabel();
         jLabelData12 = new javax.swing.JLabel();
         jLabel_Pass_Com_nemb = new javax.swing.JLabel();
-        jLabelData16 = new javax.swing.JLabel();
-        jLabel_Pass_Com_dif = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabelData18 = new javax.swing.JLabel();
         jLabel_Cargas_total = new javax.swing.JLabel();
@@ -615,16 +607,12 @@ public class JMain extends javax.swing.JFrame {
         jLabel_Cargas_emb = new javax.swing.JLabel();
         jLabelData40 = new javax.swing.JLabel();
         jLabel_Cargas_nemb = new javax.swing.JLabel();
-        jLabelData42 = new javax.swing.JLabel();
-        jLabel_Cargas_dif = new javax.swing.JLabel();
         jLabelData44 = new javax.swing.JLabel();
         jLabelData45 = new javax.swing.JLabel();
         jLabel_Cargas_Peso_total = new javax.swing.JLabel();
         jLabel_Cargas_Peso_emb = new javax.swing.JLabel();
-        jLabel_Cargas_Peso_dif = new javax.swing.JLabel();
         jLabelData49 = new javax.swing.JLabel();
         jLabel_Cargas_Peso_nemb = new javax.swing.JLabel();
-        jLabelData51 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
         jButtonActualizar = new javax.swing.JButton();
@@ -1333,10 +1321,6 @@ public class JMain extends javax.swing.JFrame {
 
         jLabel_Pass_nemb.setText("0");
 
-        jLabel_Pass_dif.setText("0");
-
-        jLabelData15.setText("Diferença");
-
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1353,13 +1337,9 @@ public class JMain extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel_Pass_emb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelData6)
-                            .addComponent(jLabelData15))
+                        .addComponent(jLabelData6)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Pass_dif, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jLabel_Pass_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                        .addComponent(jLabel_Pass_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -1376,10 +1356,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelData6)
                     .addComponent(jLabel_Pass_nemb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelData15)
-                    .addComponent(jLabel_Pass_dif)))
+                .addGap(23, 23, 23))
         );
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Voos"));
@@ -1504,10 +1481,6 @@ public class JMain extends javax.swing.JFrame {
 
         jLabel_Pass_Com_nemb.setText("0");
 
-        jLabelData16.setText("Diferença");
-
-        jLabel_Pass_Com_dif.setText("0");
-
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
@@ -1515,20 +1488,14 @@ public class JMain extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabelData16)
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel_Pass_Com_dif, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelData12)
-                            .addComponent(jLabelData8)
-                            .addComponent(jLabelData10))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Pass_Com_total, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jLabel_Pass_Com_emb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jLabel_Pass_Com_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                    .addComponent(jLabelData12)
+                    .addComponent(jLabelData8)
+                    .addComponent(jLabelData10))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_Pass_Com_total, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jLabel_Pass_Com_emb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jLabel_Pass_Com_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -1545,11 +1512,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelData12)
                     .addComponent(jLabel_Pass_Com_nemb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelData16)
-                    .addComponent(jLabel_Pass_Com_dif))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder("Carga"));
@@ -1566,10 +1529,6 @@ public class JMain extends javax.swing.JFrame {
 
         jLabel_Cargas_nemb.setText("0");
 
-        jLabelData42.setText("Diferença");
-
-        jLabel_Cargas_dif.setText("0");
-
         jLabelData44.setText("(Peso) Cargas Previstas:");
 
         jLabelData45.setText("(Peso) Cargas Embarcadas :");
@@ -1578,13 +1537,9 @@ public class JMain extends javax.swing.JFrame {
 
         jLabel_Cargas_Peso_emb.setText("0");
 
-        jLabel_Cargas_Peso_dif.setText("0");
-
         jLabelData49.setText("(Peso) Cargas Não Embarcados:");
 
         jLabel_Cargas_Peso_nemb.setText("0");
-
-        jLabelData51.setText("(Peso) Diferença");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -1595,26 +1550,22 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelData40)
                     .addComponent(jLabelData18)
-                    .addComponent(jLabelData38)
-                    .addComponent(jLabelData42))
+                    .addComponent(jLabelData38))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel_Cargas_total, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                     .addComponent(jLabel_Cargas_emb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Cargas_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Cargas_dif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel_Cargas_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(86, 86, 86)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelData49)
                     .addComponent(jLabelData45)
-                    .addComponent(jLabelData51)
                     .addComponent(jLabelData44))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_Cargas_Peso_total, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                     .addComponent(jLabel_Cargas_Peso_emb, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jLabel_Cargas_Peso_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jLabel_Cargas_Peso_dif, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                    .addComponent(jLabel_Cargas_Peso_nemb, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -1633,13 +1584,9 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelData40)
                     .addComponent(jLabel_Cargas_nemb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelData42)
-                    .addComponent(jLabel_Cargas_dif))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelData45)
                     .addComponent(jLabel_Cargas_Peso_emb))
@@ -1647,11 +1594,7 @@ public class JMain extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelData49)
                     .addComponent(jLabel_Cargas_Peso_nemb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelData51)
-                    .addComponent(jLabel_Cargas_Peso_dif))
-                .addContainerGap())
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1679,9 +1622,9 @@ public class JMain extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel17, 0, 121, Short.MAX_VALUE)))
+                        .addComponent(jPanel17, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel18, 0, 121, Short.MAX_VALUE)
+                .addComponent(jPanel18, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(48, 48, 48))
         );
 
@@ -2016,6 +1959,11 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAcercaActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        int hora = Integer.parseInt(jTextField_HORA.getText());
+        int minutos = Integer.parseInt(jTextField_MINUTOS.getText());
+
+        aerogestSistema.setHoraActual(hora,minutos);
+
         actualizarTabelas();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
@@ -2051,7 +1999,7 @@ public class JMain extends javax.swing.JFrame {
                 Voo v = aerogestSistema.getVoo(codigo_voo);
 
                 if (v.getPorta() != null && v.getTripulacao() != null)
-                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta());
+                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta(), aerogestSistema.getHoraActual());
             } else {
                 JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma aeronave associada!");
             }
@@ -2079,7 +2027,7 @@ public class JMain extends javax.swing.JFrame {
                 Voo v = aerogestSistema.getVoo(codigo_voo);
 
                 if (v.getPorta() != null && v.getTripulacao() != null)
-                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta());
+                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta(), aerogestSistema.getHoraActual());
             } else {
                 JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma tripulacao associada!");
             }
@@ -2106,7 +2054,7 @@ public class JMain extends javax.swing.JFrame {
                 Voo v = aerogestSistema.getVoo(codigo_voo);
 
                 if (v.getPorta() != null && v.getTripulacao() != null)
-                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta());
+                    v.setVooEmPreparacao1(v.getAeronave(),  v.getTripulacao(), v.getPorta(), aerogestSistema.getHoraActual());
             } else {
                 JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma porta associada!");
             }
@@ -2269,8 +2217,6 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelData1;
     private javax.swing.JLabel jLabelData10;
     private javax.swing.JLabel jLabelData12;
-    private javax.swing.JLabel jLabelData15;
-    private javax.swing.JLabel jLabelData16;
     private javax.swing.JLabel jLabelData18;
     private javax.swing.JLabel jLabelData2;
     private javax.swing.JLabel jLabelData20;
@@ -2285,29 +2231,23 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelData38;
     private javax.swing.JLabel jLabelData4;
     private javax.swing.JLabel jLabelData40;
-    private javax.swing.JLabel jLabelData42;
     private javax.swing.JLabel jLabelData44;
     private javax.swing.JLabel jLabelData45;
     private javax.swing.JLabel jLabelData49;
-    private javax.swing.JLabel jLabelData51;
     private javax.swing.JLabel jLabelData6;
     private javax.swing.JLabel jLabelData8;
     private javax.swing.JLabel jLabelPlacard;
     private javax.swing.JLabel jLabelPlacardDia;
     private javax.swing.JLabel jLabelPlacardHora;
-    private javax.swing.JLabel jLabel_Cargas_Peso_dif;
     private javax.swing.JLabel jLabel_Cargas_Peso_emb;
     private javax.swing.JLabel jLabel_Cargas_Peso_nemb;
     private javax.swing.JLabel jLabel_Cargas_Peso_total;
-    private javax.swing.JLabel jLabel_Cargas_dif;
     private javax.swing.JLabel jLabel_Cargas_emb;
     private javax.swing.JLabel jLabel_Cargas_nemb;
     private javax.swing.JLabel jLabel_Cargas_total;
-    private javax.swing.JLabel jLabel_Pass_Com_dif;
     private javax.swing.JLabel jLabel_Pass_Com_emb;
     private javax.swing.JLabel jLabel_Pass_Com_nemb;
     private javax.swing.JLabel jLabel_Pass_Com_total;
-    private javax.swing.JLabel jLabel_Pass_dif;
     private javax.swing.JLabel jLabel_Pass_emb;
     private javax.swing.JLabel jLabel_Pass_nemb;
     private javax.swing.JLabel jLabel_Pass_total;

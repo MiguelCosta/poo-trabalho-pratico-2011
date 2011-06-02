@@ -1310,11 +1310,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel17" min="0" pref="121" max="32767" attributes="0"/>
+                              <Component id="jPanel17" min="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jPanel18" min="0" pref="121" max="32767" attributes="0"/>
+                      <Component id="jPanel18" min="0" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1347,15 +1347,9 @@
                                   <Component id="jLabel_Pass_emb" pref="146" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelData6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelData15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jLabelData6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel_Pass_dif" alignment="0" pref="146" max="32767" attributes="0"/>
-                                      <Component id="jLabel_Pass_nemb" alignment="0" pref="146" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jLabel_Pass_nemb" pref="146" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1379,11 +1373,7 @@
                               <Component id="jLabelData6" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Pass_nemb" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelData15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_Pass_dif" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1417,16 +1407,6 @@
                 <Component class="javax.swing.JLabel" name="jLabel_Pass_nemb">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel_Pass_dif">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelData15">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Diferen&#xe7;a"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1632,24 +1612,15 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabelData16" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                                  <Component id="jLabel_Pass_Com_dif" pref="146" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelData12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelData8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelData10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel_Pass_Com_total" alignment="0" pref="146" max="32767" attributes="0"/>
-                                      <Component id="jLabel_Pass_Com_emb" alignment="0" pref="146" max="32767" attributes="0"/>
-                                      <Component id="jLabel_Pass_Com_nemb" alignment="0" pref="146" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jLabelData12" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelData8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelData10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel_Pass_Com_total" alignment="0" pref="146" max="32767" attributes="0"/>
+                              <Component id="jLabel_Pass_Com_emb" alignment="0" pref="146" max="32767" attributes="0"/>
+                              <Component id="jLabel_Pass_Com_nemb" alignment="0" pref="146" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1672,12 +1643,7 @@
                               <Component id="jLabelData12" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Pass_Com_nemb" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelData16" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_Pass_Com_dif" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <EmptySpace pref="31" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1713,16 +1679,6 @@
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabelData16">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Diferen&#xe7;a"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel_Pass_Com_dif">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel18">
@@ -1743,20 +1699,17 @@
                               <Component id="jLabelData40" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelData18" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelData38" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelData42" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel_Cargas_total" alignment="0" pref="94" max="32767" attributes="1"/>
                               <Component id="jLabel_Cargas_emb" alignment="0" max="32767" attributes="1"/>
                               <Component id="jLabel_Cargas_nemb" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jLabel_Cargas_dif" alignment="0" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabelData49" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelData45" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelData51" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelData44" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -1764,7 +1717,6 @@
                               <Component id="jLabel_Cargas_Peso_total" alignment="0" pref="126" max="32767" attributes="0"/>
                               <Component id="jLabel_Cargas_Peso_emb" alignment="0" pref="126" max="32767" attributes="0"/>
                               <Component id="jLabel_Cargas_Peso_nemb" alignment="0" pref="126" max="32767" attributes="0"/>
-                              <Component id="jLabel_Cargas_Peso_dif" alignment="0" pref="126" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1789,15 +1741,10 @@
                               <Component id="jLabelData40" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Cargas_nemb" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelData42" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_Cargas_dif" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="31" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="23" max="32767" attributes="0"/>
+                          <EmptySpace pref="19" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelData45" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Cargas_Peso_emb" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1807,12 +1754,7 @@
                               <Component id="jLabelData49" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_Cargas_Peso_nemb" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelData51" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_Cargas_Peso_dif" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1848,16 +1790,6 @@
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabelData42">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Diferen&#xe7;a"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel_Cargas_dif">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelData44">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="(Peso) Cargas Previstas:"/>
@@ -1878,11 +1810,6 @@
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel_Cargas_Peso_dif">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelData49">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="(Peso) Cargas N&#xe3;o Embarcados:"/>
@@ -1891,11 +1818,6 @@
                 <Component class="javax.swing.JLabel" name="jLabel_Cargas_Peso_nemb">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelData51">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="(Peso) Diferen&#xe7;a"/>
                   </Properties>
                 </Component>
               </SubComponents>

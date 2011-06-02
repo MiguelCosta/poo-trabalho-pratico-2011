@@ -28,6 +28,7 @@ public abstract class Voo implements Serializable {
     private String destino;
     private GregorianCalendar horaPartida;
     private GregorianCalendar horaPreparacao1;
+    private GregorianCalendar horaTakeOff;
     private String entidade;
     private ArrayList<Passageiro> passageiros;
     private ArrayList<Carga> carga;
@@ -325,7 +326,7 @@ public abstract class Voo implements Serializable {
      * @param tripulacao
      * @param porta
      */
-    public void setVooEmPreparacao1(Aeronave a, Tripulacao t, Porta p) {
+    public void setVooEmPreparacao1(Aeronave a, Tripulacao t, Porta p, GregorianCalendar h) {
         aeronave = a;
         tripulacao = t;
         porta = p;
@@ -333,7 +334,7 @@ public abstract class Voo implements Serializable {
         observacoes = "";
         listaEmbarqueCarga = new ArrayList<String>();
         listaEmbarquePassageiros = new ArrayList<String>();
-        horaPreparacao1 = new GregorianCalendar();
+        horaPreparacao1 = h;
     }
 
     /**
@@ -372,7 +373,8 @@ public abstract class Voo implements Serializable {
     /**
      * Alterar o estado do Voo para VooNoAr
      */
-    public void setVooAr() {
+    public void setVooAr(GregorianCalendar h) {
+        horaTakeOff = h;
         estado = VooNoAr;
     }
 
