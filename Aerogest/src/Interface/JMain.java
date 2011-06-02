@@ -1638,13 +1638,22 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEspecificadoAtribuirTripulacaoActionPerformed
 
     private void jButtonEspecificadoTransitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoTransitarActionPerformed
-
         String codigo_voo = jComboBoxEspecificados.getSelectedItem().toString();
-        if (aerogestSistema.vooTemAeronave(codigo_voo) && aerogestSistema.vooTemPorta(codigo_voo)) {
-            aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooEmPreparacao1);
+        if (aerogestSistema.vooTemAeronave(codigo_voo) ) {
+            if (aerogestSistema.vooTemPorta(codigo_voo)) {
+                if (aerogestSistema.vooTemTripulacao(codigo_voo)){
+                    aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooEmPreparacao1);
+                    String obs = JOptionPane.showInputDialog("Observações: ");
+                    aerogestSistema.adicionaObservacao(codigo_voo, obs);
+                }
+                else
+                    JOptionPane.showMessageDialog(rootPane, "O voo ainda não tem Tripulacao");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "O voo ainda nao tem porta");
+            }
+        }  else {
+            JOptionPane.showMessageDialog(rootPane, "O voo ainda nao tem aeronave");
         }
-        String obs = JOptionPane.showInputDialog("Observações: ");
-        aerogestSistema.adicionaObservacao(codigo_voo, obs);
     }//GEN-LAST:event_jButtonEspecificadoTransitarActionPerformed
 
     private void jButtonEspecificadoAtribuirPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEspecificadoAtribuirPortaActionPerformed
@@ -1666,15 +1675,12 @@ public class JMain extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "O voo " + codigo_voo + " já tem uma porta associada!");
             }
-
         }
-
-
     }//GEN-LAST:event_jButtonEspecificadoAtribuirPortaActionPerformed
 
     private void jButtonPreparacao1TransitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreparacao1TransitarActionPerformed
         String codigo_voo = jComboBoxPreparacao1.getSelectedItem().toString();
-        if (aerogestSistema.vooTemAeronave(codigo_voo) && aerogestSistema.vooTemPorta(codigo_voo)) {
+        if (aerogestSistema.vooTemCarga(codigo_voo)) {
             aerogestSistema.vooMudaEstado(codigo_voo, Voo.VooEmPreparacao2);
         }
         String obs = JOptionPane.showInputDialog("Observações: ");

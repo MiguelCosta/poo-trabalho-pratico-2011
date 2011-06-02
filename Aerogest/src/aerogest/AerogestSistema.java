@@ -698,5 +698,10 @@ public class AerogestSistema implements Serializable {
             }
 
         mapaVoos.get(dataActual).get(voo).setTripulacao(t);
+        t.setOcupacao(true);
+    }
+
+    public boolean vooTemCarga(String cod){
+        return mapaVoos.get(dataActual).get(cod).getCarga() != null;
     }
 }

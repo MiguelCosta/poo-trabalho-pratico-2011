@@ -340,7 +340,7 @@ public class GerarDados {
 
     private static void geraTripulacoes() {
         Tripulacao t = new Tripulacao();
-
+        t.setCodigo("tri1");
         t.setComandante(comandantes.get(0));
         comandantes.get(0).setLivre(false);
 
@@ -356,6 +356,78 @@ public class GerarDados {
         tripulacao.add(t);
 
         t = new Tripulacao();
+        t.setCodigo("tri2");
+        t.setComandante(comandantes.get(1));
+        comandantes.get(1).setLivre(false);
+
+        t.setCoPiloto(coPilotos.get(1));
+        coPilotos.get(1).setLivre(false);
+
+        t.addTripulante(tripulantes.get(2));
+        tripulantes.get(2).setLivre(false);
+
+        t.addTripulante(tripulantes.get(3));
+        tripulantes.get(3).setLivre(false);
+
+        tripulacao.add(t);
+
+        t = new Tripulacao();
+        t.setCodigo("tri3");
+        t.setComandante(comandantes.get(1));
+        comandantes.get(1).setLivre(false);
+
+        t.setCoPiloto(coPilotos.get(2));
+        coPilotos.get(1).setLivre(false);
+
+        tripulacao.add(t);
+
+        t = new Tripulacao();
+        t.setCodigo("tri4");
+        t.setComandante(comandantes.get(4));
+        comandantes.get(1).setLivre(false);
+
+        t.setCoPiloto(coPilotos.get(1));
+        coPilotos.get(1).setLivre(false);
+
+        t.addTripulante(tripulantes.get(2));
+        tripulantes.get(2).setLivre(false);
+
+        t.addTripulante(tripulantes.get(3));
+        tripulantes.get(3).setLivre(false);
+
+        tripulacao.add(t);
+
+        t = new Tripulacao();
+        t.setCodigo("tri5");
+        t.setComandante(comandantes.get(1));
+        comandantes.get(1).setLivre(false);
+
+        t.setCoPiloto(coPilotos.get(4));
+        coPilotos.get(1).setLivre(false);
+
+        t.addTripulante(tripulantes.get(2));
+        tripulantes.get(2).setLivre(false);
+
+        t.addTripulante(tripulantes.get(3));
+        tripulantes.get(3).setLivre(false);
+
+        tripulacao.add(t);
+
+        t = new Tripulacao();
+        t.setCodigo("tri6");
+        t.setComandante(comandantes.get(1));
+        comandantes.get(1).setLivre(false);
+
+        t.setCoPiloto(coPilotos.get(1));
+        coPilotos.get(1).setLivre(false);
+
+        t.addTripulante(tripulantes.get(2));
+        tripulantes.get(2).setLivre(false);
+
+        tripulacao.add(t);
+
+        t = new Tripulacao();
+        t.setCodigo("tri7");
         t.setComandante(comandantes.get(1));
         comandantes.get(1).setLivre(false);
 
@@ -443,8 +515,10 @@ public class GerarDados {
         carga.add(cargaNormal.get(4));
         carga.add(cargaNormal.get(5));
         VooComercial v4 = new VooComercial("vc4", "Madrid", new GregorianCalendar(), "TAP", passag, carga);
-        v2.setVooEmPreparacao1(aeronaves.get(2), tripulacao.get(1), portas.get(2));
-        v2.setVooAtrasado(new GregorianCalendar());
+        v4.setVooEmPreparacao1(aeronaves.get(2), tripulacao.get(1), portas.get(2));
+        v4.setVooAtrasado(new GregorianCalendar());
+        v4.getHoraPartida().add(GregorianCalendar.MINUTE, 1);
+        v4.setObservacoes("Nova Hora : " + v4.getHoraPartida().HOUR_OF_DAY + ":" + v4.getHoraPartida().MINUTE);
         voosComererciais.add(v4);
 
         passag = new ArrayList<Passageiro>();
@@ -456,6 +530,7 @@ public class GerarDados {
         carga.add(cargaNormal.get(4));
         carga.add(cargaNormal.get(5));
         VooComercial v5 = new VooComercial("vc5", "Porto", new GregorianCalendar(), "VAIC AIR", passag, carga);
+        v5.setEstado(Voo.VooEmPreparacao2);
         voosComererciais.add(v5);
 
         passag = new ArrayList<Passageiro>();
