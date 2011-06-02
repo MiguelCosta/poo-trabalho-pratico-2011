@@ -468,6 +468,7 @@ public class GerarDados {
     }
 
     private static void geraVoosComerciais() {
+        // <editor-fold defaultstate="collapsed" desc="Voo Pronto">
         ArrayList<Passageiro> passag = new ArrayList<Passageiro>();
         passag.add(passageiros.get(0));
         passag.add(passageiros.get(1));
@@ -476,14 +477,43 @@ public class GerarDados {
         carga.add(cargaAlimentar.get(0));
         carga.add(cargaNormal.get(0));
         carga.add(cargaNormal.get(1));
-        VooComercial v1 = new VooComercial("vc1", "Paris", new GregorianCalendar(), "TAP", passag, carga);
+        GregorianCalendar horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,5);
+        VooComercial v1 = new VooComercial("vc1", "Paris", horaPartida, "TAP", passag, carga);
         v1.setTripulacao(tripulacao.get(0));
         v1.setPorta(portas.get(0));
         v1.setAeronave(aeronaves.get(0));
+        v1.embarqueCargaALL();
+        v1.embarquePassageiroALL();
         v1.setVooPronto();
         voosComererciais.add(v1);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Voo Atrasado">
+        passag = new ArrayList<Passageiro>();
+        passag.add(passageiros.get(0));
+        passag.add(passageiros.get(1));
+        passag.add(passageiros.get(2));
+        carga = new ArrayList<Carga>();
+        carga.add(cargaNormal.get(0));
+        carga.add(cargaNormal.get(1));
+        carga.add(cargaNormal.get(2));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,10);
+        VooComercial v2 = new VooComercial("vc2", "London", horaPartida, "TAP", passag, carga);
+        v2.setTripulacao(tripulacao.get(0));
+        v2.setPorta(portas.get(0));
+        v2.setAeronave(aeronaves.get(0));
+        v2.embarqueCargaALL();
+        v2.embarquePassageiro(passageiros.get(0));
+        v2.embarquePassageiro(passageiros.get(1));
+        v2.setVooAtrasado(horaPartida);
+        voosComererciais.add(v2);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 2">
         passag = new ArrayList<Passageiro>();
         carga = new ArrayList<Carga>();
         carga.add(cargaAlimentar.get(1));
@@ -491,58 +521,282 @@ public class GerarDados {
         carga.add(cargaAlimentar.get(3));
         passag.add(passageiros.get(3));
         passag.add(passageiros.get(4));
-        VooComercial v2 = new VooComercial("vc2", "Porto", new GregorianCalendar(), "TAP", passag, carga);
-        v2.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
-        voosComererciais.add(v2);
-
-        passag = new ArrayList<Passageiro>();
-        carga = new ArrayList<Carga>();
-        passag.add(passageiros.get(5));
-        passag.add(passageiros.get(6));
-        carga.add(cargaNormal.get(2));
-        carga.add(cargaNormal.get(3));
-        carga.add(cargaNormal.get(4));
-        carga.add(cargaNormal.get(5));
-        VooComercial v3 = new VooComercial("vc3", "Lisboa", new GregorianCalendar(), "RAIANAIR", passag, carga);
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,15);
+        VooComercial v3 = new VooComercial("vc3", "Porto", horaPartida, "TAP", passag, carga);
+        v3.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        v3.embarqueCargaALL();
+        v3.embarquePassageiro(passageiros.get(3));
         voosComererciais.add(v3);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 2">
         passag = new ArrayList<Passageiro>();
         carga = new ArrayList<Carga>();
-        passag.add(passageiros.get(7));
-        passag.add(passageiros.get(8));
-        carga.add(cargaNormal.get(2));
-        carga.add(cargaNormal.get(3));
-        carga.add(cargaNormal.get(4));
-        carga.add(cargaNormal.get(5));
-        VooComercial v4 = new VooComercial("vc4", "Madrid", new GregorianCalendar(), "TAP", passag, carga);
-        v4.setVooEmPreparacao1(aeronaves.get(2), tripulacao.get(1), portas.get(2));
-        v4.setVooAtrasado(new GregorianCalendar());
-        v4.getHoraPartida().add(GregorianCalendar.MINUTE, 1);
-        v4.setObservacoes("Nova Hora : " + v4.getHoraPartida().HOUR_OF_DAY + ":" + v4.getHoraPartida().MINUTE);
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,17);
+        VooComercial v4 = new VooComercial("vc4", "Berlim", horaPartida, "TAP", passag, carga);
+        v4.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        v4.embarqueCargaALL();
         voosComererciais.add(v4);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 2">
         passag = new ArrayList<Passageiro>();
         carga = new ArrayList<Carga>();
-        passag.add(passageiros.get(7));
-        passag.add(passageiros.get(8));
-        carga.add(cargaNormal.get(2));
-        carga.add(cargaNormal.get(3));
-        carga.add(cargaNormal.get(4));
-        carga.add(cargaNormal.get(5));
-        VooComercial v5 = new VooComercial("vc5", "Porto", new GregorianCalendar(), "VAIC AIR", passag, carga);
-        v5.setEstado(Voo.VooEmPreparacao2);
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,18);
+        VooComercial v5 = new VooComercial("vc5", "Paris", horaPartida, "TAP", passag, carga);
+        v5.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        v5.embarqueCargaALL();
         voosComererciais.add(v5);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 1">
         passag = new ArrayList<Passageiro>();
         carga = new ArrayList<Carga>();
-        passag.add(passageiros.get(7));
-        passag.add(passageiros.get(8));
-        carga.add(cargaNormal.get(2));
-        carga.add(cargaNormal.get(3));
-        carga.add(cargaNormal.get(4));
-        carga.add(cargaNormal.get(5));
-        VooComercial v6 = new VooComercial("vc6", "Berlim", new GregorianCalendar(), "VAIC AIR", passag, carga);
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,30);
+        VooComercial v6 = new VooComercial("vc6", "Paris", horaPartida, "TAP", passag, carga);
+        v6.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        v6.embarqueCarga(cargaAlimentar.get(1));
+        v6.embarqueCarga(cargaAlimentar.get(2));
         voosComererciais.add(v6);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 1">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,40);
+        VooComercial v7 = new VooComercial("vc7", "New York", horaPartida, "TAP", passag, carga);
+        v7.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        voosComererciais.add(v7);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Preparacao 1">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        horaPartida.set(GregorianCalendar.MINUTE,40);
+        VooComercial v8 = new VooComercial("vc8", "Brasil", horaPartida, "VAIC AIR", passag, carga);
+        v8.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1));
+        voosComererciais.add(v8);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 1);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v9 = new VooComercial("vc9", "Porto", horaPartida, "VAIC AIR", passag, carga);
+        v9.setAeronave(aeronaves.get(1));
+        v9.setPorta(portas.get(1));
+        voosComererciais.add(v9);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 1);
+        horaPartida.set(GregorianCalendar.MINUTE,30);
+        VooComercial v10 = new VooComercial("vc10", "Porto", horaPartida, "VAIC AIR", passag, carga);
+        v10.setAeronave(aeronaves.get(1));
+        voosComererciais.add(v10);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 1);
+        horaPartida.set(GregorianCalendar.MINUTE,45);
+        VooComercial v11 = new VooComercial("vc11", "Lisboa", horaPartida, "VAIC AIR", passag, carga);
+        voosComererciais.add(v11);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 2);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v12 = new VooComercial("vc12", "London", horaPartida, "RAIANAIR", passag, carga);
+        voosComererciais.add(v12);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 3);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v13 = new VooComercial("vc13", "Marrocos", horaPartida, "VAIC AIR", passag, carga);
+        voosComererciais.add(v13);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 7);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v14 = new VooComercial("vc14", "Porto", horaPartida, "TAP", passag, carga);
+        voosComererciais.add(v14);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 14);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v15 = new VooComercial("vc15", "Madeira", horaPartida, "TAP", passag, carga);
+        voosComererciais.add(v15);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 14);
+        horaPartida.set(GregorianCalendar.MINUTE,30);
+        VooComercial v16 = new VooComercial("vc16", "Açores", horaPartida, "VAIC AIR", passag, carga);
+        voosComererciais.add(v16);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 14);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v17 = new VooComercial("vc17", "Marrocos", horaPartida, "RAIANAIR", passag, carga);
+        voosComererciais.add(v17);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 20);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v18 = new VooComercial("vc18", "Marrocos", horaPartida, "RAIANAIR", passag, carga);
+        voosComererciais.add(v18);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 21);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v19 = new VooComercial("vc19", "Porto", horaPartida, "TAP", passag, carga);
+        voosComererciais.add(v19);
+        // </editor-fold>
+
+        // <editor-fold defaultstate="collapsed" desc="Voo Especificado">
+        passag = new ArrayList<Passageiro>();
+        carga = new ArrayList<Carga>();
+        carga.add(cargaAlimentar.get(1));
+        carga.add(cargaAlimentar.get(2));
+        carga.add(cargaAlimentar.get(3));
+        passag.add(passageiros.get(3));
+        passag.add(passageiros.get(4));
+        horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 23);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        VooComercial v20 = new VooComercial("vc20", "Lisboa", horaPartida, "TAP", passag, carga);
+        voosComererciais.add(v20);
+        // </editor-fold>
     }
 
     private static void geraVoosGovernamentais() {
@@ -559,7 +813,11 @@ public class GerarDados {
         ArrayList<Passageiro> convi = new ArrayList<Passageiro>();
         convi.add(passageiros.get(12));
 
-        voosGovernamentais.add(new VooGovernamental("vg1", "Londres", new GregorianCalendar(), "TAP", carga, mGov, jorn, convi));
+        GregorianCalendar horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 15);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+
+        voosGovernamentais.add(new VooGovernamental("vg1", "Londres", horaPartida, "TAP", carga, mGov, jorn, convi));
     }
 
     private static void geraVoosMilitares() {
@@ -570,7 +828,11 @@ public class GerarDados {
         ArrayList<Carga> carga = new ArrayList<Carga>();
         carga.add(cargaNormal.get(0));
 
-        voosMilitares.add(new VooMilitar("vm1", "Libia", new GregorianCalendar(), "FA", passag, carga, 150, "Exercito", "codComu1"));
+        GregorianCalendar horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 18);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+
+        voosMilitares.add(new VooMilitar("vm1", "Libia", horaPartida, "FA", passag, carga, 150, "Exercito", "codComu1"));
     }
 
     private static void geraVoosPrivados() {
@@ -584,7 +846,11 @@ public class GerarDados {
         carga.add(cargaNormal.get(0));
         carga.add(cargaNormal.get(1));
         carga.add(cargaVeiculo.get(1));
-        voosPrivados.add(new VooPrivado("vp1", "Lisboa", new GregorianCalendar(), "TAP", passag, carga));
+
+        GregorianCalendar horaPartida = new GregorianCalendar();
+        horaPartida.set(GregorianCalendar.HOUR_OF_DAY, 10);
+        horaPartida.set(GregorianCalendar.MINUTE,00);
+        voosPrivados.add(new VooPrivado("vp1", "Lisboa", horaPartida, "TAP", passag, carga));
     }
 
     private static void geraMapaVoos() {
@@ -624,6 +890,8 @@ public class GerarDados {
 
     private static void gereHoraSistema() {
         dataActual = new GregorianCalendar();
+        dataActual.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        dataActual.set(GregorianCalendar.MINUTE, 0);
     }
 
     private static void geraAerogestSistema() {

@@ -13,7 +13,6 @@ import Classes.Porta;
 import Classes.Tripulacao;
 import Classes.Tripulante;
 import java.io.Serializable;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,7 +34,7 @@ public class AerogestSistema implements Serializable {
     private Map<String, Comandante> comandantes;
     private Map<String, CoPiloto> coPilotos;
     private Map<String, Tripulante> tribulantesAdicionais;
-    private List<Tripulacao> tripulacao;
+    private Map<String ,Tripulacao> tripulacao;
     private Map<String, Aeronave> aeronaves;
     private Map<String, Porta> portas;
     private Map<String, Carga> cargas;
@@ -47,7 +46,7 @@ public class AerogestSistema implements Serializable {
         comandantes = new HashMap<String, Comandante>();                    // TreeMap??
         coPilotos = new HashMap<String, CoPiloto>();                        // TreeMap??
         tribulantesAdicionais = new HashMap<String, Tripulante>();          // TreeMap??
-        tripulacao = new ArrayList<Tripulacao>();                           // e aqui ??
+        tripulacao = new TreeMap<String, Tripulacao>();                          // e aqui ??
         aeronaves = new TreeMap<String, Aeronave>();
         portas = new TreeMap<String, Porta>();
         cargas = new HashMap<String, Carga>();                              //TreeMap??
@@ -136,12 +135,12 @@ public class AerogestSistema implements Serializable {
      * Tripulacao do sistema
      * @return List<Tripulcao>
      */
-    public List<Tripulacao> getTripulacao() {
-        List<Tripulacao> r = new ArrayList<Tripulacao>();
-        for (Tripulacao t : tripulacao) {
-            r.add(t.clone());
+    public Map<String, Tripulacao> getTripulacao() {
+        Map<String, Tripulacao> tr = new TreeMap<String, Tripulacao>();
+        for (Tripulacao t : tripulacao.values()) {
+            tr.put(t.getCodigo(),t.clone());
         }
-        return r;
+        return tr;
     }
 
     /**
@@ -276,7 +275,7 @@ public class AerogestSistema implements Serializable {
     public String imprimeTripulacoes() {
         StringBuilder s = new StringBuilder("TRIPULACOES\n**************************\n");
 
-        for (Tripulacao t : tripulacao) {
+        for (Tripulacao t : tripulacao.values()) {
             s.append(t.toString());
         }
 
@@ -383,7 +382,7 @@ public class AerogestSistema implements Serializable {
      * @param t 
      */
     public void adicionaTripulacao(Tripulacao t) {
-        tripulacao.add(t.clone());
+        tripulacao.put(t.toString(),t.clone());
     }
 
     /**
@@ -391,7 +390,7 @@ public class AerogestSistema implements Serializable {
      * @param t 
      */
     public void removeTripulacao(Tripulacao t) {
-        tripulacao.remove(t);
+        tripulacao.remove(t.getCodigo());
     }
 
     /**
@@ -400,7 +399,7 @@ public class AerogestSistema implements Serializable {
      */
     public void adicionaTripulacaoArray(List<Tripulacao> t) {
         for (Tripulacao x : t) {
-            tripulacao.add(x.clone());
+            tripulacao.put(x.getCodigo(),x.clone());
         }
     }
 
@@ -468,6 +467,10 @@ public class AerogestSistema implements Serializable {
         cargas.remove(carga.getCodigo());
     }
 
+    /**
+     * Adicionar Cargas ao Sistema
+     * @param List<Carga>
+     */
     public void adicionaCargaList(List<Carga> cs) {
         for (Carga c : cs) {
             cargas.put(c.getCodigo(), c.clone());
@@ -641,7 +644,6 @@ public class AerogestSistema implements Serializable {
         alteraEstadoAeronave(codAeronave);
         mapaVoos.get(dataActual).get(voo).setAeronave(a);
     }
-
     
     /**
      * Atribuida uma porta a um Voo
@@ -665,6 +667,10 @@ public class AerogestSistema implements Serializable {
         return mapaVoos.get(dataActual).get(voo).getPorta() != null;
     }
 
+    /**
+     * Devolve as portas Livres do Sistema
+     * @return List<Porta>
+     */
     public List<Porta> portasLivres(){
         List<Porta> ps = new ArrayList<Porta>();
 
@@ -688,7 +694,6 @@ public class AerogestSistema implements Serializable {
         mapaVoos.get(dataActual).get(voo).setCarga((ArrayList<Carga>) cs);
     }
 
-    
     /**
      * Muda o estado de um Voo
      * @param codvoo
@@ -709,22 +714,20 @@ public class AerogestSistema implements Serializable {
     /**
      * Transita um Voo automaticamente
      */
-    public void transitaAutomatico(){
+    /*public void transitaAutomatico(){
         for( Voo v : mapaVoos.get(dataActual).values())
             if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
             (new GregorianCalendar()).after(v.getHoraPartida()))
                 v.setEstado(Voo.VooPronto);
-    }
+    }*/
 
     /**
-     * 
+     * Adiciona uma observação ao voo
      * @param voo
      * @param obs 
      */
     public void adicionaObservacao(String voo, String obs){
         mapaVoos.get(dataActual).get(voo).setObservacoes(obs);
-        System.out.println(mapaVoos.get(dataActual).get(voo).toString());
-        System.out.println(obs);
     }
 
     /**
@@ -741,13 +744,8 @@ public class AerogestSistema implements Serializable {
      * @param cod
      * @param estado 
      */
-    public void tripulacaoMudaEstado(String cod, boolean estado){
-        boolean found = false;
-        for (int i = 0 ; i < tripulacao.size() && !found ; i++)
-            if ( tripulacao.get(i).getCodigo().equals(cod)){
-                found = true;
-                tripulacao.get(i).setOcupacao(estado);
-            }
+    public void tripulacaoMudaEstado(String cod){
+        tripulacao.get(cod).setLivre(false);
     }
 
     /**
@@ -756,24 +754,39 @@ public class AerogestSistema implements Serializable {
      * @param voo 
      */
     public void atribui_tripulacao(String cod, String voo){
-        Tripulacao t = null;
-        boolean found = false;
-        for (int i = 0 ; i < tripulacao.size() && !found ; i++)
-            if ( tripulacao.get(i).getCodigo().equals(cod)){
-                found = true;
-                t = tripulacao.get(i);
-            }
-
-        mapaVoos.get(dataActual).get(voo).setTripulacao(t);
-        t.setOcupacao(true);
+        mapaVoos.get(dataActual).get(voo).setTripulacao(tripulacao.get(cod));
+        tripulacao.get(cod).setLivre(false);
     }
 
     /**
      * Verifica se um voo tem carga
      * @param cod
-     * @return 
+     * @return boolean
      */
     public boolean vooTemCarga(String cod){
         return mapaVoos.get(dataActual).get(cod).getCarga() != null;
+    }
+
+    /**
+     * Retorna um Voo
+     * @param cod
+     * @return Voo
+     */
+    public Voo getVoo(String cod){
+        return mapaVoos.get(dataActual).get(cod);
+    }
+
+    /**
+     * Lista de tripulacoes
+     * @return List<Tripulacao>
+     */
+    public List<Tripulacao> tripulacoesLivres(){
+        List<Tripulacao> r = new ArrayList<Tripulacao>();
+
+        for(Tripulacao a : tripulacao.values()){
+            if(a.getLivre()) r.add(a.clone());
+        }
+
+        return r;
     }
 }

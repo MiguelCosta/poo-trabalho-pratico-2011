@@ -27,6 +27,7 @@ public abstract class Voo implements Serializable {
     private String codigoVoo;
     private String destino;
     private GregorianCalendar horaPartida;
+    private GregorianCalendar horaPreparacao1;
     private String entidade;
     private ArrayList<Passageiro> passageiros;
     private ArrayList<Carga> carga;
@@ -56,6 +57,9 @@ public abstract class Voo implements Serializable {
         this.entidade = entidade;
         this.passageiros = passageiros;
         this.carga = carga;
+        listaEmbarqueCarga = new ArrayList<String>();
+        listaEmbarquePassageiros = new ArrayList<String>();
+        observacoes = "";
         estado = VooEspecificado;
     }
 
@@ -71,6 +75,9 @@ public abstract class Voo implements Serializable {
         passageiros = voo.getPassageiros();
         carga = voo.getCarga();
         estado = voo.getEstado();
+        listaEmbarqueCarga = voo.getCargasCarregadas();
+        listaEmbarquePassageiros = voo.getPassageirosEmbarcados();
+        observacoes = "";
     }
 
     /** gets */
@@ -182,6 +189,47 @@ public abstract class Voo implements Serializable {
         return observacoes;
     }
 
+    /**
+     * Tempo de Carregamento da Carga do Voo
+     * @return double
+     */
+    public double getTempoCarregamento(){
+        double soma = 0;
+        for (Carga c : carga)
+            soma+=c.getTempoCarregamento();
+        return soma;
+    }
+
+    /**
+     * Cargas carregadas
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getCargasCarregadas(){
+        ArrayList<String> ss = new ArrayList<String>();
+
+        for (String s : listaEmbarqueCarga)
+            ss.add(s);
+
+        return ss;
+    }
+
+    /**
+     * Passageiros Embarcados
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getPassageirosEmbarcados(){
+        ArrayList<String> ss = new ArrayList<String>();
+
+        for (String s : listaEmbarquePassageiros)
+            ss.add(s);
+
+        return ss;
+    }
+
+    public GregorianCalendar getHoraPreparacao1(){
+        return horaPreparacao1;
+    }
+
     /** sets */
     /**
      * Alterar o Codigo do Vo
@@ -285,6 +333,7 @@ public abstract class Voo implements Serializable {
         observacoes = "";
         listaEmbarqueCarga = new ArrayList<String>();
         listaEmbarquePassageiros = new ArrayList<String>();
+        horaPreparacao1 = new GregorianCalendar();
     }
 
     /**
@@ -364,7 +413,7 @@ public abstract class Voo implements Serializable {
      * @param passageiro
      */
     public void embarquePassageiro(Passageiro p) {
-        if (isPassagerVoo(p)) {
+        if (isPassagerVoo(p) && listaEmbarquePassageiros.size() < passageiros.size()) {
             listaEmbarquePassageiros.add(p.getCodPassageiro());
             if (listaEmbarquePassageiros.size() == passageiros.size()) {
                 setVooPronto();
@@ -377,15 +426,14 @@ public abstract class Voo implements Serializable {
      * @param c 
      */
     public void embarqueCarga(Carga c) {
-        if (isCargaVoo(c)) {
+        if (isCargaVoo(c) && listaEmbarqueCarga.size() < carga.size()) {
             listaEmbarqueCarga.add(c.getCodigo());
             if (listaEmbarqueCarga.size() == carga.size()) {
                 setVooEmPreparacao2();
             }
         }
     }
-    
-    
+     
     /**
      * Embarcar um passageiro no Voo
      * @param passageiro
