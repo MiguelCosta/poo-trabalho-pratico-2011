@@ -5,22 +5,10 @@
 
 package aerogest;
 
-import Classes.Passageiro;
-import Classes.Carga;
-import Classes.Comandante;
-import Classes.Porta;
-import Classes.Voo;
-import Classes.VooMilitar;
 import Importer.GerarDados;
 import Importer.SaveLoadDB;
 import Interface.JMain;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.TreeMap;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Possui todos os métodos necessários para iniciar o sistema

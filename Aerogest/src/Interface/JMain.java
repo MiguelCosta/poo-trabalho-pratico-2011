@@ -111,6 +111,7 @@ public class JMain extends javax.swing.JFrame {
         actualizarTabelaPlacard();
         actualizarComboBoxs();
         actualizarEstatisticas();
+        actualizarData(aerogestSistema.getHoraActual());
         //aerogestSistema.transitaAutomatico();
     }
 
@@ -150,7 +151,7 @@ public class JMain extends javax.swing.JFrame {
     private void actualizarData(GregorianCalendar data) {
         String s = "Data: ";
         s = s + diaEmString(data);
-        s = s + " " + data.HOUR_OF_DAY + ":" + data.MINUTE;
+        s = s + " " + data.get(GregorianCalendar.HOUR_OF_DAY) + ":" + data.get(GregorianCalendar.MINUTE);
 
         jLabelData.setText(s);
 
@@ -1964,6 +1965,7 @@ public class JMain extends javax.swing.JFrame {
 
         aerogestSistema.setHoraActual(hora,minutos);
 
+         aerogestSistema.updateVoos();
         actualizarTabelas();
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 

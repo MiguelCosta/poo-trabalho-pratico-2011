@@ -30,6 +30,7 @@ import aerogest.AerogestSistema;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 
 /**
  * Possui todos os métodos necessários para gerar os dados
@@ -62,6 +63,7 @@ public class GerarDados {
     private static ArrayList<String> funcoesValidas;
     private static GregorianCalendar dataActual;
     private static AerogestSistema aerogestSistema;
+    private static GregorianCalendar data_dia;
 
     private static void init() {
         passageiros = new ArrayList<Passageiro>();
@@ -88,6 +90,10 @@ public class GerarDados {
         portas_ = new TreeMap<String, Porta>();
         funcoesValidas = new ArrayList<String>();
         dataActual = new GregorianCalendar();
+        data_dia = new GregorianCalendar();
+        data_dia.set(GregorianCalendar.HOUR, 0);
+        data_dia.set(GregorianCalendar.MINUTE, 0);
+        data_dia.set(GregorianCalendar.SECOND, 0);
 
         geraPassageiros();
         geraMembrosGoverno();
@@ -506,7 +512,7 @@ public class GerarDados {
         horaPreparacao = new GregorianCalendar();
         horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPreparacao.set(GregorianCalendar.MINUTE,5);
-        v1.setVooEmPreparacao1(aeronaves.get(0), tripulacao.get(0), portas.get(0), horaPreparacao);
+        v2.setVooEmPreparacao1(aeronaves.get(0), tripulacao.get(0), portas.get(0), horaPreparacao);
         v2.embarqueCargaALL();
         v2.embarquePassageiro(passageiros.get(0));
         v2.embarquePassageiro(passageiros.get(1));
@@ -630,7 +636,7 @@ public class GerarDados {
         horaPreparacao = new GregorianCalendar();
         horaPreparacao.set(GregorianCalendar.HOUR_OF_DAY, 0);
         horaPreparacao.set(GregorianCalendar.MINUTE,35);
-        v8.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1), horaPartida);
+        v8.setVooEmPreparacao1(aeronaves.get(1), tripulacao.get(1), portas.get(1), horaPreparacao);
         voosComererciais.add(v8);
         // </editor-fold>
 
@@ -891,7 +897,8 @@ public class GerarDados {
             v.put(x.getEntidade() + x.getCodigoVoo(), x);
         }
 
-        mapaVoos.put(new GregorianCalendar(), v);
+
+        mapaVoos.put(data_dia, v);
     }
 
     private static void geraMapaAeronaves() {
@@ -908,10 +915,7 @@ public class GerarDados {
     }
 
     private static void gereHoraSistema() {
-        dataActual = new GregorianCalendar();
-        dataActual.
-        //dataActual.set(GregorianCalendar.HOUR_OF_DAY, 0);
-        //dataActual.set(GregorianCalendar.MINUTE, 0);
+        dataActual = data_dia;
     }
 
     private static void geraAerogestSistema() {

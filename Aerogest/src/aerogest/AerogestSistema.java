@@ -724,10 +724,10 @@ public class AerogestSistema implements Serializable {
     /**
      * Transita um Voo automaticamente
      */
-    public void updateAtrasados(){
-        for( Voo v : mapaVoos.get(dataActual).values())
+    public void updateVoos(){
+        for( Voo v : mapaVoos.get(dataActual).values()){
             if (v.getEstado().equals(Voo.VooEmPreparacao2Atraso) &&
-            (dataActual).after(v.getHoraPartida())){
+                (dataActual).after(v.getHoraPartida())){
                 GregorianCalendar nh = dataActual;
                 nh.add(GregorianCalendar.MINUTE, 30);
                 v.setVooAtrasado(nh);
@@ -736,15 +736,7 @@ public class AerogestSistema implements Serializable {
                 GregorianCalendar nh = dataActual;
                 nh.add(GregorianCalendar.MINUTE, 30);
                 v.setVooAtrasado(nh);
-            }
-    }
-
-    /**
-     * Transita um Voo automaticamente
-     */
-    public void updatePreparacao1(){
-        for( Voo v : mapaVoos.get(dataActual).values())
-            if (v.getEstado().equals(Voo.VooEmPreparacao1)){
+            } else  if (v.getEstado().equals(Voo.VooEmPreparacao1)){
                 GregorianCalendar p = v.getHoraPreparacao1();
                 v.embarqueCarga(v.getCarga().get(0));
                 p.add(GregorianCalendar.MINUTE, (int) v.getCarga().get(0).getTempoCarregamento());
@@ -752,7 +744,20 @@ public class AerogestSistema implements Serializable {
                     v.embarqueCarga(v.getCarga().get(i));
                     p.add(GregorianCalendar.MINUTE, (int)v.getCarga().get(i).getTempoCarregamento());
                 }
+                if (v.getEstado().equals(Voo.VooEmPreparacao2) &&
+                    (dataActual).after(v.getHoraPartida())){
+                    GregorianCalendar nh = dataActual;
+                    nh.add(GregorianCalendar.MINUTE, 30);
+                    v.setVooAtrasado(nh);
+                }
+            } else if((dataActual).after(v.getHoraPartida())) {
+                GregorianCalendar nh = dataActual;
+                nh.add(GregorianCalendar.MINUTE, 30);
+                v.setHoraPartida(nh);
+                v.setObservacoes("Nova Hora : " + nh.get(GregorianCalendar.HOUR_OF_DAY) +
+                        ":" + nh.get(GregorianCalendar.MINUTE));
             }
+        }
     }
 
     /**
@@ -911,10 +916,14 @@ public class AerogestSistema implements Serializable {
 
     public int getNumCargasNEmb(){
         int num = 0;
-        for (Voo v : mapaVoos.get(dataActual).values())
+        for (Voo v : mapaVoos.get(dataActual).values()){
             if (v.getEstado().equals(Voo.VooCancelado))
                 num+=v.getCarga().size();
-
+            else if ( v.getEstado().equals(Voo.VooEmPreparacao2) ||
+                      v.getEstado().equals(Voo.VooPronto) ||
+                      v.getEstado().equals(Voo.VooNoAr))
+                num+=v.getCarga().size()-v.getCargasCarregadas().size();
+        }
         return num;
     }
 
@@ -940,10 +949,17 @@ public class AerogestSistema implements Serializable {
 
     public double getNumCargasPesoNEmb(){
         double num = 0;
-        for (Voo v : mapaVoos.get(dataActual).values())
+        for (Voo v : mapaVoos.get(dataActual).values()) {
             if (v.getEstado().equals(Voo.VooCancelado))
                 for( Carga c : v.getCarga())
-                    num+=v.getCarga().size();
+                    num+=c.getPeso();
+            else if ( v.getEstado().equals(Voo.VooEmPreparacao2) ||
+                      v.getEstado().equals(Voo.VooPronto) ||
+                      v.getEstado().equals(Voo.VooNoAr))
+                for( Carga c : v.getCarga())
+                    if (!v.getCargasCarregadas().contains(c.getCodigo()))
+                        num+=c.getPeso();
+        }
 
         return num;
     }
@@ -969,9 +985,13 @@ public class AerogestSistema implements Serializable {
 
     public int getNumPassNEmb(){
         int num = 0;
-        for (Voo v : mapaVoos.get(dataActual).values())
+        for (Voo v : mapaVoos.get(dataActual).values()){
             if (v.getEstado().equals(Voo.VooCancelado))
                     num+=v.getPassageiros().size();
+            else if (   v.getEstado().equals(Voo.VooPronto) ||
+                            v.getEstado().equals(Voo.VooNoAr))
+                    num+=(v.getPassageiros().size()-v.getPassageirosEmbarcados().size());
+        }
 
         return num;
     }
@@ -1000,9 +1020,13 @@ public class AerogestSistema implements Serializable {
     public int getNumPassComNEmb(){
         int num = 0;
         for (Voo v : mapaVoos.get(dataActual).values())
-            if (v.getClass() == VooComercial.class)
+            if (v.getClass() == VooComercial.class){
                 if (v.getEstado().equals(Voo.VooCancelado))
                     num+=v.getPassageiros().size();
+                else if (   v.getEstado().equals(Voo.VooPronto) ||
+                            v.getEstado().equals(Voo.VooNoAr))
+                    num+=(v.getPassageiros().size()-v.getPassageirosEmbarcados().size());
+            }
 
         return num;
     }

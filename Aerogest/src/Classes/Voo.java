@@ -28,7 +28,6 @@ public abstract class Voo implements Serializable {
     private String destino;
     private GregorianCalendar horaPartida;
     private GregorianCalendar horaPreparacao1;
-    private GregorianCalendar horaTakeOff;
     private String entidade;
     private ArrayList<Passageiro> passageiros;
     private ArrayList<Carga> carga;
@@ -58,8 +57,6 @@ public abstract class Voo implements Serializable {
         this.entidade = entidade;
         this.passageiros = passageiros;
         this.carga = carga;
-        listaEmbarqueCarga = new ArrayList<String>();
-        listaEmbarquePassageiros = new ArrayList<String>();
         observacoes = "";
         estado = VooEspecificado;
     }
@@ -72,13 +69,17 @@ public abstract class Voo implements Serializable {
         codigoVoo = voo.getCodigoVoo();
         destino = voo.getDestino();
         horaPartida = voo.getHoraPartida();
+        horaPreparacao1 = voo.getHoraPreparacao1();
         entidade = voo.getEntidade();
         passageiros = voo.getPassageiros();
+        aeronave = voo.getAeronave();
+        porta = voo.getPorta();
+        tripulacao = voo.getTripulacao();
         carga = voo.getCarga();
         estado = voo.getEstado();
         listaEmbarqueCarga = voo.getCargasCarregadas();
         listaEmbarquePassageiros = voo.getPassageirosEmbarcados();
-        observacoes = "";
+        observacoes = voo.getObservacoes();
     }
 
     /** gets */
@@ -208,6 +209,9 @@ public abstract class Voo implements Serializable {
     public ArrayList<String> getCargasCarregadas(){
         ArrayList<String> ss = new ArrayList<String>();
 
+        if (listaEmbarqueCarga == null)
+            return ss;
+        
         for (String s : listaEmbarqueCarga)
             ss.add(s);
 
@@ -220,6 +224,9 @@ public abstract class Voo implements Serializable {
      */
     public ArrayList<String> getPassageirosEmbarcados(){
         ArrayList<String> ss = new ArrayList<String>();
+
+        if (listaEmbarquePassageiros == null)
+            return ss;
 
         for (String s : listaEmbarquePassageiros)
             ss.add(s);
@@ -374,7 +381,6 @@ public abstract class Voo implements Serializable {
      * Alterar o estado do Voo para VooNoAr
      */
     public void setVooAr(GregorianCalendar h) {
-        horaTakeOff = h;
         estado = VooNoAr;
     }
 
